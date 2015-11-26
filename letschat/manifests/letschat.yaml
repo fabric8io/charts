@@ -3,63 +3,100 @@ apiVersion: "v1"
 kind: "Template"
 labels: {}
 metadata:
-  annotations:
-    fabric8.letschat/summary: "[Lets Chat](http://sdelements.github.io/lets-chat/)\
-      \ Self-hosted chat for small teams"
-    description: "[Let's Chat](https://github.com/sdelements/lets-chat) is an open\
-      \ source chat server. It's designed to be easily deployable and fits well with\
-      \ small, intimate teams"
-    fabric8.letschat/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/letschat/src/main/fabric8/icon.png"
-  labels: {}
+  annotations: {}
+  labels:
+    name: "letschat"
+    provider: "fabric8"
   name: "letschat"
 objects:
 - apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "letschat"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      targetPort: 5000
+    selector:
+      name: "letschat"
+    type: "LoadBalancer"
+- apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
-    annotations:
-      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/16"
-      fabric8.io/build-id: "16"
+    annotations: {}
     labels:
-      project: "letschat"
+      name: "letschat"
       provider: "fabric8"
-      version: "2.2.76"
-      group: "io.fabric8.devops.apps"
     name: "letschat"
   spec:
     replicas: 1
     selector:
-      project: "letschat"
-      provider: "fabric8"
-      version: "2.2.76"
-      group: "io.fabric8.devops.apps"
+      name: "letschat"
     template:
       metadata:
         annotations: {}
         labels:
-          project: "letschat"
+          name: "letschat"
           provider: "fabric8"
-          version: "2.2.76"
-          group: "io.fabric8.devops.apps"
+        name: "letschat"
       spec:
         containers:
         - args: []
           command: []
+          env: []
+          image: "mongo"
+          name: "letschat-mongodb"
+          ports:
+          - containerPort: 27017
+            protocol: "TCP"
+          volumeMounts: []
+        - args: []
+          command: []
           env:
-          - name: "KUBERNETES_NAMESPACE"
-            valueFrom:
-              fieldRef:
-                fieldPath: "metadata.namespace"
-          image: "fabric8/letschat:2.2.76"
+          - name: "LETSCHAT_CREATE_HUBOT_USER"
+            value: "true"
+          - name: "LETSCHAT_HUBOT_TOKEN"
+            value: "${LETSCHAT_HUBOT_TOKEN}"
+          - name: "LETSCHAT_HUBOT_PASSWORD"
+            value: "${HUBOT_PASSWORD}"
+          - name: "LETSCHAT_HUBOT_USERNAME"
+            value: "${HUBOT_USERNAME}"
+          - name: "LETSCHAT_HUBOT_EMAIL"
+            value: "fabric8-admin@googlegroups.com"
+          - name: "LETSCHAT_HUBOT_FIRST_NAME"
+            value: "fabric8"
+          - name: "LETSCHAT_HUBOT_LAST_NAME"
+            value: "rocks"
+          - name: "LETSCHAT_HUBOT_DISPLAY_NAME"
+            value: "fabric8"
+          - name: "LETSCHAT_DEFAULT_ROOMS"
+            value: "${LETSCHAT_DEFAULT_ROOMS}"
+          - name: "LCB_NOROBOTS"
+            value: "false"
+          - name: "LCB_FILES_ENABLE"
+            value: "true"
+          - name: "LCB_DATABASE_URI"
+            value: "mongodb://127.0.0.1:27017/letschat"
+          image: "fabric8/lets-chat:2.2.76"
           name: "letschat"
           ports:
-          - containerPort: 8778
-            name: "jolokia"
-          securityContext: {}
+          - containerPort: 5000
+            protocol: "TCP"
           volumeMounts: []
         imagePullSecrets: []
         nodeSelector: {}
         volumes: []
-parameters: []
+parameters:
+- description: "Default rooms to create and for hubot to join"
+  name: "LETSCHAT_DEFAULT_ROOMS"
+  value: "fabric8_default"
+- description: "The username for Hubot to login to the chat service"
+  name: "HUBOT_USERNAME"
+  value: "fabric8"
+- description: "The password for Hubot to login to the chat service"
+  name: "HUBOT_PASSWORD"
+  value: "RedHat$1"

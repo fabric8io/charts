@@ -40,14 +40,32 @@ objects:
       group: "io.fabric8.devops.apps"
     type: "LoadBalancer"
 - apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "elasticsearch-cluster"
+  spec:
+    clusterIP: "None"
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - name: ""
+      port: 9300
+      protocol: "TCP"
+      targetPort: 9300
+    selector:
+      provider: "fabric8"
+      project: "elasticsearch"
+- apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/16"
-      fabric8.io/build-id: "16"
+      fabric8.io/build-id: "20"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
     labels:
       project: "elasticsearch"
       provider: "fabric8"
@@ -101,6 +119,13 @@ objects:
           - mountPath: "/usr/share/elasticsearch/data"
             name: "elasticsearch-data"
             readOnly: false
+        - args: []
+          command: []
+          env: []
+          image: "fabric8/elasticsearch-logstash-template:2.2.76"
+          name: "logstash-template"
+          ports: []
+          volumeMounts: []
         imagePullSecrets: []
         nodeSelector: {}
         volumes:

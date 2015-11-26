@@ -11,14 +11,51 @@ metadata:
   name: "gitlab"
 objects:
 - apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "gitlab"
+    name: "gitlab"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 80
+    selector:
+      provider: "fabric8"
+      project: "gitlab"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "gitlab"
+    name: "gitlab-ssh"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 22
+      protocol: "TCP"
+      targetPort: 22
+    selector:
+      provider: "fabric8"
+      project: "gitlab"
+- apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/16"
-      fabric8.io/build-id: "16"
+      fabric8.io/build-id: "20"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
     labels:
       project: "gitlab"
       provider: "fabric8"

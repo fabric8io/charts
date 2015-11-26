@@ -13,6 +13,26 @@ metadata:
   name: "console"
 objects:
 - apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "fabric8"
+  secrets: []
+- apiVersion: "v1"
+  kind: "OAuthClient"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "fabric8"
+  redirectURIs:
+  - "http://localhost:9090"
+  - "http://localhost:2772"
+  - "http://localhost:9000"
+  - "http://fabric8.${DOMAIN}"
+  - "https://fabric8.${DOMAIN}"
+- apiVersion: "v1"
   kind: "Service"
   metadata:
     annotations: {}
@@ -37,11 +57,11 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/16"
-      fabric8.io/build-id: "16"
+      fabric8.io/build-id: "20"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
     labels:
       project: "console"
       provider: "fabric8"
