@@ -42,8 +42,8 @@ objects:
       fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
       fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/15"
-      fabric8.io/build-id: "15"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/16"
+      fabric8.io/build-id: "16"
     labels:
       project: "grafana2"
       provider: "fabric8"
