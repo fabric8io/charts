@@ -1,0 +1,8 @@
+---
+name: "chat-irc"
+home: "http://fabric8.io/packages/chat-irc/"
+version: "2.2.76"
+description: "Sonatype helps open source projects to set up Maven repositories on\
+  \ https://oss.sonatype.org/"
+maintainers:
+- "Fabric8 Development Team"

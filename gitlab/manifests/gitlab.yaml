@@ -1,0 +1,87 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    fabric8.gitlab/summary: "[Gitlab](http://gitlab.com/) - A self-hosted Git service"
+    description: "Gitlab is a self-hosted Git service      \n\nMore details on the\
+      \ <a href=\"http://gitlab.com/\" target=\"gitlab\">Gitlab home page</a>.\n"
+  labels: {}
+  name: "gitlab"
+objects:
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/11"
+      fabric8.io/build-id: "11"
+    labels:
+      project: "gitlab"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    name: "gitlab"
+  spec:
+    replicas: 1
+    selector:
+      project: "gitlab"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "gitlab"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "GITLAB_ADMIN_USER_PASSWORD"
+            value: "${JENKINS_GITLAB_PASSWORD}"
+          - name: "GITLAB_ADMIN_USER_EMAIL"
+            value: "${JENKINS_GITLAB_EMAIL}"
+          - name: "GITLAB_ADMIN_USER_NAME"
+            value: "${JENKINS_GITLAB_USER}"
+          - name: "GITLAB_URL"
+            value: "${GITLAB_URL}"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "gitlab/gitlab-ce"
+          imagePullPolicy: "IfNotPresent"
+          name: "gitlab"
+          ports:
+          - containerPort: 22
+            name: "ssh"
+          - containerPort: 80
+            name: "http"
+          - containerPort: 443
+            name: "https"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+parameters:
+- description: "The email address of the Jenkins user on Gitlab"
+  name: "JENKINS_GITLAB_EMAIL"
+  value: "gitlab@fabric8.local"
+- description: "The user name for Jenkins to login to Gitlab"
+  name: "JENKINS_GITLAB_USER"
+  value: "jenkins"
+- description: "The GitLab server URL"
+  name: "GITLAB_URL"
+  value: "gitlab.vagrant.f8"
+- description: "The password for Jenkins to login to Gitlab"
+  name: "JENKINS_GITLAB_PASSWORD"
+  value: "RedHat$1"

@@ -1,0 +1,8 @@
+---
+name: "gerrit"
+home: "http://fabric8.io/gerrit/"
+version: "2.2.76"
+description: "[Gerrit](https://code.google.com/p/gerrit/) Web based code review and\
+  \ project management for Git based projects"
+maintainers:
+- "Fabric8 Development Team"

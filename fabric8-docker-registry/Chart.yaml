@@ -1,0 +1,8 @@
+---
+name: "fabric8-docker-registry"
+home: "http://fabric8.io/fabric8-docker-registry/"
+version: "2.2.76"
+description: "[Docker Registry](https://github.com/docker/distribution) - A private\
+  \ docker registry"
+maintainers:
+- "Fabric8 Development Team"

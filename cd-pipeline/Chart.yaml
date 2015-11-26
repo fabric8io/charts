@@ -1,0 +1,8 @@
+---
+name: "cd-pipeline"
+home: "http://fabric8.io/packages/cd-pipeline/"
+version: "2.2.76"
+description: "Creates the Continuous Delivery Pipeline via: gogs, jenkins, nexus,\
+  \ gerrit and sonaqube"
+maintainers:
+- "Fabric8 Development Team"

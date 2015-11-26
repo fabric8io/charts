@@ -1,0 +1,122 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    fabric8.gogs/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/gogs/src/main/fabric8/icon.png"
+    description: "Gogs is a self-hosted Git service written in Go.\n\nMore details\
+      \ on the <a href=\"http://gogs.io/\" target=\"gogs\">Gogs home page</a>.\n"
+    fabric8.gogs/summary: "[Gogs](http://gogs/) - A self-hosted Git service written\
+      \ in Go"
+  labels: {}
+  name: "gogs"
+objects:
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/11"
+      fabric8.io/build-id: "11"
+    labels:
+      project: "gogs"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    name: "gogs"
+  spec:
+    replicas: 1
+    selector:
+      project: "gogs"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "gogs"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "GOGS_SERVER__ROOT_URL"
+            value: "${GOGS_SERVER_PROTOCOL}://${GOGS_SERVER_DOMAIN}"
+          - name: "ADMIN_USER_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
+          - name: "ADMIN_USER_PASSWORD"
+            value: "${JENKINS_GOGS_PASSWORD}"
+          - name: "GOGS_SERVER__PROTOCOL"
+            value: "${GOGS_SERVER_PROTOCOL}"
+          - name: "GOGS_OAUTH_OPENSHIFT__ENABLED"
+            value: "true"
+          - name: "ADMIN_USER_CREATE"
+            value: "true"
+          - name: "GOGS_OAUTH_OPENSHIFT__TOKEN_URL"
+            value: "https://${DOMAIN}:8443/oauth/token"
+          - name: "GOGS_OAUTH_OPENSHIFT__SCOPES"
+            value: "https://${DOMAIN}:8443/console/user"
+          - name: "GOGS_OAUTH_OPENSHIFT__AUTH_URL"
+            value: "https://${DOMAIN}:8443/oauth/authorize"
+          - name: "GOGS_WEBHOOK__TASK_INTERVAL"
+            value: "true"
+          - name: "GOGS_WEBHOOK__SKIP_TLS_VERIFY"
+            value: "true"
+          - name: "GOGS_SERVER__DOMAIN"
+            value: "${GOGS_SERVER_DOMAIN}"
+          - name: "ADMIN_USER_NAME"
+            value: "${JENKINS_GOGS_USER}"
+          - name: "GOGS_OAUTH_TWITTER__ENABLED"
+            value: "false"
+          - name: "GOGS_OAUTH__ENABLED"
+            value: "true"
+          - name: "KUBERNETES_ADMIN_USER"
+            value: "${KUBERNETES_ADMIN_USER}"
+          - name: "GOGS_OAUTH_OPENSHIFT__CLIENT_ID"
+            value: "gogs"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/gogs:0.6.1"
+          imagePullPolicy: "IfNotPresent"
+          name: "gogs"
+          ports:
+          - containerPort: 22
+            name: "ssh"
+          - containerPort: 3000
+            name: "http"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+parameters:
+- description: "The email address of the Jenkins user on Gogs"
+  name: "JENKINS_GOGS_EMAIL"
+  value: "gogsadmin@fabric8.local"
+- description: "The user name for Jenkins to login to Gogs"
+  name: "JENKINS_GOGS_USER"
+  value: "gogsadmin"
+- description: "The gogs server name"
+  name: "GOGS_SERVER_DOMAIN"
+  value: "gogs.vagrant.f8"
+- description: "The protocol for gogs to use; either http or https"
+  name: "GOGS_SERVER_PROTOCOL"
+  value: "http"
+- description: "The password for Jenkins to login to Gogs"
+  name: "JENKINS_GOGS_PASSWORD"
+  value: "RedHat$1"
+- description: "The default Kubernetes admin user"
+  name: "KUBERNETES_ADMIN_USER"
+  value: "admin"
+- description: "The domain name applications are installed on"
+  name: "DOMAIN"
+  value: "vagrant.f8"

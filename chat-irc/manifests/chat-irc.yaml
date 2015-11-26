@@ -1,0 +1,212 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    fabric8.hubot-irc/summary: "[Hubot](http://hubot.github.com) IRC chat bot"
+    description: "Provides [Chat](http://fabric8.io/guide/chat.html) using [Hubot](https://hubot.github.com/)\
+      \ as the bot framework and IRC as the chat service"
+    fabric8.hubot-irc/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-irc/src/main/fabric8/icon.png"
+    fabric8.hubot-notifier/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-notifier/src/main/fabric8/icon.png"
+    fabric8.hubot-notifier/summary: "Watches the OpenShift environment and notifies\
+      \ Hubot of events such as builds completing or failing"
+    fabric8.chat-irc/summary: "Sonatype helps open source projects to set up Maven\
+      \ repositories on https://oss.sonatype.org/"
+  labels: {}
+  name: "chat-irc"
+objects:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "hubot-irc"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "chat-irc"
+    name: "hubot"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 8080
+    selector:
+      project: "hubot-irc"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "hubot-irc"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "chat-irc"
+    name: "hubot-irc"
+  spec:
+    replicas: 1
+    selector:
+      project: "hubot-irc"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "hubot-irc"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "chat-irc"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "HUBOT_IRC_USESSL"
+            value: "${HUBOT_IRC_USESSL}"
+          - name: "HUBOT_GRAFANA_API_KEY"
+            value: "${HUBOT_GRAFANA_API_KEY}"
+          - name: "HUBOT_IRC_NICK"
+            value: "${HUBOT_IRC_NICK}"
+          - name: "HUBOT_IRC_DEBUG"
+            value: "${HUBOT_IRC_DEBUG}"
+          - name: "HUBOT_IRC_ROOMS"
+            value: "${HUBOT_IRC_ROOMS}"
+          - name: "HUBOT_GRAFANA_HOST"
+            value: "${HUBOT_GRAFANA_HOST}"
+          - name: "HUBOT_IRC_UNFLOOD"
+            value: "${HUBOT_IRC_UNFLOOD}"
+          - name: "HUBOT_IRC_SERVER"
+            value: "${HUBOT_IRC_SERVER}"
+          - name: "HUBOT_JENKINS_URL"
+            value: "${HUBOT_JENKINS_URL}"
+          - name: "HUBOT_IRC_NICKSERV_PASSWORD"
+            value: "${HUBOT_IRC_NICKSERV_PASSWORD}"
+          - name: "HUBOT_IRC_PASSWORD"
+            value: "${HUBOT_IRC_PASSWORD}"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/hubot-irc:2.2.76"
+          name: "hubot-irc"
+          ports:
+          - containerPort: 8080
+            name: "http"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "hubotNotifier"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "chat-irc"
+    name: "hubot-notifier"
+  spec:
+    replicas: 1
+    selector:
+      project: "hubotNotifier"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "hubotNotifier"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "chat-irc"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "HUBOT_KUBERNETES_ROOM"
+            value: "#fabric8_${namespace}"
+          - name: "HUBOT_USERNAME"
+            value: "${HUBOT_USERNAME}"
+          - name: "HUBOT_PASSWORD"
+            value: "${HUBOT_PASSWORD}"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/hubot-notifier:2.2.76"
+          name: "hubot-notifier"
+          ports:
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "fabric8"
+        volumes: []
+parameters:
+- description: "IRC nick password"
+  name: "HUBOT_IRC_NICKSERV_PASSWORD"
+- description: "The URL for the Jenkins CI server"
+  name: "HUBOT_JENKINS_URL"
+  value: "http://jenkins"
+- description: "Enables debug logging"
+  name: "HUBOT_IRC_DEBUG"
+  value: "true"
+- description: "API key for a particular user"
+  name: "HUBOT_GRAFANA_API_KEY"
+- description: "The IRC server"
+  name: "HUBOT_IRC_SERVER"
+  value: "irc.freenode.net"
+- description: "IRC password"
+  name: "HUBOT_IRC_PASSWORD"
+- description: "List of rooms to join including '#' prefix"
+  name: "HUBOT_IRC_ROOMS"
+  value: "#fabric8_default,#random"
+- description: "Unflood"
+  name: "HUBOT_IRC_UNFLOOD"
+  value: "false"
+- description: "Use SSL"
+  name: "HUBOT_IRC_USESSL"
+  value: "1"
+- description: "Host for your Grafana 2.0 install, e.g. 'http://play.grafana.org'"
+  name: "HUBOT_GRAFANA_HOST"
+- description: "The name that hubot should joing the room as"
+  name: "HUBOT_IRC_NICK"
+  value: "fabric8"
+- description: "The DNS domain added to the serviceName.namespace.svc. to make the\
+    \ DNS name"
+  name: "KUBERNETES_DNS_DOMAIN"
+  value: "cluster.local"
+- description: "The password for Hubot to login to the chat service"
+  name: "HUBOT_PASSWORD"
+  value: "RedHat$1"
+- description: "The username for Hubot to login to the chat service"
+  name: "HUBOT_USERNAME"
+  value: "fabric8"

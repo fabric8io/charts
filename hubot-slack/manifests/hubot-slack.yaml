@@ -1,0 +1,64 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    description: "This is a [Hubot](https://hubot.github.com/) adapter to use with\
+      \ [Slack](https://slack.com/)"
+    fabric8.hubot-slack/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-slack/src/main/fabric8/icon.png"
+    fabric8.hubot-slack/summary: "[Hubot](https://hubot.github.com/) adapter to use\
+      \ with [Slack](https://slack.com/)"
+  labels: {}
+  name: "hubot-slack"
+objects:
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/11"
+      fabric8.io/build-id: "11"
+    labels:
+      project: "hubot-slack"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    name: "hubot-slack"
+  spec:
+    replicas: 1
+    selector:
+      project: "hubot-slack"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "hubot-slack"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/hubot-slack:2.2.76"
+          name: "hubot-slack"
+          ports:
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+parameters: []

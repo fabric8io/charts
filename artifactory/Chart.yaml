@@ -1,0 +1,8 @@
+---
+name: "artifactory"
+home: "http://fabric8.io/artifactory/"
+version: "2.2.76"
+description: "[Artifactory](http://www.jfrog.com/open-source/) Open Source Maven Repository\
+  \ Manager"
+maintainers:
+- "Fabric8 Development Team"

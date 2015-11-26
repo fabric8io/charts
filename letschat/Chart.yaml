@@ -1,0 +1,8 @@
+---
+name: "letschat"
+home: "http://fabric8.io/letschat/"
+version: "2.2.76"
+description: "[Lets Chat](http://sdelements.github.io/lets-chat/) Self-hosted chat\
+  \ for small teams"
+maintainers:
+- "Fabric8 Development Team"

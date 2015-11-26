@@ -1,0 +1,161 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    description: "Gerrit is a web based code review system, facilitating online code\
+      \ reviews for projects using the Git version control system.\n\nGerrit makes\
+      \ reviews easier by showing changes in a side-by-side display, and allowing\
+      \ inline comments to be added by any reviewer.\n\nGerrit simplifies Git based\
+      \ project maintainership by permitting any authorized user to submit changes\
+      \ to the master Git repository, rather than requiring all approved changes to\
+      \ be merged in by hand by the project maintainer. This functionality enables\
+      \ a more centralized usage of Git.\n\n[https://www.gerritcodereview.com/](https://www.gerritcodereview.com/)"
+    fabric8.gerrit/summary: "[Gerrit](https://code.google.com/p/gerrit/) Web based\
+      \ code review and project management for Git based projects"
+    fabric8.gerrit/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/gerrit/src/main/fabric8/icon.png"
+  labels: {}
+  name: "gerrit"
+objects:
+- apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "gerrit"
+  secrets:
+  - name: "gerrit-admin-ssh"
+  - name: "gerrit-users-ssh-keys"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/11"
+      fabric8.io/build-id: "11"
+    labels:
+      project: "gerrit"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    name: "gerrit"
+  spec:
+    replicas: 1
+    selector:
+      project: "gerrit"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations:
+          fabric8.io/secret-ssh-key: "gerrit-admin-ssh"
+          fabric8.io/secret-ssh-public-key: "gerrit-users-ssh-keys[id-jenkins-rsa.pub,id-sonar-rsa.pub]"
+        labels:
+          project: "gerrit"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "GERRIT_PUBLIC_KEYS_PATH"
+            value: "/home/gerrit/ssh-keys"
+          - name: "GIT_SERVER_PASSWORD"
+            value: "RedHat$1"
+          - name: "GERRIT_ADMIN_FULLNAME"
+            value: "Administrator"
+          - name: "GERRIT_ACCOUNTS"
+            value: "jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive\
+              \ Users"
+          - name: "GERRIT_ADMIN_USER"
+            value: "${GERRIT_ADMIN_USER}"
+          - name: "GIT_SERVER_IP"
+            value: "gogs.default.svc.cluster.local"
+          - name: "GERRIT_ADMIN_PRIVATE_KEY"
+            value: "/root/.ssh/id_rsa"
+          - name: "GERRIT_REPO_DESCRIPTION"
+            value: "${GERRIT_REPO_DESCRIPTION}"
+          - name: "GERRIT_SSH_PATH"
+            value: "/root/.ssh"
+          - name: "GERRIT_ADMIN_EMAIL"
+            value: "admin@fabric8.io"
+          - name: "GERRIT_GIT_REMOTEPATH"
+            value: "ssh://admin@localhost:29418/All-Projects"
+          - name: "GIT_SERVER_PROJ_ROOT"
+            value: "gogsadmin"
+          - name: "GERRIT_ADMIN_PWD"
+            value: "${GERRIT_ADMIN_PWD}"
+          - name: "GERRIT_GIT_PROJECT_CONFIG"
+            value: "/home/gerrit/configs/project.config"
+          - name: "GIT_SERVER_PORT"
+            value: "80"
+          - name: "GERRIT_INITIAL_COMMIT"
+            value: "${GERRIT_INITIAL_COMMIT}"
+          - name: "GERRIT_USER_PUBLIC_KEY_SUFFIX"
+            value: "-rsa.pub"
+          - name: "GIT_SERVER_USER"
+            value: "gogsadmin"
+          - name: "GERRIT_GIT_LOCALPATH"
+            value: "/home/gerrit/git"
+          - name: "GERRIT_USER_PUBLIC_KEY_PREFIX"
+            value: "id-"
+          - name: "AUTH_TYPE"
+            value: "DEVELOPMENT_BECOME_ANY_ACCOUNT"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/gerrit:2.2.76"
+          imagePullPolicy: "IfNotPresent"
+          name: "gerrit"
+          ports:
+          - containerPort: 8080
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts:
+          - mountPath: "/home/gerrit/site"
+            name: "gerrit-workspace"
+            readOnly: false
+          - mountPath: "/root/.ssh"
+            name: "gerrit-admin-ssh-key"
+            readOnly: false
+          - mountPath: "/home/gerrit/ssh-keys"
+            name: "gerrit-users-ssh-keys"
+            readOnly: false
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "gerrit"
+        volumes:
+        - name: "gerrit-admin-ssh-key"
+          secret:
+            secretName: "gerrit-admin-ssh"
+        - hostPath:
+            path: "/home/gerrit-site"
+          name: "gerrit-workspace"
+        - name: "gerrit-users-ssh-keys"
+          secret:
+            secretName: "gerrit-users-ssh-keys"
+parameters:
+- description: "Description ot add to the Gerrit Git repo created when a CD Project\
+    \ is created"
+  name: "GERRIT_REPO_DESCRIPTION"
+  value: "Description of the gerrit git repo"
+- description: "Admin password"
+  name: "GERRIT_ADMIN_PWD"
+  value: "secret"
+- description: "Admin user used to perform operations on gerrit"
+  name: "GERRIT_ADMIN_USER"
+  value: "admin"
+- description: "Parameter used when the Gerrit Git repo is created using the DevOpsConnector.\
+    \ By default, it is false as commits have already been done within gogs repo"
+  name: "GERRIT_INITIAL_COMMIT"
+  value: "false"

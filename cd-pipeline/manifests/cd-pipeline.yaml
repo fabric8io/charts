@@ -1,0 +1,1174 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    fabric8.fabric8-docker-registry/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/fabric8-docker-registry/src/main/fabric8/icon.png"
+    description: "Provides the core [Continuous Delivery platform](http://fabric8.io/guide/cdelivery.html)\
+      \ using [Gogs](http://gogs.io/), [Jenkins](https://jenkins-ci.org/), [Nexus](http://www.sonatype.org/nexus/),\
+      \ [Gerrit](https://www.gerritcodereview.com/) and [SonarQube](http://www.sonarqube.org/)"
+    fabric8.fabric8-docker-registry/summary: "[Docker Registry](https://github.com/docker/distribution)\
+      \ - A private docker registry"
+    fabric8.fabric8-forge/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/fabric8-forge/src/main/fabric8/icon.svg"
+    fabric8.fabric8-forge/summary: "Fabric8 Forge"
+    fabric8.gerrit/summary: "[Gerrit](https://code.google.com/p/gerrit/) Web based\
+      \ code review and project management for Git based projects"
+    fabric8.gerrit/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/gerrit/src/main/fabric8/icon.png"
+    fabric8.gogs/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/gogs/src/main/fabric8/icon.png"
+    fabric8.gogs/summary: "[Gogs](http://gogs/) - A self-hosted Git service written\
+      \ in Go"
+    fabric8.jenkins/summary: "[Jenkins](http://jenkins-ci.org/) extendable open source\
+      \ continuous integration server"
+    fabric8.jenkins/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/jenkins/src/main/fabric8/icon.svg"
+    fabric8.nexus/summary: "[Nexus](http://www.sonatype.org/nexus/) - A maven repository\
+      \ manager"
+    fabric8.nexus/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/nexus/src/main/fabric8/icon.png"
+    fabric8.cd-pipeline/summary: "Creates the Continuous Delivery Pipeline via: gogs,\
+      \ jenkins, nexus, gerrit and sonaqube"
+    fabric8.cd-pipeline/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/packages/cd-pipeline/src/main/fabric8/icon.svg"
+  labels: {}
+  name: "cd-pipeline"
+objects:
+- apiVersion: "v1"
+  data:
+    password: "UmVkSGF0JDE="
+    username: "Z29nc2FkbWlu"
+  kind: "Secret"
+  metadata:
+    annotations: {}
+    labels:
+      package: "cd-pipeline"
+    name: "gogs-https-${KUBERNETES_ADMIN_USER}"
+    namespace: "user-secrets-source-${KUBERNETES_ADMIN_USER}"
+- apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels:
+      package: "cd-pipeline"
+    name: "gerrit"
+  secrets:
+  - name: "gerrit-admin-ssh"
+  - name: "gerrit-users-ssh-keys"
+- apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels:
+      package: "cd-pipeline"
+    name: "jenkins"
+  secrets:
+  - name: "jenkins-git-ssh"
+  - name: "jenkins-master-ssh"
+  - name: "jenkins-release-gpg"
+- apiVersion: "v1"
+  kind: "OAuthClient"
+  metadata:
+    annotations: {}
+    labels:
+      package: "cd-pipeline"
+    name: "gogs"
+  redirectURIs:
+  - "http://localhost:3000"
+  - "http://gogs.${DOMAIN}"
+  - "https://gogs.${DOMAIN}"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "fabric8-docker-registry"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "fabric8-docker-registry"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 5000
+    selector:
+      project: "fabric8-docker-registry"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "fabric8Forge"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "fabric8-forge"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 8080
+    selector:
+      project: "fabric8Forge"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "gerrit"
+      package: "cd-pipeline"
+    name: "gerrit"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 8080
+    selector:
+      provider: "fabric8"
+      project: "gerrit"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "gerrit"
+      package: "cd-pipeline"
+    name: "gerrit-ssh"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 29418
+      protocol: "TCP"
+      targetPort: 29418
+    selector:
+      provider: "fabric8"
+      project: "gerrit"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "gogs"
+      package: "cd-pipeline"
+    name: "gogs"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 3000
+    selector:
+      provider: "fabric8"
+      project: "gogs"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "gogs"
+      package: "cd-pipeline"
+    name: "gogs-ssh"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 22
+      protocol: "TCP"
+      targetPort: 22
+    selector:
+      provider: "fabric8"
+      project: "gogs"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/path: "/prometheus"
+      prometheus.io/port: "8080"
+    labels:
+      project: "jenkins"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "jenkins"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - name: "http"
+      port: 80
+      targetPort: 8080
+    selector:
+      project: "jenkins"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "jenkins-agent"
+      package: "cd-pipeline"
+    name: "jenkins-agent"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - name: "http"
+      port: 80
+      protocol: "TCP"
+      targetPort: 8080
+    - name: "agent"
+      port: 50000
+      protocol: "TCP"
+      targetPort: 50000
+    selector:
+      provider: "fabric8"
+      project: "jenkins"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      provider: "fabric8"
+      project: "jenkins-agent"
+      package: "cd-pipeline"
+    name: "jenkins-agent"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - name: "http"
+      port: 80
+      protocol: "TCP"
+      targetPort: 8080
+    - name: "agent"
+      port: 50000
+      protocol: "TCP"
+      targetPort: 50000
+    selector:
+      provider: "fabric8"
+      project: "jenkins"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "nexus"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "nexus"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 8081
+    selector:
+      project: "nexus"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "fabric8-docker-registry"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "fabric8-docker-registry"
+  spec:
+    replicas: 1
+    selector:
+      project: "fabric8-docker-registry"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "fabric8-docker-registry"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "registry:2"
+          imagePullPolicy: "IfNotPresent"
+          name: "fabric8-docker-registry"
+          ports:
+          - containerPort: 5000
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "fabric8Forge"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "fabric8-forge"
+  spec:
+    replicas: 1
+    selector:
+      project: "fabric8Forge"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "fabric8Forge"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "JENKINS_SEED_JOB"
+            value: "seed"
+          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
+            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+          - name: "KUBERNETES_TRUST_CERTIFICATES"
+            value: "true"
+          - name: "SKIP_TLS_VERIFY"
+            value: "true"
+          - name: "JENKINS_GOGS_PASSWORD"
+            value: "${JENKINS_GOGS_PASSWORD}"
+          - name: "JENKINS_GOGS_USER"
+            value: "${JENKINS_GOGS_USER}"
+          - name: "FABRIC8_ARCHETYPES_VERSION"
+            value: "2.2.67"
+          - name: "JENKINS_GOGS_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
+          - name: "KUBERNETES_MASTER"
+            value: "https://kubernetes.default.svc"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/fabric8-forge:2.2.76"
+          name: "fabric8-forge"
+          ports:
+          - containerPort: 8778
+            name: "jolokia"
+          readinessProbe:
+            httpGet:
+              path: "/_ping"
+              port: 8080
+            initialDelaySeconds: 30
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "fabric8"
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-id: "6"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+    labels:
+      project: "gerrit"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "gerrit"
+  spec:
+    replicas: 1
+    selector:
+      project: "gerrit"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations:
+          fabric8.io/secret-ssh-key: "gerrit-admin-ssh"
+          fabric8.io/secret-ssh-public-key: "gerrit-users-ssh-keys[id-jenkins-rsa.pub,id-sonar-rsa.pub]"
+        labels:
+          project: "gerrit"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "GERRIT_PUBLIC_KEYS_PATH"
+            value: "/home/gerrit/ssh-keys"
+          - name: "GIT_SERVER_PASSWORD"
+            value: "RedHat$1"
+          - name: "GERRIT_ADMIN_FULLNAME"
+            value: "Administrator"
+          - name: "GERRIT_ACCOUNTS"
+            value: "jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive\
+              \ Users"
+          - name: "GERRIT_ADMIN_USER"
+            value: "${GERRIT_ADMIN_USER}"
+          - name: "GIT_SERVER_IP"
+            value: "gogs.default.svc.cluster.local"
+          - name: "GERRIT_ADMIN_PRIVATE_KEY"
+            value: "/root/.ssh/id_rsa"
+          - name: "GERRIT_REPO_DESCRIPTION"
+            value: "${GERRIT_REPO_DESCRIPTION}"
+          - name: "GERRIT_SSH_PATH"
+            value: "/root/.ssh"
+          - name: "GERRIT_ADMIN_EMAIL"
+            value: "admin@fabric8.io"
+          - name: "GERRIT_GIT_REMOTEPATH"
+            value: "ssh://admin@localhost:29418/All-Projects"
+          - name: "GIT_SERVER_PROJ_ROOT"
+            value: "gogsadmin"
+          - name: "GERRIT_ADMIN_PWD"
+            value: "${GERRIT_ADMIN_PWD}"
+          - name: "GERRIT_GIT_PROJECT_CONFIG"
+            value: "/home/gerrit/configs/project.config"
+          - name: "GIT_SERVER_PORT"
+            value: "80"
+          - name: "GERRIT_INITIAL_COMMIT"
+            value: "${GERRIT_INITIAL_COMMIT}"
+          - name: "GERRIT_USER_PUBLIC_KEY_SUFFIX"
+            value: "-rsa.pub"
+          - name: "GIT_SERVER_USER"
+            value: "gogsadmin"
+          - name: "GERRIT_GIT_LOCALPATH"
+            value: "/home/gerrit/git"
+          - name: "GERRIT_USER_PUBLIC_KEY_PREFIX"
+            value: "id-"
+          - name: "AUTH_TYPE"
+            value: "DEVELOPMENT_BECOME_ANY_ACCOUNT"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/gerrit:2.2.76"
+          imagePullPolicy: "IfNotPresent"
+          name: "gerrit"
+          ports:
+          - containerPort: 8080
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts:
+          - mountPath: "/home/gerrit/site"
+            name: "gerrit-workspace"
+            readOnly: false
+          - mountPath: "/root/.ssh"
+            name: "gerrit-admin-ssh-key"
+            readOnly: false
+          - mountPath: "/home/gerrit/ssh-keys"
+            name: "gerrit-users-ssh-keys"
+            readOnly: false
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "gerrit"
+        volumes:
+        - name: "gerrit-admin-ssh-key"
+          secret:
+            secretName: "gerrit-admin-ssh"
+        - hostPath:
+            path: "/home/gerrit-site"
+          name: "gerrit-workspace"
+        - name: "gerrit-users-ssh-keys"
+          secret:
+            secretName: "gerrit-users-ssh-keys"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-id: "6"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+    labels:
+      project: "gogs"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "gogs"
+  spec:
+    replicas: 1
+    selector:
+      project: "gogs"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "gogs"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "GOGS_SERVER__ROOT_URL"
+            value: "${GOGS_SERVER_PROTOCOL}://${GOGS_SERVER_DOMAIN}"
+          - name: "ADMIN_USER_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
+          - name: "ADMIN_USER_PASSWORD"
+            value: "${JENKINS_GOGS_PASSWORD}"
+          - name: "GOGS_SERVER__PROTOCOL"
+            value: "${GOGS_SERVER_PROTOCOL}"
+          - name: "GOGS_OAUTH_OPENSHIFT__ENABLED"
+            value: "true"
+          - name: "ADMIN_USER_CREATE"
+            value: "true"
+          - name: "GOGS_OAUTH_OPENSHIFT__TOKEN_URL"
+            value: "https://${DOMAIN}:8443/oauth/token"
+          - name: "GOGS_OAUTH_OPENSHIFT__SCOPES"
+            value: "https://${DOMAIN}:8443/console/user"
+          - name: "GOGS_OAUTH_OPENSHIFT__AUTH_URL"
+            value: "https://${DOMAIN}:8443/oauth/authorize"
+          - name: "GOGS_WEBHOOK__TASK_INTERVAL"
+            value: "true"
+          - name: "GOGS_WEBHOOK__SKIP_TLS_VERIFY"
+            value: "true"
+          - name: "GOGS_SERVER__DOMAIN"
+            value: "${GOGS_SERVER_DOMAIN}"
+          - name: "ADMIN_USER_NAME"
+            value: "${JENKINS_GOGS_USER}"
+          - name: "GOGS_OAUTH_TWITTER__ENABLED"
+            value: "false"
+          - name: "GOGS_OAUTH__ENABLED"
+            value: "true"
+          - name: "KUBERNETES_ADMIN_USER"
+            value: "${KUBERNETES_ADMIN_USER}"
+          - name: "GOGS_OAUTH_OPENSHIFT__CLIENT_ID"
+            value: "gogs"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/gogs:0.6.1"
+          imagePullPolicy: "IfNotPresent"
+          name: "gogs"
+          ports:
+          - containerPort: 22
+            name: "ssh"
+          - containerPort: 3000
+            name: "http"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-id: "6"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+    labels:
+      project: "jenkins"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "jenkins"
+  spec:
+    replicas: 1
+    selector:
+      project: "jenkins"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations:
+          fabric8.io/secret-ssh-key: "jenkins-git-ssh,jenkins-master-ssh"
+          fabric8.io/secret-gpg-key: "jenkins-release-gpg"
+        labels:
+          project: "jenkins"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "DOMAIN"
+            value: "${DOMAIN}"
+          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+          - name: "DOCKER_REGISTRY_SERVER_ID"
+            value: "${DOCKER_REGISTRY_SERVER_ID}"
+          - name: "SONATYPE_PASSWORD"
+            value: "${SONATYPE_PASSWORD}"
+          - name: "GITHUB_TOKEN"
+            value: "${GITHUB_TOKEN}"
+          - name: "SEED_GIT_URL"
+            value: "${SEED_GIT_URL}"
+          - name: "DOCKER_REGISTRY_USERNAME"
+            value: "${DOCKER_REGISTRY_USERNAME}"
+          - name: "JENKINS_GOGS_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
+          - name: "DOCKER_REGISTRY_PASSWORD"
+            value: "${DOCKER_REGISTRY_PASSWORD}"
+          - name: "JENKINS_SLAVE_IMAGE"
+            value: "${JENKINS_SLAVE_IMAGE}"
+          - name: "JENKINS_JOBS_GIT_REPOSITORY"
+            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
+          - name: "CGO_ENABLED"
+            value: "0"
+          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
+            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+          - name: "KUBERNETES_TRUST_CERTIFICATES"
+            value: "true"
+          - name: "NEXUS_PASSWORD"
+            value: "${NEXUS_PASSWORD}"
+          - name: "SONATYPE_USERNAME"
+            value: "${SONATYPE_USERNAME}"
+          - name: "JENKINS_GOGS_PASSWORD"
+            value: "${JENKINS_GOGS_PASSWORD}"
+          - name: "JENKINS_GOGS_USER"
+            value: "${JENKINS_GOGS_USER}"
+          - name: "GPG_PASSPHRASE"
+            value: "${GPG_PASSPHRASE}"
+          - name: "FABRIC8_CONSOLE"
+            value: "http://fabric8.${DOMAIN}"
+          - name: "DOCKER_REGISTRY"
+            value: "${DOCKER_REGISTRY_PREFIX}"
+          - name: "NEXUS_USERNAME"
+            value: "${NEXUS_USERNAME}"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          - name: "KUBERNETES_POD"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.name"
+          image: "fabric8/jenkernetes:2.2.76"
+          imagePullPolicy: "IfNotPresent"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - "/root/postStart.sh"
+          name: "jenkins"
+          ports:
+          - containerPort: 50000
+            name: "slave"
+          - containerPort: 8080
+            name: "http"
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: "/var/jenkins/.ssh-git"
+            name: "git-ssh"
+            readOnly: false
+          - mountPath: "/home/jenkins/ssh-keys"
+            name: "jenkins-master-key"
+            readOnly: false
+          - mountPath: "/var/run/docker.sock"
+            name: "docker-socket"
+            readOnly: false
+          - mountPath: "/var/jenkins_home"
+            name: "jenkins-workspace"
+            readOnly: false
+          - mountPath: "/root/.gnupg"
+            name: "gpg-key"
+            readOnly: false
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "jenkins"
+        volumes:
+        - name: "gpg-key"
+          secret:
+            secretName: "jenkins-release-gpg"
+        - name: "git-ssh"
+          secret:
+            secretName: "jenkins-git-ssh"
+        - hostPath:
+            path: "/var/run/docker.sock"
+          name: "docker-socket"
+        - name: "jenkins-master-key"
+          secret:
+            secretName: "jenkins-master-ssh"
+        - emptyDir:
+            medium: ""
+          name: "jenkins-workspace"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/11"
+      fabric8.io/build-id: "11"
+    labels:
+      package: "cd-pipeline"
+    name: "jenkins-swarm-client"
+  spec:
+    replicas: 1
+    selector:
+      provider: "fabric8"
+      project: "jenkins-swarm-client"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          provider: "fabric8"
+          project: "jenkins-swarm-client"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "DOMAIN"
+            value: "${DOMAIN}"
+          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+          - name: "SONATYPE_PASSWORD"
+            value: "${SONATYPE_PASSWORD}"
+          - name: "GITHUB_TOKEN"
+            value: "${GITHUB_TOKEN}"
+          - name: "DOCKER_REGISTRY_USERNAME"
+            value: "${DOCKER_REGISTRY_USERNAME}"
+          - name: "JENKINS_GOGS_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
+          - name: "DOCKER_REGISTRY_SERVER_ID"
+            value: "${DOCKER_REGISTRY_SERVER_ID}"
+          - name: "DOCKER_REGISTRY_PASSWORD"
+            value: "${DOCKER_REGISTRY_PASSWORD}"
+          - name: "DOCKER_REGISTRY_PASSWORD"
+            value: "${DOCKER_REGISTRY_PASSWORD}"
+          - name: "DOCKER_REGISTRY"
+            value: "${DOCKER_REGISTRY_PREFIX}"
+          - name: "JENKINS_JOBS_GIT_REPOSITORY"
+            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
+          - name: "CGO_ENABLED"
+            value: "${CGO_ENABLED}"
+          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
+            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+          - name: "SONATYPE_USERNAME"
+            value: "${SONATYPE_USERNAME}"
+          - name: "JENKINS_GOGS_PASSWORD"
+            value: "${JENKINS_GOGS_PASSWORD}"
+          - name: "JENKINS_GOGS_USER"
+            value: "${JENKINS_GOGS_USER}"
+          - name: "GPG_PASSPHRASE"
+            value: "${GPG_PASSPHRASE}"
+          - name: "GITHUB_AUTH_TOKEN"
+            value: "${GITHUB_AUTH_TOKEN}"
+          - name: "GITHUB_AUTH_TOKEN"
+            value: "${GITHUB_AUTH_TOKEN}"
+          - name: "NEXUS_USERNAME"
+            value: "${NEXUS_USERNAME}"
+          - name: "NEXUS_PASSWORD"
+            value: "${NEXUS_PASSWORD}"
+          - name: "KUBERNETES_TRUST_CERTIFICATES"
+            value: "true"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/jenkins-swarm-client:2.2.76"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - "/var/jenkins_home/postStart.sh"
+          name: "jenkins-swarm-client"
+          ports:
+          - containerPort: 8080
+            name: "http"
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: "/var/jenkins_home/workspace"
+            name: "jenkins-workspace"
+            readOnly: false
+          - mountPath: "/var/jenkins/.ssh-git"
+            name: "git-ssh"
+            readOnly: false
+          - mountPath: "/root/.gnupg"
+            name: "gpg-key"
+            readOnly: false
+          - mountPath: "/home/jenkins/ssh-keys"
+            name: "jenkins-master-key"
+            readOnly: false
+          - mountPath: "/var/run/docker.sock"
+            name: "docker-socket"
+            readOnly: false
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "jenkins"
+        volumes:
+        - hostPath:
+            path: "/var/jenkins_home/workspace"
+          name: "jenkins-workspace"
+        - name: "git-ssh"
+          secret:
+            secretName: "jenkins-git-ssh"
+        - name: "gpg-key"
+          secret:
+            secretName: "jenkins-release-gpg"
+        - name: "jenkins-master-key"
+          secret:
+            secretName: "jenkins-master-ssh"
+        - hostPath:
+            path: "/var/run/docker.sock"
+          name: "docker-socket"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/11"
+      fabric8.io/build-id: "11"
+    labels:
+      package: "cd-pipeline"
+    name: "jenkins-swarm-client"
+  spec:
+    replicas: 1
+    selector:
+      provider: "fabric8"
+      project: "jenkins-swarm-client"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          provider: "fabric8"
+          project: "jenkins-swarm-client"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "DOMAIN"
+            value: "${DOMAIN}"
+          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+          - name: "SONATYPE_PASSWORD"
+            value: "${SONATYPE_PASSWORD}"
+          - name: "GITHUB_TOKEN"
+            value: "${GITHUB_TOKEN}"
+          - name: "DOCKER_REGISTRY_USERNAME"
+            value: "${DOCKER_REGISTRY_USERNAME}"
+          - name: "JENKINS_GOGS_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
+          - name: "DOCKER_REGISTRY_SERVER_ID"
+            value: "${DOCKER_REGISTRY_SERVER_ID}"
+          - name: "DOCKER_REGISTRY_PASSWORD"
+            value: "${DOCKER_REGISTRY_PASSWORD}"
+          - name: "DOCKER_REGISTRY_PASSWORD"
+            value: "${DOCKER_REGISTRY_PASSWORD}"
+          - name: "DOCKER_REGISTRY"
+            value: "${DOCKER_REGISTRY_PREFIX}"
+          - name: "JENKINS_JOBS_GIT_REPOSITORY"
+            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
+          - name: "CGO_ENABLED"
+            value: "${CGO_ENABLED}"
+          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
+            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+          - name: "SONATYPE_USERNAME"
+            value: "${SONATYPE_USERNAME}"
+          - name: "JENKINS_GOGS_PASSWORD"
+            value: "${JENKINS_GOGS_PASSWORD}"
+          - name: "JENKINS_GOGS_USER"
+            value: "${JENKINS_GOGS_USER}"
+          - name: "GPG_PASSPHRASE"
+            value: "${GPG_PASSPHRASE}"
+          - name: "GITHUB_AUTH_TOKEN"
+            value: "${GITHUB_AUTH_TOKEN}"
+          - name: "GITHUB_AUTH_TOKEN"
+            value: "${GITHUB_AUTH_TOKEN}"
+          - name: "NEXUS_USERNAME"
+            value: "${NEXUS_USERNAME}"
+          - name: "NEXUS_PASSWORD"
+            value: "${NEXUS_PASSWORD}"
+          - name: "KUBERNETES_TRUST_CERTIFICATES"
+            value: "true"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/jenkins-swarm-client:2.2.76"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - "/var/jenkins_home/postStart.sh"
+          name: "jenkins-swarm-client"
+          ports:
+          - containerPort: 8080
+            name: "http"
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: "/var/jenkins_home/workspace"
+            name: "jenkins-workspace"
+            readOnly: false
+          - mountPath: "/var/jenkins/.ssh-git"
+            name: "git-ssh"
+            readOnly: false
+          - mountPath: "/root/.gnupg"
+            name: "gpg-key"
+            readOnly: false
+          - mountPath: "/home/jenkins/ssh-keys"
+            name: "jenkins-master-key"
+            readOnly: false
+          - mountPath: "/var/run/docker.sock"
+            name: "docker-socket"
+            readOnly: false
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "jenkins"
+        volumes:
+        - hostPath:
+            path: "/var/jenkins_home/workspace"
+          name: "jenkins-workspace"
+        - name: "git-ssh"
+          secret:
+            secretName: "jenkins-git-ssh"
+        - name: "gpg-key"
+          secret:
+            secretName: "jenkins-release-gpg"
+        - name: "jenkins-master-key"
+          secret:
+            secretName: "jenkins-master-ssh"
+        - hostPath:
+            path: "/var/run/docker.sock"
+          name: "docker-socket"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "nexus"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+      package: "cd-pipeline"
+    name: "nexus"
+  spec:
+    replicas: 1
+    selector:
+      project: "nexus"
+      provider: "fabric8"
+      version: "2.2.76"
+      group: "io.fabric8.devops.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "nexus"
+          provider: "fabric8"
+          version: "2.2.76"
+          group: "io.fabric8.devops.apps"
+          package: "cd-pipeline"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "SONATYPE_USERNAME"
+            value: "${SONATYPE_USERNAME}"
+          - name: "SONATYPE_PASSWORD"
+            value: "${SONATYPE_PASSWORD}"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/nexus:2.2.76"
+          imagePullPolicy: "IfNotPresent"
+          name: "nexus"
+          ports:
+          - containerPort: 8081
+            name: "http"
+          securityContext: {}
+          volumeMounts:
+          - mountPath: "/sonatype-work/storage"
+            name: "nexus-storage"
+            readOnly: false
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes:
+        - emptyDir:
+            medium: ""
+          name: "nexus-storage"
+parameters:
+- description: "The email address of the Jenkins user on Gogs"
+  name: "JENKINS_GOGS_EMAIL"
+  value: "gogsadmin@fabric8.local"
+- description: "The user name for Jenkins to login to Gogs"
+  name: "JENKINS_GOGS_USER"
+  value: "gogsadmin"
+- description: "The list of default environment names to actual kubernetes namespaces"
+  name: "FABRIC8_DEFAULT_ENVIRONMENTS"
+  value: "Testing=${buildName}-testing,Staging=${buildName}-staging,Production=${buildName}-prod"
+- description: "The password for Jenkins to login to Gogs"
+  name: "JENKINS_GOGS_PASSWORD"
+  value: "RedHat$1"
+- description: "The git clone URL for the jenkins workflow repository which can be\
+    \ reused across projects"
+  name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
+  value: "https://github.com/fabric8io/jenkins-workflow-library.git"
+- description: "Description ot add to the Gerrit Git repo created when a CD Project\
+    \ is created"
+  name: "GERRIT_REPO_DESCRIPTION"
+  value: "Description of the gerrit git repo"
+- description: "Admin password"
+  name: "GERRIT_ADMIN_PWD"
+  value: "secret"
+- description: "Admin user used to perform operations on gerrit"
+  name: "GERRIT_ADMIN_USER"
+  value: "admin"
+- description: "Parameter used when the Gerrit Git repo is created using the DevOpsConnector.\
+    \ By default, it is false as commits have already been done within gogs repo"
+  name: "GERRIT_INITIAL_COMMIT"
+  value: "false"
+- description: "The gogs server name"
+  name: "GOGS_SERVER_DOMAIN"
+  value: "gogs.vagrant.f8"
+- description: "The protocol for gogs to use; either http or https"
+  name: "GOGS_SERVER_PROTOCOL"
+  value: "http"
+- description: "The default Kubernetes admin user"
+  name: "KUBERNETES_ADMIN_USER"
+  value: "admin"
+- description: "The domain name applications are installed on"
+  name: "DOMAIN"
+  value: "vagrant.f8"
+- description: "The default registry, docker image prefix that new fabric8 projects\
+    \ will use"
+  name: "DOCKER_REGISTRY_PREFIX"
+  value: "docker.io/"
+- description: "Optional repository that contains build config.xml.  Example https://github.com/fabric8io/fabric8-workflow-jobs-release.git"
+  name: "JENKINS_JOBS_GIT_REPOSITORY"
+- description: "Username used to authenticate with Sonartype when deploying artifacts"
+  name: "SONATYPE_USERNAME"
+  value: "jenkins"
+- description: "The docker image used for jenkins slave when using the Docker Cloud"
+  name: "JENKINS_SLAVE_IMAGE"
+  value: "fabric8/jenkins-slave"
+- description: "Password used to authenticate with Sonartype when deploying artifacts"
+  name: "SONATYPE_PASSWORD"
+  value: "RedHat$1"
+- description: "GPG passphrase used to sign artifacts when building"
+  name: "GPG_PASSPHRASE"
+  value: "mysupersecretpassphrase"
+- description: "Username used to authenticate with a docker docker registry"
+  name: "DOCKER_REGISTRY_USERNAME"
+  value: "jenkins"
+- description: "Nexus username"
+  name: "NEXUS_USERNAME"
+  value: "admin"
+- description: "Optional token used to authenticate when making Pull Requests with\
+    \ GitHub"
+  name: "GITHUB_TOKEN"
+- description: "Docker registry server id.  Set to docker.io if using docker-maven-plugin\
+    \ to authenticate with DockerHub http://ro14nd.de/docker-maven-plugin/authentication.html"
+  name: "DOCKER_REGISTRY_SERVER_ID"
+  value: "unused"
+- description: "Password used to authenticate with a docker docker registry"
+  name: "DOCKER_REGISTRY_PASSWORD"
+  value: "RedHat$1"
+- description: "Nexus password"
+  name: "NEXUS_PASSWORD"
+  value: "admin123"
+- description: "The git URL of the seed build used to generate builds"
+  name: "SEED_GIT_URL"
+  value: "https://github.com/fabric8io/default-jenkins-dsl.git"

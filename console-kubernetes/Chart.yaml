@@ -1,0 +1,8 @@
+---
+name: "console-kubernetes"
+home: "http://fabric8.io/console-kubernetes/"
+version: "2.2.76"
+description: "Sonatype helps open source projects to set up Maven repositories on\
+  \ https://oss.sonatype.org/"
+maintainers:
+- "Fabric8 Development Team"
