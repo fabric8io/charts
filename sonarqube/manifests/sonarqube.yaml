@@ -1,0 +1,62 @@
+---
+apiVersion: "v1"
+items:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    name: "sonarqube"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 8080
+      targetPort: 9000
+    selector:
+      name: "sonarqube"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/15"
+      fabric8.io/build-id: "15"
+    labels:
+      name: "sonarqube"
+    name: "sonarqube"
+  spec:
+    replicas: 1
+    selector:
+      name: "sonarqube"
+    template:
+      metadata:
+        labels:
+          name: "sonarqube"
+        name: "sonarqube"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "DB_PORT_3306_TCP_ADDR"
+            value: "localhost"
+          image: "tpires/sonar-server"
+          name: "sonarqube-server-container"
+          ports:
+          - containerPort: 9000
+            protocol: "TCP"
+          volumeMounts: []
+        - args: []
+          command: []
+          env: []
+          image: "tpires/sonar-mysql"
+          name: "sonarqube-database-container"
+          ports:
+          - containerPort: 3306
+            protocol: "TCP"
+          volumeMounts: []
+        imagePullSecrets: []
+        volumes: []
+kind: "List"
+description: "Creates a sonarqube Server"

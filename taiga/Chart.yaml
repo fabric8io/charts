@@ -1,0 +1,8 @@
+---
+name: "taiga"
+home: "http://fabric8.io/taiga/"
+version: "2.2.76"
+description: "[Taiga](https://github.com/taigaio) Your Agile, Free and Open Source\
+  \ Project Management Tool"
+maintainers:
+- "Fabric8 Development Team"
