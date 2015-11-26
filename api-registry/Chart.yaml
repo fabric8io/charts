@@ -1,0 +1,7 @@
+---
+name: "api-registry"
+home: "http://fabric8.io/api-registry/"
+version: "2.2.68"
+description: "Provides a global view of all APIs in the Kubernetes environment"
+maintainers:
+- "Fabric8 Development Team"

@@ -1,0 +1,3 @@
+The Apiman Package provides the core [Apiman platform](http://fabric8.io/guide/apiManagement.html) using [Apiman Management Application ](http://www.apiman.io/latest/user-guide.html#_api_manager), [Apiman Gateway](http://www.apiman.io/latest/user-guide.html#_api_gateway) and [ElasticSearch](https://www.elastic.co/). 
+
+Known Issue: If all 3 applications are deployed and Apiman is not working correctly you may be in the situation where Apiman deployed *before* Elasticsearch. The workaround for this issue is to kill the apiman pod. The controller will fire up a new pod and this time it should find the elastic service. 

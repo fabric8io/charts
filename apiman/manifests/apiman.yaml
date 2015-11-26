@@ -1,0 +1,318 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    description: "The Apiman Package provides the core [Apiman platform](http://fabric8.io/guide/apiManagement.html)\
+      \ using [Apiman Management Application ](http://www.apiman.io/latest/user-guide.html#_api_manager),\
+      \ [Apiman Gateway](http://www.apiman.io/latest/user-guide.html#_api_gateway)\
+      \ and [ElasticSearch](https://www.elastic.co/). \n\nKnown Issue: If all 3 applications\
+      \ are deployed and Apiman is not working correctly you may be in the situation\
+      \ where Apiman deployed *before* Elasticsearch. The workaround for this issue\
+      \ is to kill the apiman pod. The controller will fire up a new pod and this\
+      \ time it should find the elastic service. \n"
+    fabric8.apiman/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman/src/main/fabric8/icon.png"
+    fabric8.apiman/summary: "Sonatype helps open source projects to set up Maven repositories\
+      \ on https://oss.sonatype.org/"
+    fabric8.apiman-gateway/summary: "Apiman Gateway deployed on Jetty"
+    fabric8.apiman-gateway/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman-gateway/src/main/fabric8/icon.png"
+    fabric8.elasticsearch/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/elasticsearch/src/main/fabric8/icon.png"
+    fabric8.elasticsearch/summary: "[elasticsearch](http://elasticsearch.com/) provides\
+      \ distributed RESTful search and analytics"
+  labels: {}
+  name: "apiman"
+objects:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations:
+      apiman.io/servicetype: "REST"
+      apiman.io/descriptionpath: "apiman/swagger.json"
+      apiman.io/descriptiontype: "SwaggerJSON"
+      apiman.io/servicepath: "apiman"
+    labels:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 7070
+      protocol: "TCP"
+      targetPort: 7070
+    selector:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      group: "defaultGatewayGroup"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations:
+      apiman.io/servicetype: "REST"
+      apiman.io/descriptionpath: "api/swagger.json"
+      apiman.io/descriptiontype: "SwaggerJSON"
+      apiman.io/servicepath: "api"
+    labels:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman-gateway"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 7777
+      protocol: "TCP"
+      targetPort: 7777
+    selector:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      group: "defaultGatewayGroup"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "elasticsearch"
+      component: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.54"
+      package: "apiman"
+    name: "elasticsearch"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 9200
+      protocol: "TCP"
+      targetPort: 9200
+    selector:
+      project: "elasticsearch"
+      component: "elasticsearch"
+      provider: "fabric8"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      package: "apiman"
+    name: "elasticsearch-cluster"
+  spec:
+    clusterIP: "None"
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - name: ""
+      port: 9300
+      protocol: "TCP"
+      targetPort: 9300
+    selector:
+      provider: "fabric8"
+      component: "elasticsearch"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.68"
+      fabric8.io/git-commit: "fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman"
+  spec:
+    replicas: 1
+    selector:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "apiman"
+          component: "ApimanManagerAPI"
+          provider: "fabric8"
+          version: "2.2.68"
+          group: "defaultGatewayGroup"
+          package: "apiman"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "AB_JOLOKIA_AUTH_OPENSHIFT"
+            value: "true"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/apiman:2.2.68"
+          name: "apiman"
+          ports:
+          - containerPort: 7070
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "fabric8"
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.68"
+      fabric8.io/git-commit: "fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman-gateway"
+  spec:
+    replicas: 1
+    selector:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "apiman-gateway"
+          component: "ApimanGateway"
+          provider: "fabric8"
+          version: "2.2.68"
+          group: "defaultGatewayGroup"
+          package: "apiman"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "AB_JOLOKIA_AUTH_OPENSHIFT"
+            value: "true"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/apiman-gateway:2.2.68"
+          name: "apiman-gateway"
+          ports:
+          - containerPort: 7777
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-commit: "bfc83b61cbf47fe071fe835945ffce31f075eb09"
+      fabric8.io/git-branch: "release-v2.2.54"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/bfc83b61cbf47fe071fe835945ffce31f075eb09"
+      fabric8.io/build-id: "3"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/3"
+    labels:
+      project: "elasticsearch"
+      component: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.54"
+      package: "apiman"
+    name: "elasticsearch"
+  spec:
+    replicas: 1
+    selector:
+      project: "elasticsearch"
+      component: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.54"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "elasticsearch"
+          component: "elasticsearch"
+          provider: "fabric8"
+          version: "2.2.54"
+          package: "apiman"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "SERVICE_DNS"
+            value: "elasticsearch-cluster"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "docker.io/fabric8/elasticsearch-k8s:1.5.2"
+          livenessProbe:
+            initialDelaySeconds: 60
+            tcpSocket:
+              port: 9300
+          name: "elasticsearch"
+          ports:
+          - containerPort: 9200
+            name: "http"
+          - containerPort: 9300
+            name: "transport"
+          readinessProbe:
+            httpGet:
+              path: "/_template/logstash"
+              port: 9200
+            initialDelaySeconds: 60
+          securityContext: {}
+          volumeMounts:
+          - mountPath: "/usr/share/elasticsearch/data"
+            name: "elasticsearch-data"
+            readOnly: false
+        - args: []
+          command: []
+          env: []
+          image: "docker.io/fabric8/elasticsearch-logstash-template:2.2.54"
+          name: "logstash-template"
+          ports: []
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes:
+        - emptyDir:
+            medium: ""
+          name: "elasticsearch-data"
+parameters: []
