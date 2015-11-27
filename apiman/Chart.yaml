@@ -1,7 +1,7 @@
 ---
 name: "apiman"
 home: "http://fabric8.io/packages/apiman/"
-version: "2.2.68"
+version: "2.2.70-SNAPSHOT"
 description: "Sonatype helps open source projects to set up Maven repositories on\
   \ https://oss.sonatype.org/"
 maintainers:

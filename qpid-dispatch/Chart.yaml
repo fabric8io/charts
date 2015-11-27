@@ -1,7 +1,7 @@
 ---
 name: "qpid-dispatch"
 home: "http://fabric8.io/qpid-dispatch/"
-version: "2.2.68"
+version: "2.2.70-SNAPSHOT"
 description: "A high-performance, lightweight AMQP 1.0 message router"
 maintainers:
 - "Fabric8 Development Team"

@@ -13,6 +13,26 @@ metadata:
   name: "fabric8"
 objects:
 - apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "fabric8"
+  secrets: []
+- apiVersion: "v1"
+  kind: "OAuthClient"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "fabric8"
+  redirectURIs:
+  - "http://localhost:9090"
+  - "http://localhost:2772"
+  - "http://localhost:9000"
+  - "http://fabric8.${DOMAIN}"
+  - "https://fabric8.${DOMAIN}"
+- apiVersion: "v1"
   kind: "Service"
   metadata:
     annotations: {}
@@ -20,7 +40,7 @@ objects:
       project: "fabric8"
       component: "console"
       provider: "fabric8"
-      version: "2.2.68"
+      version: "2.2.70-SNAPSHOT"
       group: "io.fabric8.ipaas.apps"
     name: "fabric8"
   spec:
@@ -39,16 +59,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "6750a361fe0796777840dd5079bbeeff7ef3be2d"
-      fabric8.io/git-commit: "6750a361fe0796777840dd5079bbeeff7ef3be2d"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/6750a361fe0796777840dd5079bbeeff7ef3be2d"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/12"
-      fabric8.io/build-id: "12"
+      fabric8.io/git-commit: "47959f95b03e0e2fa04d0471317a44ded0be9050"
+      fabric8.io/git-branch: "release-v2.2.69"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/47959f95b03e0e2fa04d0471317a44ded0be9050"
+      fabric8.io/build-id: "1"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/1"
     labels:
       project: "fabric8"
       component: "console"
       provider: "fabric8"
-      version: "2.2.68"
+      version: "2.2.70-SNAPSHOT"
       group: "io.fabric8.ipaas.apps"
     name: "fabric8"
   spec:
@@ -57,7 +77,7 @@ objects:
       project: "fabric8"
       component: "console"
       provider: "fabric8"
-      version: "2.2.68"
+      version: "2.2.70-SNAPSHOT"
       group: "io.fabric8.ipaas.apps"
     template:
       metadata:
@@ -66,7 +86,7 @@ objects:
           project: "fabric8"
           component: "console"
           provider: "fabric8"
-          version: "2.2.68"
+          version: "2.2.70-SNAPSHOT"
           group: "io.fabric8.ipaas.apps"
       spec:
         containers:
