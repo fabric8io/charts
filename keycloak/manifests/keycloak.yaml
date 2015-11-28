@@ -19,7 +19,7 @@ objects:
     labels:
       project: "keycloak"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     name: "keycloak"
   spec:
@@ -38,15 +38,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.79"
-      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
-      fabric8.io/build-id: "6"
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
+      fabric8.io/build-id: "20"
     labels:
       project: "keycloak"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     name: "keycloak"
   spec:
@@ -54,7 +54,7 @@ objects:
     selector:
       project: "keycloak"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -62,7 +62,7 @@ objects:
         labels:
           project: "keycloak"
           provider: "fabric8"
-          version: "2.2.80-SNAPSHOT"
+          version: "2.2.76"
           group: "io.fabric8.devops.apps"
       spec:
         containers:

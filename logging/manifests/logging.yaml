@@ -26,7 +26,7 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "logging"
     name: "elasticsearch"
@@ -48,13 +48,14 @@ objects:
     annotations: {}
     labels:
       package: "logging"
-    name: "elasticsearch-masters"
+    name: "elasticsearch-cluster"
   spec:
     clusterIP: "None"
     deprecatedPublicIPs: []
     externalIPs: []
     ports:
-    - port: 9300
+    - name: ""
+      port: 9300
       protocol: "TCP"
       targetPort: 9300
     selector:
@@ -67,7 +68,7 @@ objects:
     labels:
       project: "kibana"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "logging"
     name: "kibana"
@@ -87,15 +88,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/git-branch: "release-v2.2.79"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
       fabric8.io/build-id: "6"
       fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "logging"
     name: "elasticsearch"
@@ -104,7 +105,7 @@ objects:
     selector:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -112,7 +113,7 @@ objects:
         labels:
           project: "elasticsearch"
           provider: "fabric8"
-          version: "2.2.80-SNAPSHOT"
+          version: "2.2.76"
           group: "io.fabric8.devops.apps"
           package: "logging"
       spec:
@@ -120,13 +121,13 @@ objects:
         - args: []
           command: []
           env:
-          - name: "SERVICE"
-            value: "elasticsearch-masters"
+          - name: "SERVICE_DNS"
+            value: "elasticsearch-cluster"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/elasticsearch-k8s:2.1.0"
+          image: "fabric8/elasticsearch-k8s:1.5.2"
           livenessProbe:
             initialDelaySeconds: 60
             tcpSocket:
@@ -150,7 +151,7 @@ objects:
         - args: []
           command: []
           env: []
-          image: "fabric8/elasticsearch-logstash-template:2.2.80-SNAPSHOT"
+          image: "fabric8/elasticsearch-logstash-template:2.2.76"
           name: "logstash-template"
           ports: []
           volumeMounts: []
@@ -164,15 +165,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/git-branch: "release-v2.2.79"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
       fabric8.io/build-id: "6"
       fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
     labels:
       project: "kibana"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "logging"
     name: "kibana"
@@ -181,7 +182,7 @@ objects:
     selector:
       project: "kibana"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -189,7 +190,7 @@ objects:
         labels:
           project: "kibana"
           provider: "fabric8"
-          version: "2.2.80-SNAPSHOT"
+          version: "2.2.76"
           group: "io.fabric8.devops.apps"
           package: "logging"
       spec:
@@ -197,13 +198,13 @@ objects:
         - args: []
           command: []
           env:
-          - name: "ELASTICSEARCH_URL"
-            value: "http://elasticsearch:9200"
+          - name: "ELASTICSEARCH_SERVICE_NAME"
+            value: "ELASTICSEARCH"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/kibana4:4.3.0"
+          image: "fabric8/kibana4:4.1.2"
           livenessProbe:
             tcpSocket:
               port: 5601
@@ -216,13 +217,13 @@ objects:
         - args: []
           command: []
           env:
-          - name: "ELASTICSEARCH_URL"
-            value: "http://elasticsearch:9200"
+          - name: "ELASTICSEARCH_SERVICE_NAME"
+            value: "ELASTICSEARCH"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/kibana-config:2.2.80-SNAPSHOT"
+          image: "fabric8/kibana-config:2.2.76"
           name: "kibana-config"
           ports: []
           volumeMounts: []

@@ -26,7 +26,7 @@ objects:
     labels:
       project: "hubot-letschat"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "chat-letschat"
     name: "hubot"
@@ -81,15 +81,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/git-branch: "release-v2.2.79"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
       fabric8.io/build-id: "6"
       fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
     labels:
       project: "hubot-letschat"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "chat-letschat"
     name: "hubot-letschat"
@@ -98,7 +98,7 @@ objects:
     selector:
       project: "hubot-letschat"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -106,7 +106,7 @@ objects:
         labels:
           project: "hubot-letschat"
           provider: "fabric8"
-          version: "2.2.80-SNAPSHOT"
+          version: "2.2.76"
           group: "io.fabric8.devops.apps"
           package: "chat-letschat"
       spec:
@@ -150,15 +150,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.79"
-      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
+      fabric8.io/git-branch: "release-v2.2.76"
+      fabric8.io/git-commit: "a25b7f72b9832304cb18bb96b7ff20c01edb4893"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/a25b7f72b9832304cb18bb96b7ff20c01edb4893"
       fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
       fabric8.io/build-id: "6"
     labels:
       project: "hubotNotifier"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
       package: "chat-letschat"
     name: "hubot-notifier"
@@ -167,7 +167,7 @@ objects:
     selector:
       project: "hubotNotifier"
       provider: "fabric8"
-      version: "2.2.80-SNAPSHOT"
+      version: "2.2.76"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -175,7 +175,7 @@ objects:
         labels:
           project: "hubotNotifier"
           provider: "fabric8"
-          version: "2.2.80-SNAPSHOT"
+          version: "2.2.76"
           group: "io.fabric8.devops.apps"
           package: "chat-letschat"
       spec:
@@ -193,7 +193,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/hubot-notifier:2.2.80-SNAPSHOT"
+          image: "fabric8/hubot-notifier:2.2.76"
           name: "hubot-notifier"
           ports:
           - containerPort: 8778
@@ -208,11 +208,11 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.79"
-      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
-      fabric8.io/build-id: "6"
+      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
+      fabric8.io/build-id: "20"
     labels:
       name: "letschat"
       provider: "fabric8"
@@ -268,7 +268,7 @@ objects:
             value: "true"
           - name: "LCB_DATABASE_URI"
             value: "mongodb://127.0.0.1:27017/letschat"
-          image: "fabric8/lets-chat:2.2.80-SNAPSHOT"
+          image: "fabric8/lets-chat:2.2.76"
           name: "letschat"
           ports:
           - containerPort: 5000
