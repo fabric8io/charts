@@ -27,35 +27,11 @@ objects:
 - apiVersion: "v1"
   kind: "Service"
   metadata:
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/path: "/prometheus"
-      prometheus.io/port: "8080"
-    labels:
-      project: "jenkins"
-      provider: "fabric8"
-      version: "2.2.76"
-      group: "io.fabric8.devops.apps"
-    name: "jenkins"
-  spec:
-    deprecatedPublicIPs: []
-    externalIPs: []
-    ports:
-    - name: "http"
-      port: 80
-      targetPort: 8080
-    selector:
-      project: "jenkins"
-      provider: "fabric8"
-      group: "io.fabric8.devops.apps"
-- apiVersion: "v1"
-  kind: "Service"
-  metadata:
     annotations: {}
     labels:
       provider: "fabric8"
-      project: "jenkins-agent"
-    name: "jenkins-agent"
+      project: "jenkins"
+    name: "jenkins"
   spec:
     deprecatedPublicIPs: []
     externalIPs: []
@@ -78,8 +54,8 @@ objects:
     annotations: {}
     labels:
       provider: "fabric8"
-      project: "jenkins-agent"
-    name: "jenkins-agent"
+      project: "jenkins"
+    name: "jenkins"
   spec:
     deprecatedPublicIPs: []
     externalIPs: []
@@ -100,15 +76,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-id: "20"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
+      fabric8.io/git-commit: "f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
+      fabric8.io/git-branch: "release-v2.2.79"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/f2329fc83866c6bc71cb4774e52c3b6d75da3fec"
+      fabric8.io/build-id: "6"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
     labels:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.76"
+      version: "2.2.80-SNAPSHOT"
       group: "io.fabric8.devops.apps"
     name: "jenkins"
   spec:
@@ -116,7 +92,7 @@ objects:
     selector:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.76"
+      version: "2.2.80-SNAPSHOT"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -126,7 +102,7 @@ objects:
         labels:
           project: "jenkins"
           provider: "fabric8"
-          version: "2.2.76"
+          version: "2.2.80-SNAPSHOT"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -185,7 +161,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.name"
-          image: "fabric8/jenkernetes:2.2.76"
+          image: "fabric8/jenkins-docker:2.2.80-SNAPSHOT"
           imagePullPolicy: "IfNotPresent"
           lifecycle:
             postStart:
@@ -210,9 +186,6 @@ objects:
           - mountPath: "/var/run/docker.sock"
             name: "docker-socket"
             readOnly: false
-          - mountPath: "/var/jenkins_home"
-            name: "jenkins-workspace"
-            readOnly: false
           - mountPath: "/root/.gnupg"
             name: "gpg-key"
             readOnly: false
@@ -232,247 +205,6 @@ objects:
         - name: "jenkins-master-key"
           secret:
             secretName: "jenkins-master-ssh"
-        - emptyDir:
-            medium: ""
-          name: "jenkins-workspace"
-- apiVersion: "v1"
-  kind: "ReplicationController"
-  metadata:
-    annotations: {}
-    labels: {}
-    name: "jenkins-swarm-client"
-  spec:
-    replicas: 1
-    selector:
-      provider: "fabric8"
-      project: "jenkins-swarm-client"
-    template:
-      metadata:
-        annotations: {}
-        labels:
-          provider: "fabric8"
-          project: "jenkins-swarm-client"
-      spec:
-        containers:
-        - args: []
-          command: []
-          env:
-          - name: "DOMAIN"
-            value: "${DOMAIN}"
-          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
-            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
-            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-          - name: "SONATYPE_PASSWORD"
-            value: "${SONATYPE_PASSWORD}"
-          - name: "GITHUB_TOKEN"
-            value: "${GITHUB_TOKEN}"
-          - name: "DOCKER_REGISTRY_USERNAME"
-            value: "${DOCKER_REGISTRY_USERNAME}"
-          - name: "JENKINS_GOGS_EMAIL"
-            value: "${JENKINS_GOGS_EMAIL}"
-          - name: "DOCKER_REGISTRY_SERVER_ID"
-            value: "${DOCKER_REGISTRY_SERVER_ID}"
-          - name: "DOCKER_REGISTRY_PASSWORD"
-            value: "${DOCKER_REGISTRY_PASSWORD}"
-          - name: "DOCKER_REGISTRY_PASSWORD"
-            value: "${DOCKER_REGISTRY_PASSWORD}"
-          - name: "DOCKER_REGISTRY"
-            value: "${DOCKER_REGISTRY_PREFIX}"
-          - name: "JENKINS_JOBS_GIT_REPOSITORY"
-            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
-          - name: "CGO_ENABLED"
-            value: "${CGO_ENABLED}"
-          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
-            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
-          - name: "SONATYPE_USERNAME"
-            value: "${SONATYPE_USERNAME}"
-          - name: "JENKINS_GOGS_PASSWORD"
-            value: "${JENKINS_GOGS_PASSWORD}"
-          - name: "JENKINS_GOGS_USER"
-            value: "${JENKINS_GOGS_USER}"
-          - name: "GPG_PASSPHRASE"
-            value: "${GPG_PASSPHRASE}"
-          - name: "GITHUB_AUTH_TOKEN"
-            value: "${GITHUB_AUTH_TOKEN}"
-          - name: "GITHUB_AUTH_TOKEN"
-            value: "${GITHUB_AUTH_TOKEN}"
-          - name: "NEXUS_USERNAME"
-            value: "${NEXUS_USERNAME}"
-          - name: "NEXUS_PASSWORD"
-            value: "${NEXUS_PASSWORD}"
-          - name: "KUBERNETES_TRUST_CERTIFICATES"
-            value: "true"
-          - name: "KUBERNETES_NAMESPACE"
-            valueFrom:
-              fieldRef:
-                fieldPath: "metadata.namespace"
-          image: "fabric8/jenkins-swarm-client:2.2.76"
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                - "/var/jenkins_home/postStart.sh"
-          name: "jenkins-swarm-client"
-          ports:
-          - containerPort: 8080
-            name: "http"
-          securityContext:
-            privileged: true
-          volumeMounts:
-          - mountPath: "/var/jenkins_home/workspace"
-            name: "jenkins-workspace"
-            readOnly: false
-          - mountPath: "/var/jenkins/.ssh-git"
-            name: "git-ssh"
-            readOnly: false
-          - mountPath: "/root/.gnupg"
-            name: "gpg-key"
-            readOnly: false
-          - mountPath: "/home/jenkins/ssh-keys"
-            name: "jenkins-master-key"
-            readOnly: false
-          - mountPath: "/var/run/docker.sock"
-            name: "docker-socket"
-            readOnly: false
-        imagePullSecrets: []
-        nodeSelector: {}
-        serviceAccountName: "jenkins"
-        volumes:
-        - hostPath:
-            path: "/var/jenkins_home/workspace"
-          name: "jenkins-workspace"
-        - name: "git-ssh"
-          secret:
-            secretName: "jenkins-git-ssh"
-        - name: "gpg-key"
-          secret:
-            secretName: "jenkins-release-gpg"
-        - name: "jenkins-master-key"
-          secret:
-            secretName: "jenkins-master-ssh"
-        - hostPath:
-            path: "/var/run/docker.sock"
-          name: "docker-socket"
-- apiVersion: "v1"
-  kind: "ReplicationController"
-  metadata:
-    annotations: {}
-    labels: {}
-    name: "jenkins-swarm-client"
-  spec:
-    replicas: 1
-    selector:
-      provider: "fabric8"
-      project: "jenkins-swarm-client"
-    template:
-      metadata:
-        annotations: {}
-        labels:
-          provider: "fabric8"
-          project: "jenkins-swarm-client"
-      spec:
-        containers:
-        - args: []
-          command: []
-          env:
-          - name: "DOMAIN"
-            value: "${DOMAIN}"
-          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
-            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-          - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
-            value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-          - name: "SONATYPE_PASSWORD"
-            value: "${SONATYPE_PASSWORD}"
-          - name: "GITHUB_TOKEN"
-            value: "${GITHUB_TOKEN}"
-          - name: "DOCKER_REGISTRY_USERNAME"
-            value: "${DOCKER_REGISTRY_USERNAME}"
-          - name: "JENKINS_GOGS_EMAIL"
-            value: "${JENKINS_GOGS_EMAIL}"
-          - name: "DOCKER_REGISTRY_SERVER_ID"
-            value: "${DOCKER_REGISTRY_SERVER_ID}"
-          - name: "DOCKER_REGISTRY_PASSWORD"
-            value: "${DOCKER_REGISTRY_PASSWORD}"
-          - name: "DOCKER_REGISTRY_PASSWORD"
-            value: "${DOCKER_REGISTRY_PASSWORD}"
-          - name: "DOCKER_REGISTRY"
-            value: "${DOCKER_REGISTRY_PREFIX}"
-          - name: "JENKINS_JOBS_GIT_REPOSITORY"
-            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
-          - name: "CGO_ENABLED"
-            value: "${CGO_ENABLED}"
-          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
-            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
-          - name: "SONATYPE_USERNAME"
-            value: "${SONATYPE_USERNAME}"
-          - name: "JENKINS_GOGS_PASSWORD"
-            value: "${JENKINS_GOGS_PASSWORD}"
-          - name: "JENKINS_GOGS_USER"
-            value: "${JENKINS_GOGS_USER}"
-          - name: "GPG_PASSPHRASE"
-            value: "${GPG_PASSPHRASE}"
-          - name: "GITHUB_AUTH_TOKEN"
-            value: "${GITHUB_AUTH_TOKEN}"
-          - name: "GITHUB_AUTH_TOKEN"
-            value: "${GITHUB_AUTH_TOKEN}"
-          - name: "NEXUS_USERNAME"
-            value: "${NEXUS_USERNAME}"
-          - name: "NEXUS_PASSWORD"
-            value: "${NEXUS_PASSWORD}"
-          - name: "KUBERNETES_TRUST_CERTIFICATES"
-            value: "true"
-          - name: "KUBERNETES_NAMESPACE"
-            valueFrom:
-              fieldRef:
-                fieldPath: "metadata.namespace"
-          image: "fabric8/jenkins-swarm-client:2.2.76"
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                - "/var/jenkins_home/postStart.sh"
-          name: "jenkins-swarm-client"
-          ports:
-          - containerPort: 8080
-            name: "http"
-          securityContext:
-            privileged: true
-          volumeMounts:
-          - mountPath: "/var/jenkins_home/workspace"
-            name: "jenkins-workspace"
-            readOnly: false
-          - mountPath: "/var/jenkins/.ssh-git"
-            name: "git-ssh"
-            readOnly: false
-          - mountPath: "/root/.gnupg"
-            name: "gpg-key"
-            readOnly: false
-          - mountPath: "/home/jenkins/ssh-keys"
-            name: "jenkins-master-key"
-            readOnly: false
-          - mountPath: "/var/run/docker.sock"
-            name: "docker-socket"
-            readOnly: false
-        imagePullSecrets: []
-        nodeSelector: {}
-        serviceAccountName: "jenkins"
-        volumes:
-        - hostPath:
-            path: "/var/jenkins_home/workspace"
-          name: "jenkins-workspace"
-        - name: "git-ssh"
-          secret:
-            secretName: "jenkins-git-ssh"
-        - name: "gpg-key"
-          secret:
-            secretName: "jenkins-release-gpg"
-        - name: "jenkins-master-key"
-          secret:
-            secretName: "jenkins-master-ssh"
-        - hostPath:
-            path: "/var/run/docker.sock"
-          name: "docker-socket"
 parameters:
 - description: "The password for Jenkins to login to Gogs"
   name: "JENKINS_GOGS_PASSWORD"

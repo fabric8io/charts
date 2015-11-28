@@ -1,7 +1,7 @@
 ---
 name: "hubot-letschat"
 home: "http://fabric8.io/hubot-letschat/"
-version: "2.2.76"
+version: "2.2.80-SNAPSHOT"
 description: "[Hubot](http://hubot.github.com) chat bot for Lets Chat"
 maintainers:
 - "Fabric8 Development Team"
