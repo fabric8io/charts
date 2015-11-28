@@ -12,14 +12,73 @@ metadata:
       \ where Apiman deployed *before* Elasticsearch. The workaround for this issue\
       \ is to kill the apiman pod. The controller will fire up a new pod and this\
       \ time it should find the elastic service. \n"
+    fabric8.apiman/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman/src/main/fabric8/icon.png"
+    fabric8.apiman/summary: "Sonatype helps open source projects to set up Maven repositories\
+      \ on https://oss.sonatype.org/"
+    fabric8.apiman-gateway/summary: "Apiman Gateway deployed on Jetty"
+    fabric8.apiman-gateway/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman-gateway/src/main/fabric8/icon.png"
     fabric8.elasticsearch/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/elasticsearch/src/main/fabric8/icon.png"
     fabric8.elasticsearch/summary: "[elasticsearch](http://elasticsearch.com/) provides\
       \ distributed RESTful search and analytics"
-    fabric8.apiman/summary: "Sonatype helps open source projects to set up Maven repositories\
-      \ on https://oss.sonatype.org/"
   labels: {}
   name: "apiman"
 objects:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations:
+      apiman.io/servicetype: "REST"
+      apiman.io/descriptionpath: "apiman/swagger.json"
+      apiman.io/descriptiontype: "SwaggerJSON"
+      apiman.io/servicepath: "apiman"
+    labels:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 7070
+      protocol: "TCP"
+      targetPort: 7070
+    selector:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      group: "defaultGatewayGroup"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations:
+      apiman.io/servicetype: "REST"
+      apiman.io/descriptionpath: "api/swagger.json"
+      apiman.io/descriptiontype: "SwaggerJSON"
+      apiman.io/servicepath: "api"
+    labels:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman-gateway"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 7777
+      protocol: "TCP"
+      targetPort: 7777
+    selector:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      group: "defaultGatewayGroup"
 - apiVersion: "v1"
   kind: "Service"
   metadata:
@@ -62,6 +121,123 @@ objects:
     selector:
       provider: "fabric8"
       component: "elasticsearch"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.68"
+      fabric8.io/git-commit: "fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman"
+  spec:
+    replicas: 1
+    selector:
+      project: "apiman"
+      component: "ApimanManagerAPI"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "apiman"
+          component: "ApimanManagerAPI"
+          provider: "fabric8"
+          version: "2.2.68"
+          group: "defaultGatewayGroup"
+          package: "apiman"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "AB_JOLOKIA_AUTH_OPENSHIFT"
+            value: "true"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/apiman:2.2.68"
+          name: "apiman"
+          ports:
+          - containerPort: 7070
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        serviceAccountName: "fabric8"
+        volumes: []
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-branch: "release-v2.2.68"
+      fabric8.io/git-commit: "fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/fda4f0bc0f1c414464087917a05c54c983937d4a"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
+    labels:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+      package: "apiman"
+    name: "apiman-gateway"
+  spec:
+    replicas: 1
+    selector:
+      project: "apiman-gateway"
+      component: "ApimanGateway"
+      provider: "fabric8"
+      version: "2.2.68"
+      group: "defaultGatewayGroup"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "apiman-gateway"
+          component: "ApimanGateway"
+          provider: "fabric8"
+          version: "2.2.68"
+          group: "defaultGatewayGroup"
+          package: "apiman"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "AB_JOLOKIA_AUTH_OPENSHIFT"
+            value: "true"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/apiman-gateway:2.2.68"
+          name: "apiman-gateway"
+          ports:
+          - containerPort: 7777
+            name: "http"
+          - containerPort: 8778
+            name: "jolokia"
+          securityContext: {}
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes: []
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
