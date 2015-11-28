@@ -21,7 +21,7 @@ objects:
     labels:
       project: "prometheus"
       provider: "fabric8"
-      version: "2.2.76"
+      version: "2.2.80"
       group: "io.fabric8.devops.apps"
     name: "prometheus"
   spec:
@@ -40,15 +40,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/git-commit: "021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/021bf3d7ca308e9087fa805e7639658766044658"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/20"
-      fabric8.io/build-id: "20"
+      fabric8.io/git-branch: "release-v2.2.80"
+      fabric8.io/git-commit: "5a0dc01b2e08edc925b66533140497e62886aba7"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/5a0dc01b2e08edc925b66533140497e62886aba7"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/7"
+      fabric8.io/build-id: "7"
     labels:
       project: "prometheus"
       provider: "fabric8"
-      version: "2.2.76"
+      version: "2.2.80"
       group: "io.fabric8.devops.apps"
     name: "prometheus"
   spec:
@@ -56,7 +56,7 @@ objects:
     selector:
       project: "prometheus"
       provider: "fabric8"
-      version: "2.2.76"
+      version: "2.2.80"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -64,7 +64,7 @@ objects:
         labels:
           project: "prometheus"
           provider: "fabric8"
-          version: "2.2.76"
+          version: "2.2.80"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -75,7 +75,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/prometheus-kubernetes:2.2.76"
+          image: "fabric8/prometheus-kubernetes:2.2.80"
           livenessProbe:
             tcpSocket:
               port: 9090
