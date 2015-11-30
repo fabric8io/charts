@@ -1,8 +1,8 @@
 ---
 name: "keycloak"
 home: "http://fabric8.io/keycloak/"
-version: "2.2.81-SNAPSHOT"
+version: "2.2.82-SNAPSHOT"
 description: "Keycloack (security) - Integrated SSO and IDM for browser apps and RESTful\
   \ services"
 maintainers:
-- "Fabric8 Development Team"
+- "Fabric8 Development Team <fabric8@googlegroups.com>"

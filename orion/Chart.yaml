@@ -1,8 +1,8 @@
 ---
 name: "orion"
 home: "http://fabric8.io/orion/"
-version: "2.2.81-SNAPSHOT"
+version: "2.2.82-SNAPSHOT"
 description: "[Orion](http://eclipse.org/orion/) is a web based IDE for working files\
   \ in a git repository"
 maintainers:
-- "Fabric8 Development Team"
+- "Fabric8 Development Team <fabric8@googlegroups.com>"

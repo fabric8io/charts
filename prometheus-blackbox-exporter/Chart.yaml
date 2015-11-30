@@ -1,8 +1,8 @@
 ---
 name: "prometheus-blackbox-exporter"
 home: "http://fabric8.io/prometheus-blackbox-exporter/"
-version: "2.2.81-SNAPSHOT"
+version: "2.2.82-SNAPSHOT"
 description: "[Prometheus Blackbox Exporter](https://github.com/prometheus/blackbox_exporter)\
   \ - blackbox probing of endpoints over HTTP, HTTPS and TCP."
 maintainers:
-- "Fabric8 Development Team"
+- "Fabric8 Development Team <fabric8@googlegroups.com>"

@@ -1,60 +1,26 @@
 ---
 apiVersion: "v1"
-kind: "Template"
-labels: {}
-metadata:
-  annotations:
-    description: "Provides centralised historical [Metrics](http://fabric8.io/guide/metrics.html)\
-      \ and alerting using [Prometheus](prometheus) as the back end and [Grafana2](http://grafana.org/)\
-      \ as the front end"
-    fabric8.grafana2/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/grafana2/src/main/fabric8/icon.png"
-    fabric8.grafana2/summary: "[Grafana](http://grafana.org/) 2 console for viewing\
-      \ metrics stored in various storage backends"
-    fabric8.prometheus/summary: "[Prometheus](http://prometheus.io/) - an open-source\
-      \ service monitoring system and time series database"
-    fabric8.prometheus/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/prometheus/src/main/fabric8/icon.png"
-    fabric8.metrics/summary: "Sonatype helps open source projects to set up Maven\
-      \ repositories on https://oss.sonatype.org/"
-    fabric8.metrics/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/packages/metrics/src/main/fabric8/icon.png"
-  labels: {}
-  name: "metrics"
-objects:
+items:
+- apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels:
+      package: "console-kubernetes"
+    name: "fabric8"
+  secrets: []
 - apiVersion: "v1"
   kind: "Service"
   metadata:
     annotations: {}
     labels:
-      project: "grafana2"
+      project: "console"
       provider: "fabric8"
       version: "2.2.81"
       group: "io.fabric8.devops.apps"
-      package: "metrics"
-    name: "grafana2"
-  spec:
-    deprecatedPublicIPs: []
-    externalIPs: []
-    ports:
-    - port: 80
-      protocol: "TCP"
-      targetPort: 3000
-    selector:
-      project: "grafana2"
-      provider: "fabric8"
-      group: "io.fabric8.devops.apps"
-    type: "LoadBalancer"
-- apiVersion: "v1"
-  kind: "Service"
-  metadata:
-    annotations:
-      prometheus.io/port: "9090"
-      prometheus.io/scrape: "true"
-    labels:
-      project: "prometheus"
-      provider: "fabric8"
-      version: "2.2.81"
-      group: "io.fabric8.devops.apps"
-      package: "metrics"
-    name: "prometheus"
+      package: "console-kubernetes"
+    name: "fabric8"
   spec:
     deprecatedPublicIPs: []
     externalIPs: []
@@ -63,30 +29,52 @@ objects:
       protocol: "TCP"
       targetPort: 9090
     selector:
-      project: "prometheus"
+      project: "console"
       provider: "fabric8"
       group: "io.fabric8.devops.apps"
     type: "LoadBalancer"
 - apiVersion: "v1"
-  kind: "ReplicationController"
+  kind: "Service"
   metadata:
-    annotations:
-      fabric8.io/git-branch: "release-v2.2.81"
-      fabric8.io/git-commit: "c568041ef5980c9642814a7c40fec3787296e24f"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/c568041ef5980c9642814a7c40fec3787296e24f"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/1"
-      fabric8.io/build-id: "1"
+    annotations: {}
     labels:
-      project: "grafana2"
+      project: "templates"
       provider: "fabric8"
       version: "2.2.81"
       group: "io.fabric8.devops.apps"
-      package: "metrics"
-    name: "grafana2"
+      package: "console-kubernetes"
+    name: "templates"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 80
+      protocol: "TCP"
+      targetPort: 8080
+    selector:
+      project: "templates"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-commit: "c568041ef5980c9642814a7c40fec3787296e24f"
+      fabric8.io/git-branch: "release-v2.2.81"
+      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/c568041ef5980c9642814a7c40fec3787296e24f"
+      fabric8.io/build-id: "1"
+      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/1"
+    labels:
+      project: "console"
+      provider: "fabric8"
+      version: "2.2.81"
+      group: "io.fabric8.devops.apps"
+      package: "console-kubernetes"
+    name: "fabric8"
   spec:
     replicas: 1
     selector:
-      project: "grafana2"
+      project: "console"
       provider: "fabric8"
       version: "2.2.81"
       group: "io.fabric8.devops.apps"
@@ -94,24 +82,44 @@ objects:
       metadata:
         annotations: {}
         labels:
-          project: "grafana2"
+          project: "console"
           provider: "fabric8"
           version: "2.2.81"
           group: "io.fabric8.devops.apps"
-          package: "metrics"
+          package: "console-kubernetes"
       spec:
         containers:
         - args: []
           command: []
           env:
+          - name: "GOOGLE_OAUTH_SCOPE"
+            value: "profile"
+          - name: "OAUTH_AUTHORIZE_PORT"
+            value: "8443"
+          - name: "GOOGLE_OAUTH_CLIENT_ID"
+            value: ""
+          - name: "OAUTH_AUTHORIZE_URI"
+            value: "https://vagrant.f8:8443/oauth/authorize"
+          - name: "GOOGLE_OAUTH_AUTHENTICATION_URI"
+            value: "https://accounts.google.com/o/oauth2/auth"
+          - name: "GOOGLE_OAUTH_CLIENT_SECRET"
+            value: ""
+          - name: "OAUTH_CLIENT_ID"
+            value: "fabric8"
+          - name: "OAUTH_PROVIDER"
+            value: "basic"
+          - name: "GOOGLE_OAUTH_REDIRECT_URI"
+            value: "https://fabric8.vagrant.f8"
+          - name: "GOOGLE_OAUTH_TOKEN_URL"
+            value: "https://www.googleapis.com/oauth2/v3/token"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/grafana:2.5.0"
-          name: "grafana2"
+          image: "fabric8/fabric8-console:2.2.81"
+          name: "fabric8-container"
           ports:
-          - containerPort: 3000
+          - containerPort: 9090
             name: "http"
           securityContext: {}
           volumeMounts: []
@@ -128,16 +136,16 @@ objects:
       fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
-      project: "prometheus"
+      project: "templates"
       provider: "fabric8"
       version: "2.2.81"
       group: "io.fabric8.devops.apps"
-      package: "metrics"
-    name: "prometheus"
+      package: "console-kubernetes"
+    name: "templates"
   spec:
     replicas: 1
     selector:
-      project: "prometheus"
+      project: "templates"
       provider: "fabric8"
       version: "2.2.81"
       group: "io.fabric8.devops.apps"
@@ -145,38 +153,39 @@ objects:
       metadata:
         annotations: {}
         labels:
-          project: "prometheus"
+          project: "templates"
           provider: "fabric8"
           version: "2.2.81"
           group: "io.fabric8.devops.apps"
-          package: "metrics"
+          package: "console-kubernetes"
       spec:
         containers:
         - args: []
           command: []
           env:
+          - name: "DATA_DIR"
+            value: "/data/templates"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/prometheus-kubernetes:2.2.81"
-          livenessProbe:
-            tcpSocket:
-              port: 9090
-          name: "prometheus"
+          image: "fabric8/templates:2.2.81"
+          name: "templates"
           ports:
-          - containerPort: 9090
+          - containerPort: 8080
             name: "http"
+          - containerPort: 8778
+            name: "jolokia"
           securityContext: {}
           volumeMounts:
-          - mountPath: "/prometheus"
-            name: "prometheus-data"
+          - mountPath: "/data"
+            name: "template-data"
             readOnly: false
         imagePullSecrets: []
         nodeSelector: {}
-        serviceAccountName: "metrics"
         volumes:
-        - emptyDir:
-            medium: ""
-          name: "prometheus-data"
-parameters: []
+        - gitRepo:
+            repository: "https://github.com/fabric8io/templates.git"
+            revision: "master"
+          name: "template-data"
+kind: "List"

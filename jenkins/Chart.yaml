@@ -1,8 +1,8 @@
 ---
 name: "jenkins"
 home: "http://fabric8.io/jenkins/"
-version: "2.2.81-SNAPSHOT"
+version: "2.2.82-SNAPSHOT"
 description: "[Jenkins](http://jenkins-ci.org/) extendable open source continuous\
   \ integration server"
 maintainers:
-- "Fabric8 Development Team"
+- "Fabric8 Development Team <fabric8@googlegroups.com>"

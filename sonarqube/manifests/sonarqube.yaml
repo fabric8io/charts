@@ -13,6 +13,7 @@ items:
       targetPort: 9000
     selector:
       name: "sonarqube"
+  type: "LoadBalancer"
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
