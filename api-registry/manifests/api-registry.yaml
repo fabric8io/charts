@@ -21,7 +21,7 @@ objects:
       project: "api-registry"
       component: "apiRegistry"
       provider: "fabric8"
-      version: "2.2.73"
+      version: "2.2.74"
       group: "io.fabric8.ipaas.apps"
     name: "api-registry"
   spec:
@@ -41,16 +41,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.73"
-      fabric8.io/git-commit: "432f3065993d407ed286eb112dba497d04819b88"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/432f3065993d407ed286eb112dba497d04819b88"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/git-branch: "release-v2.2.74"
+      fabric8.io/git-commit: "eaafc7ecb0026d7a11260ba03741972277bd9ea2"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/eaafc7ecb0026d7a11260ba03741972277bd9ea2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
       project: "api-registry"
       component: "apiRegistry"
       provider: "fabric8"
-      version: "2.2.73"
+      version: "2.2.74"
       group: "io.fabric8.ipaas.apps"
     name: "api-registry"
   spec:
@@ -59,7 +59,7 @@ objects:
       project: "api-registry"
       component: "apiRegistry"
       provider: "fabric8"
-      version: "2.2.73"
+      version: "2.2.74"
       group: "io.fabric8.ipaas.apps"
     template:
       metadata:
@@ -68,7 +68,7 @@ objects:
           project: "api-registry"
           component: "apiRegistry"
           provider: "fabric8"
-          version: "2.2.73"
+          version: "2.2.74"
           group: "io.fabric8.ipaas.apps"
       spec:
         containers:
@@ -79,7 +79,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/api-registry:2.2.73"
+          image: "fabric8/api-registry:2.2.74"
           name: "api-registry"
           ports:
           - containerPort: 8080
