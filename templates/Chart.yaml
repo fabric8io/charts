@@ -1,7 +1,7 @@
 ---
 name: "templates"
 home: "http://fabric8.io/templates/"
-version: "2.2.82-SNAPSHOT"
+version: "2.2.84"
 description: "Implements the OpenShift Templates REST API so templates can be used\
   \ on vanilla Kubernetes environments"
 maintainers:

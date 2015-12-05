@@ -24,7 +24,7 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.81"
+      version: "2.2.84"
       group: "io.fabric8.devops.apps"
     name: "elasticsearch"
   spec:
@@ -60,15 +60,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "c568041ef5980c9642814a7c40fec3787296e24f"
-      fabric8.io/git-branch: "release-v2.2.81"
-      fabric8.io/git-url: "http://gogs.cd.fabric8.io/gogsadmin/oss-parent/commit/c568041ef5980c9642814a7c40fec3787296e24f"
+      fabric8.io/git-commit: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
+      fabric8.io/git-branch: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/71bae5ed8bea537e75abd970f2da7e38a6ee282c"
       fabric8.io/build-id: "1"
-      fabric8.io/build-url: "http://jenkins.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.81"
+      version: "2.2.84"
       group: "io.fabric8.devops.apps"
     name: "elasticsearch"
   spec:
@@ -76,7 +76,7 @@ objects:
     selector:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.81"
+      version: "2.2.84"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -84,7 +84,7 @@ objects:
         labels:
           project: "elasticsearch"
           provider: "fabric8"
-          version: "2.2.81"
+          version: "2.2.84"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -121,7 +121,7 @@ objects:
         - args: []
           command: []
           env: []
-          image: "fabric8/elasticsearch-logstash-template:2.2.81"
+          image: "fabric8/elasticsearch-logstash-template:2.2.84"
           name: "logstash-template"
           ports: []
           volumeMounts: []

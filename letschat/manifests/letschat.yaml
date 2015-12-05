@@ -81,7 +81,7 @@ objects:
             value: "true"
           - name: "LCB_DATABASE_URI"
             value: "mongodb://127.0.0.1:27017/letschat"
-          image: "fabric8/lets-chat:2.2.81"
+          image: "fabric8/lets-chat:2.2.84"
           name: "letschat"
           ports:
           - containerPort: 5000
