@@ -17,8 +17,8 @@ items:
     labels:
       project: "console"
       provider: "fabric8"
-      version: "2.2.84"
-      group: "io.fabric8.devops.apps"
+      version: "2.2.81"
+      group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "fabric8"
   spec:
@@ -31,7 +31,7 @@ items:
     selector:
       project: "console"
       provider: "fabric8"
-      group: "io.fabric8.devops.apps"
+      group: "io.fabric8.apps"
     type: "LoadBalancer"
 - apiVersion: "v1"
   kind: "Service"
@@ -40,8 +40,8 @@ items:
     labels:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.84"
-      group: "io.fabric8.devops.apps"
+      version: "2.2.81"
+      group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "templates"
   spec:
@@ -54,21 +54,21 @@ items:
     selector:
       project: "templates"
       provider: "fabric8"
-      group: "io.fabric8.devops.apps"
+      group: "io.fabric8.apps"
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-branch: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/build-id: "1"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/git-commit: "e6fbe99609c88bbebf11bc8dff5336ff5a9d2795"
+      fabric8.io/git-branch: "release-v2.2.81"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e6fbe99609c88bbebf11bc8dff5336ff5a9d2795"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "console"
       provider: "fabric8"
-      version: "2.2.84"
-      group: "io.fabric8.devops.apps"
+      version: "2.2.81"
+      group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "fabric8"
   spec:
@@ -76,16 +76,16 @@ items:
     selector:
       project: "console"
       provider: "fabric8"
-      version: "2.2.84"
-      group: "io.fabric8.devops.apps"
+      version: "2.2.81"
+      group: "io.fabric8.apps"
     template:
       metadata:
         annotations: {}
         labels:
           project: "console"
           provider: "fabric8"
-          version: "2.2.84"
-          group: "io.fabric8.devops.apps"
+          version: "2.2.81"
+          group: "io.fabric8.apps"
           package: "console-kubernetes"
       spec:
         containers:
@@ -116,7 +116,7 @@ items:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8-console:2.2.84"
+          image: "fabric8/fabric8-console:2.2.81"
           name: "fabric8-container"
           ports:
           - containerPort: 9090
@@ -130,16 +130,16 @@ items:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-commit: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
-      fabric8.io/build-id: "1"
+      fabric8.io/git-branch: "release-v2.2.81"
+      fabric8.io/git-commit: "e6fbe99609c88bbebf11bc8dff5336ff5a9d2795"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e6fbe99609c88bbebf11bc8dff5336ff5a9d2795"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.84"
-      group: "io.fabric8.devops.apps"
+      version: "2.2.81"
+      group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "templates"
   spec:
@@ -147,16 +147,16 @@ items:
     selector:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.84"
-      group: "io.fabric8.devops.apps"
+      version: "2.2.81"
+      group: "io.fabric8.apps"
     template:
       metadata:
         annotations: {}
         labels:
           project: "templates"
           provider: "fabric8"
-          version: "2.2.84"
-          group: "io.fabric8.devops.apps"
+          version: "2.2.81"
+          group: "io.fabric8.apps"
           package: "console-kubernetes"
       spec:
         containers:
@@ -169,7 +169,7 @@ items:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/templates:2.2.84"
+          image: "fabric8/templates:2.2.81"
           name: "templates"
           ports:
           - containerPort: 8080
