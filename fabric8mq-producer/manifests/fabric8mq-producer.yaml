@@ -16,9 +16,9 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.74"
-      fabric8.io/git-commit: "eaafc7ecb0026d7a11260ba03741972277bd9ea2"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/eaafc7ecb0026d7a11260ba03741972277bd9ea2"
+      fabric8.io/git-branch: "release-v2.2.75"
+      fabric8.io/git-commit: "f85b55d7afb88411daae8ebac741b6c94542ff54"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/f85b55d7afb88411daae8ebac741b6c94542ff54"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
@@ -26,7 +26,7 @@ objects:
       component: "fabric8MQProducer"
       provider: "fabric8"
       project: "fabric8mq-producer"
-      version: "2.2.74"
+      version: "2.2.75"
       group: "fabric8mq"
     name: "fabric8mq-producer"
   spec:
@@ -36,7 +36,7 @@ objects:
       component: "fabric8MQProducer"
       provider: "fabric8"
       project: "fabric8mq-producer"
-      version: "2.2.74"
+      version: "2.2.75"
       group: "fabric8mq"
     template:
       metadata:
@@ -46,7 +46,7 @@ objects:
           component: "fabric8MQProducer"
           provider: "fabric8"
           project: "fabric8mq-producer"
-          version: "2.2.74"
+          version: "2.2.75"
           group: "fabric8mq"
       spec:
         containers:
@@ -61,7 +61,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8mq-producer:2.2.74"
+          image: "fabric8/fabric8mq-producer:2.2.75"
           name: "fabric8mq-producer"
           ports:
           - containerPort: 8778

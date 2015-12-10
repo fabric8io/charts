@@ -1,7 +1,7 @@
 ---
 name: "fabric8mq"
 home: "http://fabric8.io/fabric8mq/"
-version: "2.2.75-SNAPSHOT"
+version: "2.2.76-SNAPSHOT"
 description: "Fabric8 MQ Broker"
 maintainers:
 - "Fabric8 Development Team"
