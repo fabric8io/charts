@@ -7,8 +7,8 @@ metadata:
     fabric8.orion/summary: "[Orion](http://eclipse.org/orion/) is a web based IDE\
       \ for working files in a git repository"
     description: "Provides an Open Source issue tracker via [Taiga](https://taiga.io/)\
-      \ and a web based IDE via <a href=\"http://eclipse.org/orion/\" target=\"orion\"\
-      >Orion</a>"
+      \ NOTE: default username/password admin/123123 and a web based IDE via <a href=\"\
+      http://eclipse.org/orion/\" target=\"orion\">Orion</a>\n"
     fabric8.orion/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/orion/src/main/fabric8/icon.png"
     fabric8.social/summary: "Sonatype helps open source projects to set up Maven repositories\
       \ on https://oss.sonatype.org/"
@@ -23,7 +23,7 @@ objects:
     labels:
       project: "orion"
       provider: "fabric8"
-      version: "2.2.84"
+      version: "2.2.88"
       group: "io.fabric8.devops.apps"
       package: "social"
     name: "orion"
@@ -80,15 +80,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-commit: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/71bae5ed8bea537e75abd970f2da7e38a6ee282c"
+      fabric8.io/git-branch: "release-v2.2.88"
+      fabric8.io/git-commit: "1bea03cd9b6bcaf72c05555ae7f57adfa3496c64"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/1bea03cd9b6bcaf72c05555ae7f57adfa3496c64"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
       project: "orion"
       provider: "fabric8"
-      version: "2.2.84"
+      version: "2.2.88"
       group: "io.fabric8.devops.apps"
       package: "social"
     name: "orion"
@@ -97,7 +97,7 @@ objects:
     selector:
       project: "orion"
       provider: "fabric8"
-      version: "2.2.84"
+      version: "2.2.88"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -105,7 +105,7 @@ objects:
         labels:
           project: "orion"
           provider: "fabric8"
-          version: "2.2.84"
+          version: "2.2.88"
           group: "io.fabric8.devops.apps"
           package: "social"
       spec:
@@ -117,7 +117,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/eclipse-orion:2.2.84"
+          image: "fabric8/eclipse-orion:2.2.88"
           imagePullPolicy: "IfNotPresent"
           name: "orion"
           ports:
@@ -132,9 +132,9 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-commit: "71bae5ed8bea537e75abd970f2da7e38a6ee282c"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/71bae5ed8bea537e75abd970f2da7e38a6ee282c"
+      fabric8.io/git-branch: "release-v2.2.88"
+      fabric8.io/git-commit: "1bea03cd9b6bcaf72c05555ae7f57adfa3496c64"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/1bea03cd9b6bcaf72c05555ae7f57adfa3496c64"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
@@ -181,7 +181,7 @@ objects:
             value: "taiga"
           - name: "POSTGRES_ENV_POSTGRES_PASSWORD"
             value: "password"
-          image: "fabric8/taiga-back:2.2.84"
+          image: "fabric8/taiga-back:2.2.88"
           name: "taiga-backend"
           ports:
           - containerPort: 8000
@@ -196,7 +196,7 @@ objects:
         - args: []
           command: []
           env: []
-          image: "fabric8/taiga-front:2.2.84"
+          image: "fabric8/taiga-front:2.2.88"
           name: "taiga-frontend"
           ports:
           - containerPort: 80
