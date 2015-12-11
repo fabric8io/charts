@@ -26,7 +26,7 @@ objects:
       project: "qpid-dispatch"
       component: "qpid-dispatch"
       provider: "fabric8"
-      version: "2.2.77"
+      version: "2.2.78"
       group: "qpid-dispatch"
     name: "qpid-dispatch"
   spec:
@@ -82,16 +82,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "fccd1ba6b9b4ccaabba003287e6ecb8194131b64"
-      fabric8.io/git-branch: "release-v2.2.77"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/fccd1ba6b9b4ccaabba003287e6ecb8194131b64"
-      fabric8.io/build-id: "3"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
+      fabric8.io/git-commit: "a90a24c7fccac7ae219c1b51aecb44d6738b0559"
+      fabric8.io/git-branch: "release-v2.2.78"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/a90a24c7fccac7ae219c1b51aecb44d6738b0559"
+      fabric8.io/build-id: "4"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
     labels:
       project: "qpid-dispatch"
       component: "qpid-dispatch"
       provider: "fabric8"
-      version: "2.2.77"
+      version: "2.2.78"
       group: "qpid-dispatch"
     name: "qpid-dispatch"
   spec:
@@ -100,7 +100,7 @@ objects:
       project: "qpid-dispatch"
       component: "qpid-dispatch"
       provider: "fabric8"
-      version: "2.2.77"
+      version: "2.2.78"
       group: "qpid-dispatch"
     template:
       metadata:
@@ -109,7 +109,7 @@ objects:
           project: "qpid-dispatch"
           component: "qpid-dispatch"
           provider: "fabric8"
-          version: "2.2.77"
+          version: "2.2.78"
           group: "qpid-dispatch"
       spec:
         containers:
