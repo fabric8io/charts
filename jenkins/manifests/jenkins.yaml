@@ -76,15 +76,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "1bea03cd9b6bcaf72c05555ae7f57adfa3496c64"
-      fabric8.io/git-branch: "release-v2.2.88"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/1bea03cd9b6bcaf72c05555ae7f57adfa3496c64"
-      fabric8.io/build-id: "1"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/git-commit: "ad7d853e502c650efeb7a582cc54ecdde489bc48"
+      fabric8.io/git-branch: "release-v2.2.91"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/ad7d853e502c650efeb7a582cc54ecdde489bc48"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.88"
+      version: "2.2.91"
       group: "io.fabric8.devops.apps"
     name: "jenkins"
   spec:
@@ -92,7 +92,7 @@ objects:
     selector:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.88"
+      version: "2.2.91"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -102,7 +102,7 @@ objects:
         labels:
           project: "jenkins"
           provider: "fabric8"
-          version: "2.2.88"
+          version: "2.2.91"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -140,7 +140,7 @@ objects:
           - name: "NEXUS_PASSWORD"
             value: "${NEXUS_PASSWORD}"
           - name: "PROJECT_VERSION"
-            value: "2.2.88"
+            value: "2.2.91"
           - name: "SONATYPE_USERNAME"
             value: "${SONATYPE_USERNAME}"
           - name: "JENKINS_GOGS_PASSWORD"
@@ -163,7 +163,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.name"
-          image: "fabric8/jenkins-docker:2.2.88"
+          image: "fabric8/jenkins-docker:2.2.91"
           imagePullPolicy: "IfNotPresent"
           lifecycle:
             postStart:
