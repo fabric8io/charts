@@ -1,7 +1,7 @@
 ---
 name: "amqbroker"
 home: "http://fabric8.io/amqbroker/"
-version: "2.2.79-SNAPSHOT"
+version: "2.2.80-SNAPSHOT"
 description: "ActiveMQ Broker"
 maintainers:
 - "Fabric8 Development Team"
