@@ -40,7 +40,7 @@ objects:
       project: "fabric8"
       component: "console"
       provider: "fabric8"
-      version: "2.2.80"
+      version: "2.2.81"
       group: "io.fabric8.ipaas.apps"
     name: "fabric8"
   spec:
@@ -59,16 +59,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "8b8d8f36cd1f507c87d7f339ce12f3cfba571fde"
-      fabric8.io/git-branch: "release-v2.2.80"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/8b8d8f36cd1f507c87d7f339ce12f3cfba571fde"
-      fabric8.io/build-id: "1"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/git-commit: "58269c2f58c5bbbbdb92a8e90264f6fed9e37b10"
+      fabric8.io/git-branch: "release-v2.2.81"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/58269c2f58c5bbbbdb92a8e90264f6fed9e37b10"
+      fabric8.io/build-id: "3"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
     labels:
       project: "fabric8"
       component: "console"
       provider: "fabric8"
-      version: "2.2.80"
+      version: "2.2.81"
       group: "io.fabric8.ipaas.apps"
     name: "fabric8"
   spec:
@@ -77,7 +77,7 @@ objects:
       project: "fabric8"
       component: "console"
       provider: "fabric8"
-      version: "2.2.80"
+      version: "2.2.81"
       group: "io.fabric8.ipaas.apps"
     template:
       metadata:
@@ -86,7 +86,7 @@ objects:
           project: "fabric8"
           component: "console"
           provider: "fabric8"
-          version: "2.2.80"
+          version: "2.2.81"
           group: "io.fabric8.ipaas.apps"
       spec:
         containers:
