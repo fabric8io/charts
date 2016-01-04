@@ -32,7 +32,7 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.84"
+      version: "2.2.85"
       group: "defaultGatewayGroup"
     name: "apiman-gateway"
   spec:
@@ -51,16 +51,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.84"
-      fabric8.io/git-commit: "f69f0b345daf2fcfa5e7b0ddde3440d618109c4e"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/f69f0b345daf2fcfa5e7b0ddde3440d618109c4e"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
-      fabric8.io/build-id: "1"
+      fabric8.io/git-branch: "release-v2.2.85"
+      fabric8.io/git-commit: "0b821d73850330ea0d3a0274a1af147b1b62679f"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0b821d73850330ea0d3a0274a1af147b1b62679f"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.84"
+      version: "2.2.85"
       group: "defaultGatewayGroup"
     name: "apiman-gateway"
   spec:
@@ -69,7 +69,7 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.84"
+      version: "2.2.85"
       group: "defaultGatewayGroup"
     template:
       metadata:
@@ -78,7 +78,7 @@ objects:
           project: "apiman-gateway"
           component: "ApimanGateway"
           provider: "fabric8"
-          version: "2.2.84"
+          version: "2.2.85"
           group: "defaultGatewayGroup"
       spec:
         containers:
@@ -91,7 +91,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/apiman-gateway:2.2.84"
+          image: "fabric8/apiman-gateway:2.2.85"
           name: "apiman-gateway"
           ports:
           - containerPort: 7777
