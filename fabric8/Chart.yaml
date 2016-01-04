@@ -1,7 +1,7 @@
 ---
 name: "fabric8"
 home: "http://fabric8.io/fabric8/"
-version: "2.2.84-SNAPSHOT"
+version: "2.2.85-SNAPSHOT"
 description: "[Fabric8 Console](http://fabric8.io/v2/console.html) for working with\
   \ Fabric8 and Kubernetes"
 maintainers:
