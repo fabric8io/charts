@@ -105,7 +105,7 @@ objects:
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.100"
+      version: "2.2.102"
       group: "io.fabric8.forge.apps"
       package: "cd-pipeline"
     name: "fabric8-forge"
@@ -330,15 +330,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.100"
-      fabric8.io/git-commit: "0b2005dff536047c41a7ee47819428577200afa3"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0b2005dff536047c41a7ee47819428577200afa3"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
-      fabric8.io/build-id: "2"
+      fabric8.io/git-branch: "release-v2.2.102"
+      fabric8.io/git-commit: "926ef581bc9abbfc1c548e02df0b4bd5ea142f02"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/926ef581bc9abbfc1c548e02df0b4bd5ea142f02"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
+      fabric8.io/build-id: "4"
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.100"
+      version: "2.2.102"
       group: "io.fabric8.forge.apps"
       package: "cd-pipeline"
     name: "fabric8-forge"
@@ -347,7 +347,7 @@ objects:
     selector:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.100"
+      version: "2.2.102"
       group: "io.fabric8.forge.apps"
     template:
       metadata:
@@ -355,7 +355,7 @@ objects:
         labels:
           project: "fabric8-forge"
           provider: "fabric8"
-          version: "2.2.100"
+          version: "2.2.102"
           group: "io.fabric8.forge.apps"
           package: "cd-pipeline"
       spec:
@@ -389,7 +389,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8-forge:2.2.100"
+          image: "fabric8/fabric8-forge:2.2.102"
           name: "fabric8-forge"
           ports:
           - containerPort: 8778
