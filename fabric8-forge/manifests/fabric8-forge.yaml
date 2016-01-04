@@ -37,10 +37,10 @@ objects:
   metadata:
     annotations:
       fabric8.io/git-branch: "release-v2.2.100"
-      fabric8.io/git-commit: "120f227966d4d46f0054572edb9425e1fdbbb17c"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/120f227966d4d46f0054572edb9425e1fdbbb17c"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/10"
-      fabric8.io/build-id: "10"
+      fabric8.io/git-commit: "0b2005dff536047c41a7ee47819428577200afa3"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0b2005dff536047c41a7ee47819428577200afa3"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
