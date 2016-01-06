@@ -39,7 +39,7 @@ objects:
     labels:
       project: "console"
       provider: "fabric8"
-      version: "2.2.101"
+      version: "2.2.102"
       group: "io.fabric8.apps"
     name: "fabric8"
   spec:
@@ -58,15 +58,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "7062c5351d42c2dea4cb4c27b1bc8ab7c837ee52"
-      fabric8.io/git-branch: "release-v2.2.101"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/7062c5351d42c2dea4cb4c27b1bc8ab7c837ee52"
-      fabric8.io/build-id: "6"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/git-commit: "6dabedee1923a25a7d595d17599580c8de651134"
+      fabric8.io/git-branch: "release-v2.2.102"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/6dabedee1923a25a7d595d17599580c8de651134"
+      fabric8.io/build-id: "10"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/10"
     labels:
       project: "console"
       provider: "fabric8"
-      version: "2.2.101"
+      version: "2.2.102"
       group: "io.fabric8.apps"
     name: "fabric8"
   spec:
@@ -74,7 +74,7 @@ objects:
     selector:
       project: "console"
       provider: "fabric8"
-      version: "2.2.101"
+      version: "2.2.102"
       group: "io.fabric8.apps"
     template:
       metadata:
@@ -82,7 +82,7 @@ objects:
         labels:
           project: "console"
           provider: "fabric8"
-          version: "2.2.101"
+          version: "2.2.102"
           group: "io.fabric8.apps"
       spec:
         containers:
@@ -113,7 +113,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8-console:2.2.101"
+          image: "fabric8/fabric8-console:2.2.102"
           name: "fabric8-container"
           ports:
           - containerPort: 9090
