@@ -53,7 +53,7 @@ objects:
             value: "${HUBOT_SLACK_GRAFANA_API_KEY}"
           - name: "HUBOT_JENKINS_URL"
             value: "${HUBOT_JENKINS_URL}"
-          image: "fabric8/hubot-slack:2.2.91"
+          image: "fabric8/hubot-slack:2.2.99"
           name: "hubot-slack"
           ports:
           - containerPort: 8080

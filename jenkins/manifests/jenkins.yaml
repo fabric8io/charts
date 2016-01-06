@@ -76,15 +76,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "ad7d853e502c650efeb7a582cc54ecdde489bc48"
-      fabric8.io/git-branch: "release-v2.2.91"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/ad7d853e502c650efeb7a582cc54ecdde489bc48"
+      fabric8.io/git-commit: "940838f152fbe27e0c8e6f72653d17502a81bb2e"
+      fabric8.io/git-branch: "release-v2.2.99"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/940838f152fbe27e0c8e6f72653d17502a81bb2e"
       fabric8.io/build-id: "2"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.91"
+      version: "2.2.99"
       group: "io.fabric8.devops.apps"
     name: "jenkins"
   spec:
@@ -92,17 +92,19 @@ objects:
     selector:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.91"
+      version: "2.2.99"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
         annotations:
           fabric8.io/secret-ssh-key: "jenkins-git-ssh,jenkins-master-ssh"
+          fabric8.io/secret-maven-settings: "jenkins-maven-settings"
           fabric8.io/secret-gpg-key: "jenkins-release-gpg"
+          fabric8.io/secret-docker-cfg: "jenkins-docker-cfg"
         labels:
           project: "jenkins"
           provider: "fabric8"
-          version: "2.2.91"
+          version: "2.2.99"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -113,58 +115,23 @@ objects:
             value: "${DOMAIN}"
           - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
             value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-          - name: "DOCKER_REGISTRY_SERVER_ID"
-            value: "${DOCKER_REGISTRY_SERVER_ID}"
-          - name: "SONATYPE_PASSWORD"
-            value: "${SONATYPE_PASSWORD}"
-          - name: "GITHUB_TOKEN"
-            value: "${GITHUB_TOKEN}"
-          - name: "SEED_GIT_URL"
-            value: "${SEED_GIT_URL}"
-          - name: "DOCKER_REGISTRY_USERNAME"
-            value: "${DOCKER_REGISTRY_USERNAME}"
-          - name: "JENKINS_GOGS_EMAIL"
-            value: "${JENKINS_GOGS_EMAIL}"
-          - name: "DOCKER_REGISTRY_PASSWORD"
-            value: "${DOCKER_REGISTRY_PASSWORD}"
-          - name: "JENKINS_SLAVE_IMAGE"
-            value: "${JENKINS_SLAVE_IMAGE}"
-          - name: "JENKINS_JOBS_GIT_REPOSITORY"
-            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
-          - name: "CGO_ENABLED"
-            value: "0"
-          - name: "FABRIC8_DEFAULT_ENVIRONMENTS"
-            value: "${FABRIC8_DEFAULT_ENVIRONMENTS}"
-          - name: "KUBERNETES_TRUST_CERTIFICATES"
-            value: "true"
-          - name: "NEXUS_PASSWORD"
-            value: "${NEXUS_PASSWORD}"
-          - name: "PROJECT_VERSION"
-            value: "2.2.91"
-          - name: "SONATYPE_USERNAME"
-            value: "${SONATYPE_USERNAME}"
           - name: "JENKINS_GOGS_PASSWORD"
             value: "${JENKINS_GOGS_PASSWORD}"
           - name: "JENKINS_GOGS_USER"
             value: "${JENKINS_GOGS_USER}"
-          - name: "GPG_PASSPHRASE"
-            value: "${GPG_PASSPHRASE}"
+          - name: "GITHUB_TOKEN"
+            value: "${GITHUB_TOKEN}"
+          - name: "JENKINS_GOGS_EMAIL"
+            value: "${JENKINS_GOGS_EMAIL}"
           - name: "FABRIC8_CONSOLE"
             value: "http://fabric8.${DOMAIN}"
-          - name: "DOCKER_REGISTRY"
-            value: "${DOCKER_REGISTRY_PREFIX}"
-          - name: "NEXUS_USERNAME"
-            value: "${NEXUS_USERNAME}"
+          - name: "JENKINS_JOBS_GIT_REPOSITORY"
+            value: "${JENKINS_JOBS_GIT_REPOSITORY}"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          - name: "KUBERNETES_POD"
-            valueFrom:
-              fieldRef:
-                fieldPath: "metadata.name"
-          image: "fabric8/jenkins-docker:2.2.91"
-          imagePullPolicy: "IfNotPresent"
+          image: "fabric8/jenkins-docker:2.2.99"
           lifecycle:
             postStart:
               exec:
@@ -176,94 +143,32 @@ objects:
             name: "slave"
           - containerPort: 8080
             name: "http"
-          securityContext:
-            privileged: true
-          volumeMounts:
-          - mountPath: "/var/jenkins/.ssh-git"
-            name: "git-ssh"
-            readOnly: false
-          - mountPath: "/home/jenkins/ssh-keys"
-            name: "jenkins-master-key"
-            readOnly: false
-          - mountPath: "/var/run/docker.sock"
-            name: "docker-socket"
-            readOnly: false
-          - mountPath: "/root/.gnupg"
-            name: "gpg-key"
-            readOnly: false
+          securityContext: {}
+          volumeMounts: []
         imagePullSecrets: []
         nodeSelector: {}
         serviceAccountName: "jenkins"
-        volumes:
-        - name: "gpg-key"
-          secret:
-            secretName: "jenkins-release-gpg"
-        - name: "git-ssh"
-          secret:
-            secretName: "jenkins-git-ssh"
-        - hostPath:
-            path: "/var/run/docker.sock"
-          name: "docker-socket"
-        - name: "jenkins-master-key"
-          secret:
-            secretName: "jenkins-master-ssh"
+        volumes: []
 parameters:
-- description: "The password for Jenkins to login to Gogs"
-  name: "JENKINS_GOGS_PASSWORD"
-  value: "RedHat$1"
-- description: "The default registry, docker image prefix that new fabric8 projects\
-    \ will use"
-  name: "DOCKER_REGISTRY_PREFIX"
-  value: "docker.io/"
-- description: "Optional repository that contains build config.xml.  Example https://github.com/fabric8io/fabric8-workflow-jobs-release.git"
-  name: "JENKINS_JOBS_GIT_REPOSITORY"
-- description: "Username used to authenticate with Sonartype when deploying artifacts"
-  name: "SONATYPE_USERNAME"
-  value: "jenkins"
-- description: "The user name for Jenkins to login to Gogs"
-  name: "JENKINS_GOGS_USER"
-  value: "gogsadmin"
-- description: "The docker image used for jenkins slave when using the Docker Cloud"
-  name: "JENKINS_SLAVE_IMAGE"
-  value: "fabric8/jenkins-slave"
 - description: "The email address of the Jenkins user on Gogs"
   name: "JENKINS_GOGS_EMAIL"
   value: "gogsadmin@fabric8.local"
-- description: "Password used to authenticate with Sonartype when deploying artifacts"
-  name: "SONATYPE_PASSWORD"
+- description: "Optional repository that contains a collection of build config.xml\
+    \ that will create Jenkins jobs when started.  Example fabric8 release jobs https://github.com/fabric8io/fabric8-workflow-jobs-release.git"
+  name: "JENKINS_JOBS_GIT_REPOSITORY"
+- description: "The user name for Jenkins to login to Gogs"
+  name: "JENKINS_GOGS_USER"
+  value: "gogsadmin"
+- description: "The password for Jenkins to login to Gogs"
+  name: "JENKINS_GOGS_PASSWORD"
   value: "RedHat$1"
-- description: "GPG passphrase used to sign artifacts when building"
-  name: "GPG_PASSPHRASE"
-  value: "mysupersecretpassphrase"
-- description: "The list of default environment names to actual kubernetes namespaces"
-  name: "FABRIC8_DEFAULT_ENVIRONMENTS"
-  value: "Testing=${buildName}-testing,Staging=${buildName}-staging,Production=${buildName}-prod"
-- description: "The git clone URL for the jenkins workflow repository which can be\
-    \ reused across projects"
+- description: "The git clone URL for the jenkins global workflow repository which\
+    \ can be reused across projects.  See https://github.com/jenkinsci/workflow-plugin/tree/master/cps-global-lib"
   name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
   value: "https://github.com/fabric8io/jenkins-workflow-library.git"
 - description: "The domain name applications are installed on"
   name: "DOMAIN"
   value: "vagrant.f8"
-- description: "Username used to authenticate with a docker docker registry"
-  name: "DOCKER_REGISTRY_USERNAME"
-  value: "jenkins"
-- description: "Nexus username"
-  name: "NEXUS_USERNAME"
-  value: "admin"
 - description: "Optional token used to authenticate when making Pull Requests with\
     \ GitHub"
   name: "GITHUB_TOKEN"
-- description: "Docker registry server id.  Set to docker.io if using docker-maven-plugin\
-    \ to authenticate with DockerHub http://ro14nd.de/docker-maven-plugin/authentication.html"
-  name: "DOCKER_REGISTRY_SERVER_ID"
-  value: "unused"
-- description: "Password used to authenticate with a docker docker registry"
-  name: "DOCKER_REGISTRY_PASSWORD"
-  value: "RedHat$1"
-- description: "Nexus password"
-  name: "NEXUS_PASSWORD"
-  value: "admin123"
-- description: "The git URL of the seed build used to generate builds"
-  name: "SEED_GIT_URL"
-  value: "https://github.com/fabric8io/default-jenkins-dsl.git"

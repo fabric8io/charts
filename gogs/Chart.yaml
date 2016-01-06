@@ -1,7 +1,7 @@
 ---
 name: "gogs"
 home: "http://fabric8.io/gogs/"
-version: "2.2.92-SNAPSHOT"
+version: "2.2.100-SNAPSHOT"
 description: "[Gogs](http://gogs/) - A self-hosted Git service written in Go"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"
