@@ -38,10 +38,10 @@ objects:
   metadata:
     annotations:
       fabric8.io/git-branch: "release-v2.2.104"
-      fabric8.io/git-commit: "2c236db2ae75c4a169e405190b9952b4136cf29d"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/2c236db2ae75c4a169e405190b9952b4136cf29d"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
-      fabric8.io/build-id: "5"
+      fabric8.io/git-commit: "d40e7c768f475f43240ecd9e1dc0ebd89861e109"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/d40e7c768f475f43240ecd9e1dc0ebd89861e109"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/build-id: "1"
     labels:
       project: "templates"
       provider: "fabric8"
