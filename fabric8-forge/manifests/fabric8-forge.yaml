@@ -17,7 +17,7 @@ objects:
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.110"
+      version: "2.2.111"
       group: "io.fabric8.forge.apps"
     name: "fabric8-forge"
   spec:
@@ -36,15 +36,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.110"
-      fabric8.io/git-commit: "60c66ed17355f29a252ece2eecbab053bf1ad5c0"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/60c66ed17355f29a252ece2eecbab053bf1ad5c0"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/11"
-      fabric8.io/build-id: "11"
+      fabric8.io/git-branch: "release-v2.2.111"
+      fabric8.io/git-commit: "81089bc73cc87364b3fba84fe96c99f1801530a2"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/81089bc73cc87364b3fba84fe96c99f1801530a2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/8"
+      fabric8.io/build-id: "8"
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.110"
+      version: "2.2.111"
       group: "io.fabric8.forge.apps"
     name: "fabric8-forge"
   spec:
@@ -52,7 +52,7 @@ objects:
     selector:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.110"
+      version: "2.2.111"
       group: "io.fabric8.forge.apps"
     template:
       metadata:
@@ -60,7 +60,7 @@ objects:
         labels:
           project: "fabric8-forge"
           provider: "fabric8"
-          version: "2.2.110"
+          version: "2.2.111"
           group: "io.fabric8.forge.apps"
       spec:
         containers:
@@ -82,7 +82,7 @@ objects:
           - name: "JENKINS_GOGS_USER"
             value: "${JENKINS_GOGS_USER}"
           - name: "FABRIC8_ARCHETYPES_VERSION"
-            value: "2.2.92"
+            value: "2.2.93"
           - name: "JAVA_OPTIONS"
             value: "-Dorg.apache.maven.log_transfer=true"
           - name: "JENKINS_GOGS_EMAIL"
@@ -93,7 +93,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8-forge:2.2.110"
+          image: "fabric8/fabric8-forge:2.2.111"
           name: "fabric8-forge"
           ports:
           - containerPort: 8778
