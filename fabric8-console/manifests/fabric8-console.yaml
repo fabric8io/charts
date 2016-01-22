@@ -58,11 +58,11 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "7533dda75dc239077131785b27fce823cb0b3dbc"
+      fabric8.io/git-commit: "f347647535c3918d73bfdcd1573146e82d01bd2a"
       fabric8.io/git-branch: "release-v2.2.105"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/7533dda75dc239077131785b27fce823cb0b3dbc"
-      fabric8.io/build-id: "1"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/f347647535c3918d73bfdcd1573146e82d01bd2a"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "console"
       provider: "fabric8"
