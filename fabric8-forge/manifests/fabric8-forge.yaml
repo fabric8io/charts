@@ -37,10 +37,10 @@ objects:
   metadata:
     annotations:
       fabric8.io/git-branch: "release-v2.2.113"
-      fabric8.io/git-commit: "2334ffbda8c987df01241110cdddb370cb60e50a"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/2334ffbda8c987df01241110cdddb370cb60e50a"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/7"
-      fabric8.io/build-id: "7"
+      fabric8.io/git-commit: "849d12e46261f3d59b09cb7b62a558cc29a84bea"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/849d12e46261f3d59b09cb7b62a558cc29a84bea"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/8"
+      fabric8.io/build-id: "8"
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
@@ -82,7 +82,7 @@ objects:
           - name: "JENKINS_GOGS_USER"
             value: "${JENKINS_GOGS_USER}"
           - name: "FABRIC8_ARCHETYPES_VERSION"
-            value: "2.2.93"
+            value: "2.2.95"
           - name: "JAVA_OPTIONS"
             value: "-Dorg.apache.maven.log_transfer=true"
           - name: "JENKINS_GOGS_EMAIL"
