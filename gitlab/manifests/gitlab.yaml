@@ -51,15 +51,13 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "2bab91bbf2279db6b7116e30594c404e8c16beeb"
-      fabric8.io/git-branch: "release-v2.2.101"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/2bab91bbf2279db6b7116e30594c404e8c16beeb"
-      fabric8.io/build-id: "3"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
+      fabric8.io/git-commit: "df8e36b08230aa1698bb6c61012911c9662fc23d"
+      fabric8.io/git-branch: "release-v2.2.104"
+      fabric8.io/build-id: "6"
     labels:
       project: "gitlab"
       provider: "fabric8"
-      version: "2.2.101"
+      version: "2.2.104"
       group: "io.fabric8.devops.apps"
     name: "gitlab"
   spec:
@@ -67,7 +65,7 @@ objects:
     selector:
       project: "gitlab"
       provider: "fabric8"
-      version: "2.2.101"
+      version: "2.2.104"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -75,7 +73,7 @@ objects:
         labels:
           project: "gitlab"
           provider: "fabric8"
-          version: "2.2.101"
+          version: "2.2.104"
           group: "io.fabric8.devops.apps"
       spec:
         containers:

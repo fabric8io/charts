@@ -1,7 +1,7 @@
 ---
 name: "sonarqube"
 home: "http://fabric8.io/sonarqube/"
-version: "2.2.102-SNAPSHOT"
+version: "2.2.105-SNAPSHOT"
 description: "[SonarQube](http://www.sonarqube.org/) is an open platform to manage\
   \ code quality"
 maintainers:
