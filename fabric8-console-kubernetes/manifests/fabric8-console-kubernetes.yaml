@@ -17,7 +17,7 @@ items:
     labels:
       project: "console"
       provider: "fabric8"
-      version: "2.2.105"
+      version: "2.2.106"
       group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "fabric8"
@@ -40,7 +40,7 @@ items:
     labels:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.105"
+      version: "2.2.106"
       group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "templates"
@@ -59,13 +59,13 @@ items:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "7b5a058df81e2d014afc1f5fa4077bdd11775824"
-      fabric8.io/git-branch: "release-v2.2.105"
-      fabric8.io/build-id: "1"
+      fabric8.io/git-commit: "3da708762b8ba9c6f0328e038be2da0e18591e7d"
+      fabric8.io/git-branch: "release-v2.2.106"
+      fabric8.io/build-id: "2"
     labels:
       project: "console"
       provider: "fabric8"
-      version: "2.2.105"
+      version: "2.2.106"
       group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "fabric8"
@@ -74,7 +74,7 @@ items:
     selector:
       project: "console"
       provider: "fabric8"
-      version: "2.2.105"
+      version: "2.2.106"
       group: "io.fabric8.apps"
     template:
       metadata:
@@ -82,7 +82,7 @@ items:
         labels:
           project: "console"
           provider: "fabric8"
-          version: "2.2.105"
+          version: "2.2.106"
           group: "io.fabric8.apps"
           package: "console-kubernetes"
       spec:
@@ -114,7 +114,7 @@ items:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8-console:2.2.105"
+          image: "fabric8/fabric8-console:2.2.106"
           name: "fabric8-container"
           ports:
           - containerPort: 9090
@@ -128,13 +128,13 @@ items:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.105"
-      fabric8.io/git-commit: "7b5a058df81e2d014afc1f5fa4077bdd11775824"
-      fabric8.io/build-id: "1"
+      fabric8.io/git-branch: "release-v2.2.106"
+      fabric8.io/git-commit: "3da708762b8ba9c6f0328e038be2da0e18591e7d"
+      fabric8.io/build-id: "2"
     labels:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.105"
+      version: "2.2.106"
       group: "io.fabric8.apps"
       package: "console-kubernetes"
     name: "templates"
@@ -143,7 +143,7 @@ items:
     selector:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.105"
+      version: "2.2.106"
       group: "io.fabric8.apps"
     template:
       metadata:
@@ -151,7 +151,7 @@ items:
         labels:
           project: "templates"
           provider: "fabric8"
-          version: "2.2.105"
+          version: "2.2.106"
           group: "io.fabric8.apps"
           package: "console-kubernetes"
       spec:
@@ -165,7 +165,7 @@ items:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/templates:2.2.105"
+          image: "fabric8/templates:2.2.106"
           name: "templates"
           ports:
           - containerPort: 8080
