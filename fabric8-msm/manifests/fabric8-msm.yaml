@@ -4,25 +4,24 @@ kind: "Template"
 labels: {}
 metadata:
   annotations:
-    fabric8.fabric8mq/summary: "Fabric8 MQ Broker"
-    description: "runs a Fabric8 MQ broker based on [Apache ActiveMQ](http://activemq.apache.org/)\
-      \ which is then exposed as a [kubernetes service](http://fabric8.io/v2/services.html)\
-      \ so that clients can easily connect."
-    fabric8.fabric8mq/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/fabric8mq/src/main/fabric8/icon.svg"
+    fabric8.fabric8-msm/summary: "Artemis configured for Microservice Messaging"
+    description: "runs a [Apache ActiveMQ Artemis](https://activemq.apache.org/artemis/)\
+      \ broker which is then exposed as a [kubernetes service](http://fabric8.io/v2/services.html).\n"
+    fabric8.fabric8-msm/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8/master/fabric8-maven-plugin/src/main/resources/icons/activemq.svg"
   labels: {}
-  name: "fabric8mq"
+  name: "fabric8-msm"
 objects:
 - apiVersion: "v1"
   kind: "Service"
   metadata:
     annotations: {}
     labels:
-      project: "fabric8mq"
-      component: "fabric8MQ"
+      project: "fabric8-msm"
+      component: "msm"
       provider: "fabric8"
       version: "2.2.90"
-      group: "fabric8mq"
-    name: "fabric8mq"
+      group: "msm"
+    name: "fabric8-msm"
   spec:
     deprecatedPublicIPs: []
     externalIPs: []
@@ -31,11 +30,10 @@ objects:
       protocol: "TCP"
       targetPort: 6194
     selector:
-      project: "fabric8mq"
-      component: "fabric8MQ"
+      project: "fabric8-msm"
+      component: "msm"
       provider: "fabric8"
-      group: "fabric8mq"
-    type: "LoadBalancer"
+      group: "msm"
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
@@ -46,42 +44,40 @@ objects:
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
       fabric8.io/build-id: "2"
     labels:
-      project: "fabric8mq"
-      component: "fabric8MQ"
+      project: "fabric8-msm"
+      component: "msm"
       provider: "fabric8"
       version: "2.2.90"
-      group: "fabric8mq"
-    name: "fabric8mq"
+      group: "msm"
+    name: "fabric8-msm"
   spec:
     replicas: 1
     selector:
-      project: "fabric8mq"
-      component: "fabric8MQ"
+      project: "fabric8-msm"
+      component: "msm"
       provider: "fabric8"
       version: "2.2.90"
-      group: "fabric8mq"
+      group: "msm"
     template:
       metadata:
         annotations: {}
         labels:
-          project: "fabric8mq"
-          component: "fabric8MQ"
+          project: "fabric8-msm"
+          component: "msm"
           provider: "fabric8"
           version: "2.2.90"
-          group: "fabric8mq"
+          group: "msm"
       spec:
         containers:
         - args: []
           command: []
           env:
-          - name: "KUBERNETES_TRUST_CERT"
-            value: "true"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8mq:2.2.90"
-          name: "fabric8mq"
+          image: "fabric8/fabric8-msm:2.2.90"
+          name: "fabric8-msm"
           ports:
           - containerPort: 6194
             name: "amq"
@@ -91,6 +87,5 @@ objects:
           volumeMounts: []
         imagePullSecrets: []
         nodeSelector: {}
-        serviceAccountName: "fabric8"
         volumes: []
 parameters: []

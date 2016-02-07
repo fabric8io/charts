@@ -1,0 +1,140 @@
+---
+apiVersion: "v1"
+kind: "Template"
+labels: {}
+metadata:
+  annotations:
+    description: "Elasticsearch is a search server based on Lucene. It provides a\
+      \ distributed, multitenant-capable full-text search engine with a RESTful web\
+      \ interface and schema-free JSON documents. Elasticsearch is developed in Java\
+      \ and is released as open source under the terms of the Apache License.\n\n\
+      More details on the <a href=\"http://wikipedia.org/wiki/Elasticsearch\" target=\"\
+      wikipedia\">Elasticsearch wikipedia page</a> or the <a href=\"http://elasticsearch.com/\"\
+      \ target=\"elasticsearch\">Elasticsearch home page</a>.\n.\n"
+    fabric8.elasticsearch-v1/summary: "[elasticsearch](http://elasticsearch.com/)\
+      \ provides distributed RESTful search and analytics"
+    fabric8.elasticsearch-v1/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/elasticsearch-v1/master/elasticsearch/src/main/fabric8/icon.png"
+  labels: {}
+  name: "elasticsearch-v1"
+objects:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.90"
+      group: "io.fabric8.ipaas.apps"
+    name: "elasticsearch-v1"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 9200
+      protocol: "TCP"
+      targetPort: 9200
+    selector:
+      project: "elasticsearch"
+      provider: "fabric8"
+      group: "io.fabric8.ipaas.apps"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.90"
+      group: "io.fabric8.ipaas.apps"
+    name: "elasticsearch-v1-masters"
+  spec:
+    clusterIP: "None"
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 9300
+      protocol: "TCP"
+      targetPort: 9300
+    selector:
+      project: "elasticsearch"
+      provider: "fabric8"
+      group: "io.fabric8.ipaas.apps"
+    type: "LoadBalancer"
+- apiVersion: "v1"
+  kind: "ReplicationController"
+  metadata:
+    annotations:
+      fabric8.io/git-commit: "e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/git-branch: "release-v2.2.90"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+    labels:
+      project: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.90"
+      group: "io.fabric8.ipaas.apps"
+    name: "elasticsearch-v1"
+  spec:
+    replicas: 1
+    selector:
+      project: "elasticsearch"
+      provider: "fabric8"
+      version: "2.2.90"
+      group: "io.fabric8.ipaas.apps"
+    template:
+      metadata:
+        annotations: {}
+        labels:
+          project: "elasticsearch"
+          provider: "fabric8"
+          version: "2.2.90"
+          group: "io.fabric8.ipaas.apps"
+      spec:
+        containers:
+        - args: []
+          command: []
+          env:
+          - name: "SERVICE_DNS"
+            value: "elasticsearch-v1-masters"
+          - name: "KUBERNETES_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.namespace"
+          image: "fabric8/elasticsearch-k8s:1.6.0"
+          livenessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: 9300
+          name: "elasticsearch-v1"
+          ports:
+          - containerPort: 9200
+            name: "http"
+          - containerPort: 9300
+            name: "transport"
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: 9200
+            initialDelaySeconds: 30
+          securityContext: {}
+          volumeMounts:
+          - mountPath: "/usr/share/elasticsearch-v1/data"
+            name: "elasticsearch-data"
+            readOnly: false
+        - args: []
+          command: []
+          env: []
+          image: "fabric8/elasticsearch-logstash-template:2.2.90"
+          name: "logstash-template"
+          ports: []
+          volumeMounts: []
+        imagePullSecrets: []
+        nodeSelector: {}
+        volumes:
+        - emptyDir:
+            medium: ""
+          name: "elasticsearch-data"
+parameters: []

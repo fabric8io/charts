@@ -17,9 +17,9 @@ metadata:
       \ on https://oss.sonatype.org/"
     fabric8.apiman-gateway/summary: "Apiman Gateway deployed on Jetty"
     fabric8.apiman-gateway/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman-gateway/src/main/fabric8/icon.png"
-    fabric8.elasticsearch-1/summary: "[elasticsearch](http://elasticsearch.com/) provides\
-      \ distributed RESTful search and analytics"
-    fabric8.elasticsearch-1/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/elasticsearch-1/master/elasticsearch/src/main/fabric8/icon.png"
+    fabric8.elasticsearch-v1/summary: "[elasticsearch](http://elasticsearch.com/)\
+      \ provides distributed RESTful search and analytics"
+    fabric8.elasticsearch-v1/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/elasticsearch-v1/master/elasticsearch/src/main/fabric8/icon.png"
   labels: {}
   name: "apiman"
 objects:
@@ -35,7 +35,7 @@ objects:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "defaultGatewayGroup"
       package: "apiman"
     name: "apiman"
@@ -63,7 +63,7 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "defaultGatewayGroup"
       package: "apiman"
     name: "apiman-gateway"
@@ -86,10 +86,10 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "io.fabric8.ipaas.apps"
       package: "apiman"
-    name: "elasticsearch-1"
+    name: "elasticsearch-v1"
   spec:
     deprecatedPublicIPs: []
     externalIPs: []
@@ -109,10 +109,10 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "io.fabric8.ipaas.apps"
       package: "apiman"
-    name: "elasticsearch-masters"
+    name: "elasticsearch-v1-masters"
   spec:
     clusterIP: "None"
     deprecatedPublicIPs: []
@@ -130,16 +130,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.89"
-      fabric8.io/git-commit: "d797d9ea518b310ee8e2d3670859ac58ed61d455"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/d797d9ea518b310ee8e2d3670859ac58ed61d455"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
-      fabric8.io/build-id: "5"
+      fabric8.io/git-branch: "release-v2.2.90"
+      fabric8.io/git-commit: "e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "defaultGatewayGroup"
       package: "apiman"
     name: "apiman"
@@ -149,7 +149,7 @@ objects:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "defaultGatewayGroup"
     template:
       metadata:
@@ -158,7 +158,7 @@ objects:
           project: "apiman"
           component: "ApimanManagerAPI"
           provider: "fabric8"
-          version: "2.2.89"
+          version: "2.2.90"
           group: "defaultGatewayGroup"
           package: "apiman"
       spec:
@@ -172,7 +172,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/apiman:2.2.89"
+          image: "fabric8/apiman:2.2.90"
           name: "apiman"
           ports:
           - containerPort: 7070
@@ -189,16 +189,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.89"
-      fabric8.io/git-commit: "d797d9ea518b310ee8e2d3670859ac58ed61d455"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/d797d9ea518b310ee8e2d3670859ac58ed61d455"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
-      fabric8.io/build-id: "5"
+      fabric8.io/git-branch: "release-v2.2.90"
+      fabric8.io/git-commit: "e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "defaultGatewayGroup"
       package: "apiman"
     name: "apiman-gateway"
@@ -208,7 +208,7 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "defaultGatewayGroup"
     template:
       metadata:
@@ -217,7 +217,7 @@ objects:
           project: "apiman-gateway"
           component: "ApimanGateway"
           provider: "fabric8"
-          version: "2.2.89"
+          version: "2.2.90"
           group: "defaultGatewayGroup"
           package: "apiman"
       spec:
@@ -231,7 +231,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/apiman-gateway:2.2.89"
+          image: "fabric8/apiman-gateway:2.2.90"
           name: "apiman-gateway"
           ports:
           - containerPort: 7777
@@ -242,29 +242,30 @@ objects:
           volumeMounts: []
         imagePullSecrets: []
         nodeSelector: {}
+        serviceAccountName: "fabric8"
         volumes: []
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "d797d9ea518b310ee8e2d3670859ac58ed61d455"
-      fabric8.io/git-branch: "release-v2.2.89"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/d797d9ea518b310ee8e2d3670859ac58ed61d455"
-      fabric8.io/build-id: "5"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
+      fabric8.io/git-commit: "e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/git-branch: "release-v2.2.90"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "io.fabric8.ipaas.apps"
       package: "apiman"
-    name: "elasticsearch-1"
+    name: "elasticsearch-v1"
   spec:
     replicas: 1
     selector:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.89"
+      version: "2.2.90"
       group: "io.fabric8.ipaas.apps"
     template:
       metadata:
@@ -272,7 +273,7 @@ objects:
         labels:
           project: "elasticsearch"
           provider: "fabric8"
-          version: "2.2.89"
+          version: "2.2.90"
           group: "io.fabric8.ipaas.apps"
           package: "apiman"
       spec:
@@ -281,17 +282,17 @@ objects:
           command: []
           env:
           - name: "SERVICE_DNS"
-            value: "elasticsearch-masters"
+            value: "elasticsearch-v1-masters"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
           image: "fabric8/elasticsearch-k8s:1.6.0"
           livenessProbe:
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             tcpSocket:
               port: 9300
-          name: "elasticsearch-1"
+          name: "elasticsearch-v1"
           ports:
           - containerPort: 9200
             name: "http"
@@ -301,16 +302,16 @@ objects:
             httpGet:
               path: "/"
               port: 9200
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
           securityContext: {}
           volumeMounts:
-          - mountPath: "/usr/share/elasticsearch/data"
+          - mountPath: "/usr/share/elasticsearch-v1/data"
             name: "elasticsearch-data"
             readOnly: false
         - args: []
           command: []
           env: []
-          image: "fabric8/elasticsearch-logstash-template:2.2.89"
+          image: "fabric8/elasticsearch-logstash-template:2.2.90"
           name: "logstash-template"
           ports: []
           volumeMounts: []

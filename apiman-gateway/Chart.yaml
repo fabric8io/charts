@@ -1,7 +1,7 @@
 ---
 name: "apiman-gateway"
 home: "http://fabric8.io/apiman-gateway/"
-version: "2.2.90-SNAPSHOT"
+version: "2.2.91-SNAPSHOT"
 description: "Apiman Gateway deployed on Jetty"
 maintainers:
 - "Fabric8 Development Team"
