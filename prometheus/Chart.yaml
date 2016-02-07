@@ -1,7 +1,7 @@
 ---
 name: "prometheus"
 home: "http://fabric8.io/prometheus/"
-version: "2.2.106-SNAPSHOT"
+version: "2.2.108-SNAPSHOT"
 description: "[Prometheus](http://prometheus.io/) - an open-source service monitoring\
   \ system and time series database"
 maintainers:
