@@ -14,7 +14,7 @@ metadata:
       \ specification\n"
     fabric8.qpid-dispatch/summary: "A high-performance, lightweight AMQP 1.0 message\
       \ router"
-    fabric8.qpid-dispatch/iconUrl: "https://cdn.rawgit.com/fabric8io/fabric8/master/fabric8-maven-plugin/src/main/resources/icons/activemq.svg"
+    fabric8.qpid-dispatch/iconUrl: "img/icons/activemq.svg"
   labels: {}
   name: "qpid-dispatch"
 objects:
@@ -26,7 +26,7 @@ objects:
       project: "qpid-dispatch"
       component: "qpid-dispatch"
       provider: "fabric8"
-      version: "2.2.90"
+      version: "2.2.91"
       group: "qpid-dispatch"
     name: "qpid-dispatch"
   spec:
@@ -82,16 +82,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
-      fabric8.io/git-branch: "release-v2.2.90"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e5f3eb6278383ca5b74580ebaa2d2c366c322cb3"
-      fabric8.io/build-id: "2"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/git-commit: "76dc4baf0015ca9a11110f29c2a58a5acad528d6"
+      fabric8.io/git-branch: "release-v2.2.91"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/76dc4baf0015ca9a11110f29c2a58a5acad528d6"
+      fabric8.io/build-id: "1"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
     labels:
       project: "qpid-dispatch"
       component: "qpid-dispatch"
       provider: "fabric8"
-      version: "2.2.90"
+      version: "2.2.91"
       group: "qpid-dispatch"
     name: "qpid-dispatch"
   spec:
@@ -100,7 +100,7 @@ objects:
       project: "qpid-dispatch"
       component: "qpid-dispatch"
       provider: "fabric8"
-      version: "2.2.90"
+      version: "2.2.91"
       group: "qpid-dispatch"
     template:
       metadata:
@@ -109,7 +109,7 @@ objects:
           project: "qpid-dispatch"
           component: "qpid-dispatch"
           provider: "fabric8"
-          version: "2.2.90"
+          version: "2.2.91"
           group: "qpid-dispatch"
       spec:
         containers:
