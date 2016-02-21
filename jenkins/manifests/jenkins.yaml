@@ -100,15 +100,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "98941ab606db9843c8011998d703f3e8189e3851"
-      fabric8.io/git-branch: "release-v2.2.113"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/98941ab606db9843c8011998d703f3e8189e3851"
-      fabric8.io/build-id: "3"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
+      fabric8.io/git-commit: "fa8c20e7aa20af5fa5fdd5f31c30b67e7f6330e6"
+      fabric8.io/git-branch: "release-v2.2.114"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/fa8c20e7aa20af5fa5fdd5f31c30b67e7f6330e6"
+      fabric8.io/build-id: "1"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
     labels:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.113"
+      version: "2.2.114"
       group: "io.fabric8.devops.apps"
     name: "jenkins"
   spec:
@@ -116,7 +116,7 @@ objects:
     selector:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.113"
+      version: "2.2.114"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -129,7 +129,7 @@ objects:
         labels:
           project: "jenkins"
           provider: "fabric8"
-          version: "2.2.113"
+          version: "2.2.114"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -141,7 +141,7 @@ objects:
           - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
             value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
           - name: "PROJECT_VERSION"
-            value: "2.2.113"
+            value: "2.2.114"
           - name: "JENKINS_GOGS_PASSWORD"
             value: "${JENKINS_GOGS_PASSWORD}"
           - name: "JENKINS_GOGS_USER"
@@ -156,7 +156,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/jenkins-docker:2.2.113"
+          image: "fabric8/jenkins-docker:2.2.114"
           imagePullPolicy: "IfNotPresent"
           lifecycle:
             postStart:
