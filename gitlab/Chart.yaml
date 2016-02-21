@@ -1,7 +1,7 @@
 ---
 name: "gitlab"
 home: "http://fabric8.io/gitlab/"
-version: "2.2.113-SNAPSHOT"
+version: "2.2.114-SNAPSHOT"
 description: "[Gitlab](http://gitlab.com/) - A self-hosted Git service"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"
