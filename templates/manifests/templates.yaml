@@ -19,7 +19,7 @@ objects:
     labels:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.114"
+      version: "2.2.115"
       group: "io.fabric8.apps"
     name: "templates"
   spec:
@@ -37,15 +37,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.114"
-      fabric8.io/git-commit: "649604fe4d98e9d923faaf0f620d5b0573c7d6a5"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/649604fe4d98e9d923faaf0f620d5b0573c7d6a5"
+      fabric8.io/git-branch: "release-v2.2.115"
+      fabric8.io/git-commit: "548e30463c18bf547d9c748c2448c7dee7b7a094"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/548e30463c18bf547d9c748c2448c7dee7b7a094"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.114"
+      version: "2.2.115"
       group: "io.fabric8.apps"
     name: "templates"
   spec:
@@ -53,7 +53,7 @@ objects:
     selector:
       project: "templates"
       provider: "fabric8"
-      version: "2.2.114"
+      version: "2.2.115"
       group: "io.fabric8.apps"
     template:
       metadata:
@@ -61,7 +61,7 @@ objects:
         labels:
           project: "templates"
           provider: "fabric8"
-          version: "2.2.114"
+          version: "2.2.115"
           group: "io.fabric8.apps"
       spec:
         containers:
@@ -74,7 +74,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/templates:2.2.114"
+          image: "fabric8/templates:2.2.115"
           name: "templates"
           ports:
           - containerPort: 8080
