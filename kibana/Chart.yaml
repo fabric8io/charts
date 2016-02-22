@@ -1,7 +1,7 @@
 ---
 name: "kibana"
 home: "http://fabric8.io/kibana/"
-version: "2.2.115-SNAPSHOT"
+version: "2.2.116-SNAPSHOT"
 description: "Awesome front-end for Elasticsearch"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"
