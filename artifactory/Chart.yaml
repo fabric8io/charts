@@ -1,7 +1,7 @@
 ---
 name: "artifactory"
 home: "http://fabric8.io/artifactory/"
-version: "2.2.116-SNAPSHOT"
+version: "2.2.117-SNAPSHOT"
 description: "[Artifactory](http://www.jfrog.com/open-source/) Open Source Maven Repository\
   \ Manager"
 maintainers:

@@ -20,7 +20,7 @@ objects:
     labels:
       project: "grafana2"
       provider: "fabric8"
-      version: "2.2.115"
+      version: "2.2.116"
       group: "io.fabric8.devops.apps"
     name: "grafana2"
   spec:
@@ -39,15 +39,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.115"
-      fabric8.io/git-commit: "d6e18e3174db562836d260f8f2ab10ec81e94f2e"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/d6e18e3174db562836d260f8f2ab10ec81e94f2e"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
-      fabric8.io/build-id: "1"
+      fabric8.io/git-branch: "release-v2.2.116"
+      fabric8.io/git-commit: "28af451fcd261f7f7f4260e8bfd2b45b75e508fb"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/28af451fcd261f7f7f4260e8bfd2b45b75e508fb"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "grafana2"
       provider: "fabric8"
-      version: "2.2.115"
+      version: "2.2.116"
       group: "io.fabric8.devops.apps"
     name: "grafana2"
   spec:
@@ -55,7 +55,7 @@ objects:
     selector:
       project: "grafana2"
       provider: "fabric8"
-      version: "2.2.115"
+      version: "2.2.116"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -63,7 +63,7 @@ objects:
         labels:
           project: "grafana2"
           provider: "fabric8"
-          version: "2.2.115"
+          version: "2.2.116"
           group: "io.fabric8.devops.apps"
       spec:
         containers:

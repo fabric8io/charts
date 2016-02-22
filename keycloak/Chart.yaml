@@ -1,7 +1,7 @@
 ---
 name: "keycloak"
 home: "http://fabric8.io/keycloak/"
-version: "2.2.116-SNAPSHOT"
+version: "2.2.117-SNAPSHOT"
 description: "Keycloack (security) - Integrated SSO and IDM for browser apps and RESTful\
   \ services"
 maintainers:
