@@ -73,15 +73,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "8145ff3a3efd549b10f23b2d2e58ed7cb76b82a4"
-      fabric8.io/git-branch: "release-v2.2.117"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/8145ff3a3efd549b10f23b2d2e58ed7cb76b82a4"
-      fabric8.io/build-id: "3"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
+      fabric8.io/git-commit: "866d36ff862f1c5cf75a9e5ee632a843dab5ef27"
+      fabric8.io/git-branch: "release-v2.2.118"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/866d36ff862f1c5cf75a9e5ee632a843dab5ef27"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.117"
+      version: "2.2.118"
       group: "io.fabric8.devops.apps"
     name: "gogs"
   spec:
@@ -89,7 +89,7 @@ objects:
     selector:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.117"
+      version: "2.2.118"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -97,7 +97,7 @@ objects:
         labels:
           project: "gogs"
           provider: "fabric8"
-          version: "2.2.117"
+          version: "2.2.118"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
