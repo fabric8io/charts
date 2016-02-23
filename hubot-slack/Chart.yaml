@@ -1,7 +1,7 @@
 ---
 name: "hubot-slack"
 home: "http://fabric8.io/hubot-slack/"
-version: "2.2.117-SNAPSHOT"
+version: "2.2.118-SNAPSHOT"
 description: "[Hubot](https://hubot.github.com/) adapter to use with [Slack](https://slack.com/)"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"

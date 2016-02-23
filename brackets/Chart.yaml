@@ -1,7 +1,7 @@
 ---
 name: "brackets"
 home: "http://fabric8.io/brackets/"
-version: "2.2.117-SNAPSHOT"
+version: "2.2.118-SNAPSHOT"
 description: "[Brackets](http://brackets.io/) editor for working with files in git"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"
