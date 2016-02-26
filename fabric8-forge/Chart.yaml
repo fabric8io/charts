@@ -1,7 +1,7 @@
 ---
 name: "fabric8-forge"
 home: "http://fabric8.io/fabric8-forge/"
-version: "2.2.129-SNAPSHOT"
+version: "2.2.130-SNAPSHOT"
 description: "Fabric8 :: Forge"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"
