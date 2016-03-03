@@ -68,7 +68,7 @@ objects:
     labels:
       project: "fabric8-docker-registry"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
       package: "cd-pipeline"
     name: "fabric8-docker-registry"
@@ -91,7 +91,7 @@ objects:
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.129"
+      version: "2.2.130"
       group: "io.fabric8.forge.apps"
       package: "cd-pipeline"
     name: "fabric8-forge"
@@ -228,7 +228,7 @@ objects:
     labels:
       project: "nexus"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
       package: "cd-pipeline"
     name: "nexus"
@@ -248,15 +248,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.119"
-      fabric8.io/git-commit: "705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
-      fabric8.io/build-id: "4"
+      fabric8.io/git-branch: "release-v2.2.120"
+      fabric8.io/git-commit: "369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
+      fabric8.io/build-id: "5"
     labels:
       project: "fabric8-docker-registry"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
       package: "cd-pipeline"
     name: "fabric8-docker-registry"
@@ -265,7 +265,7 @@ objects:
     selector:
       project: "fabric8-docker-registry"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -273,7 +273,7 @@ objects:
         labels:
           project: "fabric8-docker-registry"
           provider: "fabric8"
-          version: "2.2.119"
+          version: "2.2.120"
           group: "io.fabric8.devops.apps"
           package: "cd-pipeline"
       spec:
@@ -300,15 +300,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.129"
-      fabric8.io/git-commit: "78970c990e48f28f6071a436dc1cabbedece8350"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/78970c990e48f28f6071a436dc1cabbedece8350"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
-      fabric8.io/build-id: "2"
+      fabric8.io/git-branch: "release-v2.2.130"
+      fabric8.io/git-commit: "db51c313a40dda701e3749e92288969db60a6401"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/db51c313a40dda701e3749e92288969db60a6401"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
+      fabric8.io/build-id: "5"
     labels:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.129"
+      version: "2.2.130"
       group: "io.fabric8.forge.apps"
       package: "cd-pipeline"
     name: "fabric8-forge"
@@ -317,7 +317,7 @@ objects:
     selector:
       project: "fabric8-forge"
       provider: "fabric8"
-      version: "2.2.129"
+      version: "2.2.130"
       group: "io.fabric8.forge.apps"
     template:
       metadata:
@@ -325,7 +325,7 @@ objects:
         labels:
           project: "fabric8-forge"
           provider: "fabric8"
-          version: "2.2.129"
+          version: "2.2.130"
           group: "io.fabric8.forge.apps"
           package: "cd-pipeline"
       spec:
@@ -348,7 +348,7 @@ objects:
           - name: "JENKINS_GOGS_USER"
             value: "${JENKINS_GOGS_USER}"
           - name: "FABRIC8_ARCHETYPES_VERSION"
-            value: "2.2.99"
+            value: "2.2.100"
           - name: "JAVA_OPTIONS"
             value: "-Dorg.apache.maven.log_transfer=true"
           - name: "JENKINS_GOGS_EMAIL"
@@ -359,7 +359,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8-forge:2.2.129"
+          image: "fabric8/fabric8-forge:2.2.130"
           name: "fabric8-forge"
           ports:
           - containerPort: 8778
@@ -379,15 +379,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/git-branch: "release-v2.2.119"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/build-id: "4"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
+      fabric8.io/git-commit: "369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/git-branch: "release-v2.2.120"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/build-id: "5"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
     labels:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
       package: "cd-pipeline"
     name: "gogs"
@@ -396,7 +396,7 @@ objects:
     selector:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -404,7 +404,7 @@ objects:
         labels:
           project: "gogs"
           provider: "fabric8"
-          version: "2.2.119"
+          version: "2.2.120"
           group: "io.fabric8.devops.apps"
           package: "cd-pipeline"
       spec:
@@ -467,15 +467,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/git-branch: "release-v2.2.119"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/build-id: "4"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
+      fabric8.io/git-commit: "369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/git-branch: "release-v2.2.120"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/build-id: "5"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
     labels:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
       package: "cd-pipeline"
     name: "jenkins"
@@ -484,7 +484,7 @@ objects:
     selector:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -498,7 +498,7 @@ objects:
         labels:
           project: "jenkins"
           provider: "fabric8"
-          version: "2.2.119"
+          version: "2.2.120"
           group: "io.fabric8.devops.apps"
           package: "cd-pipeline"
       spec:
@@ -511,7 +511,7 @@ objects:
           - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
             value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
           - name: "PROJECT_VERSION"
-            value: "2.2.119"
+            value: "2.2.120"
           - name: "JENKINS_GOGS_PASSWORD"
             value: "${JENKINS_GOGS_PASSWORD}"
           - name: "JENKINS_GOGS_USER"
@@ -524,7 +524,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/jenkins-docker:2.2.119"
+          image: "fabric8/jenkins-docker:2.2.120"
           imagePullPolicy: "IfNotPresent"
           lifecycle:
             postStart:
@@ -560,15 +560,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.119"
-      fabric8.io/git-commit: "705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/705691d23797d59c5450e747a3cb7522441cd2fc"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
-      fabric8.io/build-id: "4"
+      fabric8.io/git-branch: "release-v2.2.120"
+      fabric8.io/git-commit: "369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
+      fabric8.io/build-id: "5"
     labels:
       project: "nexus"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
       package: "cd-pipeline"
     name: "nexus"
@@ -577,7 +577,7 @@ objects:
     selector:
       project: "nexus"
       provider: "fabric8"
-      version: "2.2.119"
+      version: "2.2.120"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -585,7 +585,7 @@ objects:
         labels:
           project: "nexus"
           provider: "fabric8"
-          version: "2.2.119"
+          version: "2.2.120"
           group: "io.fabric8.devops.apps"
           package: "cd-pipeline"
       spec:
@@ -597,7 +597,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/nexus:2.2.119"
+          image: "fabric8/nexus:2.2.120"
           imagePullPolicy: "IfNotPresent"
           name: "nexus"
           ports:
