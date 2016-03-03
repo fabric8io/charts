@@ -1,7 +1,7 @@
 ---
 name: "taiga"
 home: "http://fabric8.io/taiga/"
-version: "2.2.120-SNAPSHOT"
+version: "2.2.121-SNAPSHOT"
 description: "[Taiga](https://github.com/taigaio) Your Agile, Free and Open Source\
   \ Project Management Tool"
 maintainers:

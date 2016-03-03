@@ -1,7 +1,7 @@
 ---
 name: "social"
 home: "http://fabric8.io/packages/social/"
-version: "2.2.120-SNAPSHOT"
+version: "2.2.121-SNAPSHOT"
 description: "Sonatype helps open source projects to set up Maven repositories on\
   \ https://oss.sonatype.org/"
 maintainers:
