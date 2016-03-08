@@ -23,7 +23,7 @@ objects:
     labels:
       project: "fabric8-docker-registry"
       provider: "fabric8"
-      version: "2.2.120"
+      version: "2.2.121"
       group: "io.fabric8.devops.apps"
     name: "fabric8-docker-registry"
   spec:
@@ -42,15 +42,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.120"
-      fabric8.io/git-commit: "369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/369091cda5c5e2d5f907d7a47a722a0a77fa64c8"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/5"
-      fabric8.io/build-id: "5"
+      fabric8.io/git-branch: "release-v2.2.121"
+      fabric8.io/git-commit: "9c1b1dd44505f0868254db0ee086af7a4386c32c"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/9c1b1dd44505f0868254db0ee086af7a4386c32c"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/build-id: "6"
     labels:
       project: "fabric8-docker-registry"
       provider: "fabric8"
-      version: "2.2.120"
+      version: "2.2.121"
       group: "io.fabric8.devops.apps"
     name: "fabric8-docker-registry"
   spec:
@@ -58,7 +58,7 @@ objects:
     selector:
       project: "fabric8-docker-registry"
       provider: "fabric8"
-      version: "2.2.120"
+      version: "2.2.121"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -66,7 +66,7 @@ objects:
         labels:
           project: "fabric8-docker-registry"
           provider: "fabric8"
-          version: "2.2.120"
+          version: "2.2.121"
           group: "io.fabric8.devops.apps"
       spec:
         containers:

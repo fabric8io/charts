@@ -90,7 +90,7 @@ objects:
             value: "taiga"
           - name: "POSTGRES_ENV_POSTGRES_PASSWORD"
             value: "password"
-          image: "fabric8/taiga-back:2.2.120"
+          image: "fabric8/taiga-back:2.2.121"
           name: "taiga-backend"
           ports:
           - containerPort: 8000
@@ -105,7 +105,7 @@ objects:
         - args: []
           command: []
           env: []
-          image: "fabric8/taiga-front:2.2.120"
+          image: "fabric8/taiga-front:2.2.121"
           name: "taiga-frontend"
           ports:
           - containerPort: 80
