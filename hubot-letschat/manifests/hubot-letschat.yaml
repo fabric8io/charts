@@ -19,7 +19,7 @@ objects:
     labels:
       project: "hubot-letschat"
       provider: "fabric8"
-      version: "2.2.122"
+      version: "2.2.123"
       group: "io.fabric8.devops.apps"
     name: "hubot"
   spec:
@@ -56,15 +56,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "a7ce7769f07c0de738a9ae29d4857e02a5542bd3"
-      fabric8.io/git-branch: "release-v2.2.122"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/a7ce7769f07c0de738a9ae29d4857e02a5542bd3"
-      fabric8.io/build-id: "7"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/7"
+      fabric8.io/git-commit: "1c5580eb0b4779a7ecc2dc093b420f791b4c03d6"
+      fabric8.io/git-branch: "release-v2.2.123"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/1c5580eb0b4779a7ecc2dc093b420f791b4c03d6"
+      fabric8.io/build-id: "3"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
     labels:
       project: "hubot-letschat"
       provider: "fabric8"
-      version: "2.2.122"
+      version: "2.2.123"
       group: "io.fabric8.devops.apps"
     name: "hubot-letschat"
   spec:
@@ -72,7 +72,7 @@ objects:
     selector:
       project: "hubot-letschat"
       provider: "fabric8"
-      version: "2.2.122"
+      version: "2.2.123"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -80,7 +80,7 @@ objects:
         labels:
           project: "hubot-letschat"
           provider: "fabric8"
-          version: "2.2.122"
+          version: "2.2.123"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
