@@ -18,7 +18,7 @@ objects:
     labels:
       project: "kibana"
       provider: "fabric8"
-      version: "2.2.123"
+      version: "2.2.124"
       group: "io.fabric8.devops.apps"
     name: "kibana"
   spec:
@@ -37,15 +37,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "1c5580eb0b4779a7ecc2dc093b420f791b4c03d6"
-      fabric8.io/git-branch: "release-v2.2.123"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/1c5580eb0b4779a7ecc2dc093b420f791b4c03d6"
-      fabric8.io/build-id: "3"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
+      fabric8.io/git-commit: "ff277adb1fb2ab190b89d95140a9e9b08240b357"
+      fabric8.io/git-branch: "release-v2.2.124"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/ff277adb1fb2ab190b89d95140a9e9b08240b357"
+      fabric8.io/build-id: "8"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/8"
     labels:
       project: "kibana"
       provider: "fabric8"
-      version: "2.2.123"
+      version: "2.2.124"
       group: "io.fabric8.devops.apps"
     name: "kibana"
   spec:
@@ -53,7 +53,7 @@ objects:
     selector:
       project: "kibana"
       provider: "fabric8"
-      version: "2.2.123"
+      version: "2.2.124"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -61,7 +61,7 @@ objects:
         labels:
           project: "kibana"
           provider: "fabric8"
-          version: "2.2.123"
+          version: "2.2.124"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -99,7 +99,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/kibana-config:2.2.123"
+          image: "fabric8/kibana-config:2.2.124"
           name: "kibana-config"
           ports: []
           volumeMounts: []

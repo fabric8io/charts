@@ -1,7 +1,7 @@
 ---
 name: "hubot-notifier"
 home: "http://fabric8.io/hubot-notifier/"
-version: "2.2.124-SNAPSHOT"
+version: "2.2.125-SNAPSHOT"
 description: "Watches the OpenShift environment and notifies Hubot of events such\
   \ as builds completing or failing"
 maintainers:
