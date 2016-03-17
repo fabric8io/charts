@@ -24,7 +24,7 @@ objects:
     labels:
       project: "artifactory"
       provider: "fabric8"
-      version: "2.2.129"
+      version: "2.2.130"
       group: "io.fabric8.devops.apps"
     name: "artifactory"
   spec:
@@ -43,15 +43,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.129"
-      fabric8.io/git-commit: "3372c45ffc2a641d8fbbbe88dfe2e21067f91e32"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/3372c45ffc2a641d8fbbbe88dfe2e21067f91e32"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
-      fabric8.io/build-id: "1"
+      fabric8.io/git-branch: "release-v2.2.130"
+      fabric8.io/git-commit: "514ff2f5601c91ddd8e44b1079bf87731f90df2f"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/514ff2f5601c91ddd8e44b1079bf87731f90df2f"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/build-id: "2"
     labels:
       project: "artifactory"
       provider: "fabric8"
-      version: "2.2.129"
+      version: "2.2.130"
       group: "io.fabric8.devops.apps"
     name: "artifactory"
   spec:
@@ -59,7 +59,7 @@ objects:
     selector:
       project: "artifactory"
       provider: "fabric8"
-      version: "2.2.129"
+      version: "2.2.130"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -67,7 +67,7 @@ objects:
         labels:
           project: "artifactory"
           provider: "fabric8"
-          version: "2.2.129"
+          version: "2.2.130"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
