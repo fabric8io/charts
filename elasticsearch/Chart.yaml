@@ -1,7 +1,7 @@
 ---
 name: "elasticsearch"
 home: "http://fabric8.io/elasticsearch/"
-version: "2.2.128-SNAPSHOT"
+version: "2.2.129-SNAPSHOT"
 description: "[elasticsearch](http://elasticsearch.com/) provides distributed RESTful\
   \ search and analytics"
 maintainers:
