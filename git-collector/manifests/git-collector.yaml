@@ -17,15 +17,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.128"
-      fabric8.io/git-commit: "673a1c9aafc6453196faf1d0c1cb3099906fb666"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/673a1c9aafc6453196faf1d0c1cb3099906fb666"
+      fabric8.io/git-branch: "release-v2.2.129"
+      fabric8.io/git-commit: "3372c45ffc2a641d8fbbbe88dfe2e21067f91e32"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/3372c45ffc2a641d8fbbbe88dfe2e21067f91e32"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
       fabric8.io/build-id: "1"
     labels:
       project: "gitCollector"
       provider: "fabric8"
-      version: "2.2.128"
+      version: "2.2.129"
       group: "io.fabric8.devops.apps"
     name: "git-collector"
   spec:
@@ -33,7 +33,7 @@ objects:
     selector:
       project: "gitCollector"
       provider: "fabric8"
-      version: "2.2.128"
+      version: "2.2.129"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -41,7 +41,7 @@ objects:
         labels:
           project: "gitCollector"
           provider: "fabric8"
-          version: "2.2.128"
+          version: "2.2.129"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -52,7 +52,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/git-collector:2.2.128"
+          image: "fabric8/git-collector:2.2.129"
           name: "git-collector"
           ports:
           - containerPort: 8778
