@@ -6,7 +6,7 @@ metadata:
     group: "io.fabric8.devops.apps"
     project: "fluentd"
     provider: "fabric8"
-    version: "2.2.134"
+    version: "2.2.135"
   name: "fluentd"
 spec:
   template:
@@ -15,7 +15,7 @@ spec:
         group: "io.fabric8.devops.apps"
         project: "fluentd"
         provider: "fabric8"
-        version: "2.2.134"
+        version: "2.2.135"
     spec:
       containers:
       - args: []
@@ -52,4 +52,4 @@ selector:
   group: "io.fabric8.devops.apps"
   project: "fluentd"
   provider: "fabric8"
-  version: "2.2.134"
+  version: "2.2.135"
