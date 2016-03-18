@@ -1,7 +1,7 @@
 ---
 name: "git-collector"
 home: "http://fabric8.io/git-collector/"
-version: "2.2.133-SNAPSHOT"
+version: "2.2.134-SNAPSHOT"
 description: "Collects events from git repositories from projects in OpenShift"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"

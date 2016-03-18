@@ -23,6 +23,14 @@ objects:
     name: "gogs-https-${KUBERNETES_ADMIN_USER}"
     namespace: "user-secrets-source-${KUBERNETES_ADMIN_USER}"
 - apiVersion: "v1"
+  imagePullSecrets: []
+  kind: "ServiceAccount"
+  metadata:
+    annotations: {}
+    labels: {}
+    name: "gogs"
+  secrets: []
+- apiVersion: "v1"
   kind: "OAuthClient"
   metadata:
     annotations: {}
@@ -73,15 +81,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "ba63bda85fac58d4ea0f33aa656d63e200bdd806"
-      fabric8.io/git-branch: "release-v2.2.132"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/ba63bda85fac58d4ea0f33aa656d63e200bdd806"
-      fabric8.io/build-id: "1"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/1"
+      fabric8.io/git-commit: "eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
+      fabric8.io/git-branch: "release-v2.2.133"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
+      fabric8.io/build-id: "2"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
     labels:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.132"
+      version: "2.2.133"
       group: "io.fabric8.devops.apps"
     name: "gogs"
   spec:
@@ -89,7 +97,7 @@ objects:
     selector:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.132"
+      version: "2.2.133"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -97,7 +105,7 @@ objects:
         labels:
           project: "gogs"
           provider: "fabric8"
-          version: "2.2.132"
+          version: "2.2.133"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
