@@ -26,7 +26,7 @@ objects:
     labels:
       project: "grafana2"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
       package: "metrics"
     name: "grafana2"
@@ -51,7 +51,7 @@ objects:
     labels:
       project: "prometheus"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
       package: "metrics"
     name: "prometheus"
@@ -71,15 +71,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.133"
-      fabric8.io/git-commit: "eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
-      fabric8.io/build-id: "2"
+      fabric8.io/git-branch: "release-v2.2.134"
+      fabric8.io/git-commit: "92f68d4e0d796b17f3f0a846c2d0a0030423eb85"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/92f68d4e0d796b17f3f0a846c2d0a0030423eb85"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
+      fabric8.io/build-id: "4"
     labels:
       project: "grafana2"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
       package: "metrics"
     name: "grafana2"
@@ -88,7 +88,7 @@ objects:
     selector:
       project: "grafana2"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -96,7 +96,7 @@ objects:
         labels:
           project: "grafana2"
           provider: "fabric8"
-          version: "2.2.133"
+          version: "2.2.134"
           group: "io.fabric8.devops.apps"
           package: "metrics"
       spec:
@@ -130,15 +130,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.133"
-      fabric8.io/git-commit: "eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
-      fabric8.io/build-id: "2"
+      fabric8.io/git-branch: "release-v2.2.134"
+      fabric8.io/git-commit: "92f68d4e0d796b17f3f0a846c2d0a0030423eb85"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/92f68d4e0d796b17f3f0a846c2d0a0030423eb85"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
+      fabric8.io/build-id: "4"
     labels:
       project: "prometheus"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
       package: "metrics"
     name: "prometheus"
@@ -147,7 +147,7 @@ objects:
     selector:
       project: "prometheus"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -155,7 +155,7 @@ objects:
         labels:
           project: "prometheus"
           provider: "fabric8"
-          version: "2.2.133"
+          version: "2.2.134"
           group: "io.fabric8.devops.apps"
           package: "metrics"
       spec:
@@ -167,7 +167,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/prometheus-kubernetes:2.2.133"
+          image: "fabric8/prometheus-kubernetes:2.2.134"
           livenessProbe:
             tcpSocket:
               port: 9090

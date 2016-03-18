@@ -23,14 +23,6 @@ objects:
     name: "gogs-https-${KUBERNETES_ADMIN_USER}"
     namespace: "user-secrets-source-${KUBERNETES_ADMIN_USER}"
 - apiVersion: "v1"
-  imagePullSecrets: []
-  kind: "ServiceAccount"
-  metadata:
-    annotations: {}
-    labels: {}
-    name: "gogs"
-  secrets: []
-- apiVersion: "v1"
   kind: "OAuthClient"
   metadata:
     annotations: {}
@@ -45,8 +37,10 @@ objects:
   metadata:
     annotations: {}
     labels:
-      provider: "fabric8"
       project: "gogs"
+      provider: "fabric8"
+      version: "2.2.134"
+      group: "io.fabric8.devops.apps"
     name: "gogs"
   spec:
     deprecatedPublicIPs: []
@@ -56,16 +50,18 @@ objects:
       protocol: "TCP"
       targetPort: 3000
     selector:
-      provider: "fabric8"
       project: "gogs"
-    type: "LoadBalancer"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
 - apiVersion: "v1"
   kind: "Service"
   metadata:
     annotations: {}
     labels:
-      provider: "fabric8"
       project: "gogs"
+      provider: "fabric8"
+      version: "2.2.134"
+      group: "io.fabric8.devops.apps"
     name: "gogs-ssh"
   spec:
     deprecatedPublicIPs: []
@@ -75,21 +71,22 @@ objects:
       protocol: "TCP"
       targetPort: 22
     selector:
-      provider: "fabric8"
       project: "gogs"
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
-      fabric8.io/git-branch: "release-v2.2.133"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/eea056bd59ca5f4d5f4ec7bc88c65bc9ec21c55f"
-      fabric8.io/build-id: "2"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/2"
+      fabric8.io/git-commit: "92f68d4e0d796b17f3f0a846c2d0a0030423eb85"
+      fabric8.io/git-branch: "release-v2.2.134"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/92f68d4e0d796b17f3f0a846c2d0a0030423eb85"
+      fabric8.io/build-id: "4"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
     labels:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
     name: "gogs"
   spec:
@@ -97,7 +94,7 @@ objects:
     selector:
       project: "gogs"
       provider: "fabric8"
-      version: "2.2.133"
+      version: "2.2.134"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -105,7 +102,7 @@ objects:
         labels:
           project: "gogs"
           provider: "fabric8"
-          version: "2.2.133"
+          version: "2.2.134"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
