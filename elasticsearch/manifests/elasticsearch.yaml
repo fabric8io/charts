@@ -24,7 +24,7 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.136"
+      version: "2.2.137"
       group: "io.fabric8.devops.apps"
     name: "elasticsearch"
   spec:
@@ -46,7 +46,7 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.136"
+      version: "2.2.137"
       group: "io.fabric8.devops.apps"
     name: "elasticsearch-masters"
   spec:
@@ -66,15 +66,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "b1a29a4539686b90baa12e99c93b5330aac98892"
-      fabric8.io/git-branch: "release-v2.2.136"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/b1a29a4539686b90baa12e99c93b5330aac98892"
-      fabric8.io/build-id: "6"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/6"
+      fabric8.io/git-commit: "f717c010cf3c3b1f598bf25a72c7851a5896c65d"
+      fabric8.io/git-branch: "release-v2.2.137"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/f717c010cf3c3b1f598bf25a72c7851a5896c65d"
+      fabric8.io/build-id: "7"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/7"
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.136"
+      version: "2.2.137"
       group: "io.fabric8.devops.apps"
     name: "elasticsearch"
   spec:
@@ -82,7 +82,7 @@ objects:
     selector:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.136"
+      version: "2.2.137"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -90,7 +90,7 @@ objects:
         labels:
           project: "elasticsearch"
           provider: "fabric8"
-          version: "2.2.136"
+          version: "2.2.137"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -127,7 +127,7 @@ objects:
         - args: []
           command: []
           env: []
-          image: "fabric8/elasticsearch-logstash-template:2.2.136"
+          image: "fabric8/elasticsearch-logstash-template:2.2.137"
           name: "logstash-template"
           ports: []
           volumeMounts: []

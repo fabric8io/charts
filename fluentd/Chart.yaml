@@ -1,7 +1,7 @@
 ---
 name: "fluentd"
 home: "http://fabric8.io/fluentd/"
-version: "2.2.137-SNAPSHOT"
+version: "2.2.138-SNAPSHOT"
 description: "[Fluentd](http://www.fluentd.org/) is an open source data collector\
   \ for unified logging layer."
 maintainers:
