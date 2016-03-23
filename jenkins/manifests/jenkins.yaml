@@ -100,15 +100,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "bc1edaaad52fe8dbb435066b5470e4f79ec2e9ed"
-      fabric8.io/git-branch: "release-v2.2.138"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/bc1edaaad52fe8dbb435066b5470e4f79ec2e9ed"
-      fabric8.io/build-id: "8"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/8"
+      fabric8.io/git-commit: "9befdd81c3eaa5b48bf6ad29156fa04f37ce0c5d"
+      fabric8.io/git-branch: "release-v2.2.139"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/9befdd81c3eaa5b48bf6ad29156fa04f37ce0c5d"
+      fabric8.io/build-id: "9"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/9"
     labels:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.138"
+      version: "2.2.139"
       group: "io.fabric8.devops.apps"
     name: "jenkins"
   spec:
@@ -116,7 +116,7 @@ objects:
     selector:
       project: "jenkins"
       provider: "fabric8"
-      version: "2.2.138"
+      version: "2.2.139"
       group: "io.fabric8.devops.apps"
     template:
       metadata:
@@ -130,7 +130,7 @@ objects:
         labels:
           project: "jenkins"
           provider: "fabric8"
-          version: "2.2.138"
+          version: "2.2.139"
           group: "io.fabric8.devops.apps"
       spec:
         containers:
@@ -142,7 +142,7 @@ objects:
           - name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
             value: "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
           - name: "PROJECT_VERSION"
-            value: "2.2.138"
+            value: "2.2.139"
           - name: "JENKINS_GOGS_PASSWORD"
             value: "${JENKINS_GOGS_PASSWORD}"
           - name: "JENKINS_GOGS_USER"
@@ -155,7 +155,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/jenkins-docker:2.2.138"
+          image: "fabric8/jenkins-docker:2.2.139"
           imagePullPolicy: "IfNotPresent"
           lifecycle:
             postStart:
@@ -197,10 +197,10 @@ parameters:
 - description: "The password for Jenkins to login to Gogs"
   name: "JENKINS_GOGS_PASSWORD"
   value: "RedHat$1"
-- description: "Optionally overwrite the pre-cloned default https://github.com/fabric8io/jenkins-workflow-library.git\
-    \ the Git URL for the jenkins global workflow repository.  For more info see https://github.com/jenkinsci/workflow-plugin/tree/master/cps-global-lib"
+- description: "The Git URL for the jenkins global workflow repository.  For more\
+    \ info see https://github.com/jenkinsci/workflow-plugin/tree/master/cps-global-lib"
   name: "JENKINS_WORKFLOW_GIT_REPOSITORY"
-  value: "default"
+  value: "https://github.com/fabric8io/jenkins-workflow-library.git"
 - description: "The domain name applications are installed on"
   name: "DOMAIN"
   value: "vagrant.f8"

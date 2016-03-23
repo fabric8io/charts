@@ -1,7 +1,7 @@
 ---
 name: "chaos-monkey"
 home: "http://fabric8.io/chaos-monkey/"
-version: "2.2.139-SNAPSHOT"
+version: "2.2.140-SNAPSHOT"
 description: "Kills random pods for chaos fun!"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"
