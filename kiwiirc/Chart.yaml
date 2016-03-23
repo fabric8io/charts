@@ -1,7 +1,7 @@
 ---
 name: "kiwiirc"
 home: "http://fabric8.io/kiwiirc/"
-version: "2.2.140-SNAPSHOT"
+version: "2.2.141-SNAPSHOT"
 description: "[Kiwi IRC](https://kiwiirc.com/) KiwiIRC makes Web IRC easy"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"

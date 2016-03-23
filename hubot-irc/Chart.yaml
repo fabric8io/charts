@@ -1,7 +1,7 @@
 ---
 name: "hubot-irc"
 home: "http://fabric8.io/hubot-irc/"
-version: "2.2.140-SNAPSHOT"
+version: "2.2.141-SNAPSHOT"
 description: "[Hubot](http://hubot.github.com) IRC chat bot"
 maintainers:
 - "Fabric8 Development Team <fabric8@googlegroups.com>"

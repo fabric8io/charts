@@ -1,7 +1,7 @@
 ---
 name: "grafana2"
 home: "http://fabric8.io/grafana2/"
-version: "2.2.140-SNAPSHOT"
+version: "2.2.141-SNAPSHOT"
 description: "[Grafana](http://grafana.org/) 2 console for viewing metrics stored\
   \ in various storage backends"
 maintainers:
