@@ -1,7 +1,7 @@
 ---
 name: "fabric8-msm"
 home: "http://fabric8.io/fabric8-msm/"
-version: "2.2.94-SNAPSHOT"
+version: "2.2.95-SNAPSHOT"
 description: "Artemis configured for Microservice Messaging"
 maintainers:
 - "Fabric8 Development Team"

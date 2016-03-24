@@ -35,8 +35,8 @@ objects:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      version: "2.2.93"
-      group: "defaultGatewayGroup"
+      version: "2.2.94"
+      group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "apiman"
   spec:
@@ -50,7 +50,7 @@ objects:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      group: "defaultGatewayGroup"
+      group: "io.fabric8.ipaas.apps"
 - apiVersion: "v1"
   kind: "Service"
   metadata:
@@ -63,8 +63,8 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.93"
-      group: "defaultGatewayGroup"
+      version: "2.2.94"
+      group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "apiman-gateway"
   spec:
@@ -78,7 +78,7 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      group: "defaultGatewayGroup"
+      group: "io.fabric8.ipaas.apps"
 - apiVersion: "v1"
   kind: "Service"
   metadata:
@@ -86,7 +86,7 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.93"
+      version: "2.2.94"
       group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "elasticsearch-v1"
@@ -109,7 +109,7 @@ objects:
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.93"
+      version: "2.2.94"
       group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "elasticsearch-v1-masters"
@@ -130,17 +130,17 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.93"
-      fabric8.io/git-commit: "b77f769fc057c1afd8eec090393f106c2b1ad0ed"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/b77f769fc057c1afd8eec090393f106c2b1ad0ed"
+      fabric8.io/git-branch: "release-v2.2.94"
+      fabric8.io/git-commit: "e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
       fabric8.io/build-id: "3"
     labels:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      version: "2.2.93"
-      group: "defaultGatewayGroup"
+      version: "2.2.94"
+      group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "apiman"
   spec:
@@ -149,8 +149,8 @@ objects:
       project: "apiman"
       component: "ApimanManagerAPI"
       provider: "fabric8"
-      version: "2.2.93"
-      group: "defaultGatewayGroup"
+      version: "2.2.94"
+      group: "io.fabric8.ipaas.apps"
     template:
       metadata:
         annotations: {}
@@ -158,8 +158,8 @@ objects:
           project: "apiman"
           component: "ApimanManagerAPI"
           provider: "fabric8"
-          version: "2.2.93"
-          group: "defaultGatewayGroup"
+          version: "2.2.94"
+          group: "io.fabric8.ipaas.apps"
           package: "apiman"
       spec:
         containers:
@@ -172,7 +172,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/apiman:2.2.93"
+          image: "fabric8/apiman:2.2.94"
           name: "apiman"
           ports:
           - containerPort: 7070
@@ -189,17 +189,17 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.93"
-      fabric8.io/git-commit: "b77f769fc057c1afd8eec090393f106c2b1ad0ed"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/b77f769fc057c1afd8eec090393f106c2b1ad0ed"
+      fabric8.io/git-branch: "release-v2.2.94"
+      fabric8.io/git-commit: "e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
       fabric8.io/build-id: "3"
     labels:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.93"
-      group: "defaultGatewayGroup"
+      version: "2.2.94"
+      group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "apiman-gateway"
   spec:
@@ -208,8 +208,8 @@ objects:
       project: "apiman-gateway"
       component: "ApimanGateway"
       provider: "fabric8"
-      version: "2.2.93"
-      group: "defaultGatewayGroup"
+      version: "2.2.94"
+      group: "io.fabric8.ipaas.apps"
     template:
       metadata:
         annotations: {}
@@ -217,8 +217,8 @@ objects:
           project: "apiman-gateway"
           component: "ApimanGateway"
           provider: "fabric8"
-          version: "2.2.93"
-          group: "defaultGatewayGroup"
+          version: "2.2.94"
+          group: "io.fabric8.ipaas.apps"
           package: "apiman"
       spec:
         containers:
@@ -231,7 +231,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/apiman-gateway:2.2.93"
+          image: "fabric8/apiman-gateway:2.2.94"
           name: "apiman-gateway"
           ports:
           - containerPort: 7777
@@ -248,15 +248,15 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-commit: "b77f769fc057c1afd8eec090393f106c2b1ad0ed"
-      fabric8.io/git-branch: "release-v2.2.93"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/b77f769fc057c1afd8eec090393f106c2b1ad0ed"
+      fabric8.io/git-commit: "e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
+      fabric8.io/git-branch: "release-v2.2.94"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
       fabric8.io/build-id: "3"
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
     labels:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.93"
+      version: "2.2.94"
       group: "io.fabric8.ipaas.apps"
       package: "apiman"
     name: "elasticsearch-v1"
@@ -265,7 +265,7 @@ objects:
     selector:
       project: "elasticsearch"
       provider: "fabric8"
-      version: "2.2.93"
+      version: "2.2.94"
       group: "io.fabric8.ipaas.apps"
     template:
       metadata:
@@ -273,7 +273,7 @@ objects:
         labels:
           project: "elasticsearch"
           provider: "fabric8"
-          version: "2.2.93"
+          version: "2.2.94"
           group: "io.fabric8.ipaas.apps"
           package: "apiman"
       spec:
@@ -311,7 +311,7 @@ objects:
         - args: []
           command: []
           env: []
-          image: "fabric8/elasticsearch-logstash-template:2.2.93"
+          image: "fabric8/elasticsearch-logstash-template:2.2.94"
           name: "logstash-template"
           ports: []
           volumeMounts: []

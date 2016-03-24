@@ -1,0 +1,1 @@
+An Enterprise Messaging Gateway that can apply policeis for scaling/security/rate limiting etc.

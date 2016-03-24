@@ -4,14 +4,36 @@ kind: "Template"
 labels: {}
 metadata:
   annotations:
-    fabric8.fabric8mq-producer/iconUrl: "img/icons/activemq.svg"
-    fabric8.fabric8mq-producer/summary: "Fabric8 MQ Example Producer"
-    description: "Sends messages via [Apache Camel](http://camel.apache.org/) to a\
-      \ queue on [Apache ActiveMQ](http://activemq.apache.org/). Communicates with\
-      \ the broker using a [kubernetes service](http://fabric8.io/v2/services.html)."
+    fabric8.msg-gateway/iconUrl: "img/icons/activemq.svg"
+    fabric8.msg-gateway/summary: "Control/Secure/Scale Enterprise Messaging"
+    description: "An Enterprise Messaging Gateway that can apply policeis for scaling/security/rate\
+      \ limiting etc."
   labels: {}
-  name: "fabric8mq-producer"
+  name: "msg-gateway"
 objects:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "msg-gateway"
+      component: "msg-gateway"
+      provider: "fabric8"
+      version: "2.2.94"
+      group: "msg-gateway"
+    name: "msg-gateway"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 6163
+      protocol: "TCP"
+      targetPort: 6194
+    selector:
+      project: "msg-gateway"
+      component: "msg-gateway"
+      provider: "fabric8"
+      group: "msg-gateway"
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
@@ -22,48 +44,43 @@ objects:
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
       fabric8.io/build-id: "3"
     labels:
-      queuename: "TEST.FOO"
-      component: "fabric8MQProducer"
+      project: "msg-gateway"
+      component: "msg-gateway"
       provider: "fabric8"
-      project: "fabric8mq-producer"
       version: "2.2.94"
-      group: "fabric8mq"
-    name: "fabric8mq-producer"
+      group: "msg-gateway"
+    name: "msg-gateway"
   spec:
     replicas: 1
     selector:
-      queuename: "TEST.FOO"
-      component: "fabric8MQProducer"
+      project: "msg-gateway"
+      component: "msg-gateway"
       provider: "fabric8"
-      project: "fabric8mq-producer"
       version: "2.2.94"
-      group: "fabric8mq"
+      group: "msg-gateway"
     template:
       metadata:
         annotations: {}
         labels:
-          queuename: "TEST.FOO"
-          component: "fabric8MQProducer"
+          project: "msg-gateway"
+          component: "msg-gateway"
           provider: "fabric8"
-          project: "fabric8mq-producer"
           version: "2.2.94"
-          group: "fabric8mq"
+          group: "msg-gateway"
       spec:
         containers:
         - args: []
           command: []
           env:
-          - name: "AMQ_QUEUENAME"
-            value: "TEST.FOO"
-          - name: "AMQ_SERVICE_ID"
-            value: "FABRIC8MQ"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8mq-producer:2.2.94"
-          name: "fabric8mq-producer"
+          image: "fabric8/msg-gateway:2.2.94"
+          name: "msg-gateway"
           ports:
+          - containerPort: 6194
+            name: "amq"
           - containerPort: 8778
             name: "jolokia"
           securityContext: {}

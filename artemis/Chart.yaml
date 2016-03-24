@@ -1,0 +1,7 @@
+---
+name: "artemis"
+home: "http://fabric8.io/artemis/"
+version: "2.2.95-SNAPSHOT"
+description: "Enterprise Message Broker"
+maintainers:
+- "Fabric8 Development Team"

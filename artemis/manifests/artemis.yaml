@@ -4,14 +4,36 @@ kind: "Template"
 labels: {}
 metadata:
   annotations:
-    fabric8.fabric8mq-producer/iconUrl: "img/icons/activemq.svg"
-    fabric8.fabric8mq-producer/summary: "Fabric8 MQ Example Producer"
-    description: "Sends messages via [Apache Camel](http://camel.apache.org/) to a\
-      \ queue on [Apache ActiveMQ](http://activemq.apache.org/). Communicates with\
-      \ the broker using a [kubernetes service](http://fabric8.io/v2/services.html)."
+    fabric8.artemis/summary: "Enterprise Message Broker"
+    description: "Apache ActiveMQ Artemis is a enterprise Message broker -supporting\
+      \ JMS 2.0 and AMQP/OpenWire/MQTT/STOMP wire protocols\n"
+    fabric8.artemis/iconUrl: "img/icons/activemq.svg"
   labels: {}
-  name: "fabric8mq-producer"
+  name: "artemis"
 objects:
+- apiVersion: "v1"
+  kind: "Service"
+  metadata:
+    annotations: {}
+    labels:
+      project: "artemis"
+      component: "artemis"
+      provider: "fabric8"
+      version: "2.2.94"
+      group: "artemis"
+    name: "artemis"
+  spec:
+    deprecatedPublicIPs: []
+    externalIPs: []
+    ports:
+    - port: 6163
+      protocol: "TCP"
+      targetPort: 6194
+    selector:
+      project: "artemis"
+      component: "artemis"
+      provider: "fabric8"
+      group: "artemis"
 - apiVersion: "v1"
   kind: "ReplicationController"
   metadata:
@@ -22,48 +44,43 @@ objects:
       fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
       fabric8.io/build-id: "3"
     labels:
-      queuename: "TEST.FOO"
-      component: "fabric8MQProducer"
+      project: "artemis"
+      component: "artemis"
       provider: "fabric8"
-      project: "fabric8mq-producer"
       version: "2.2.94"
-      group: "fabric8mq"
-    name: "fabric8mq-producer"
+      group: "artemis"
+    name: "artemis"
   spec:
     replicas: 1
     selector:
-      queuename: "TEST.FOO"
-      component: "fabric8MQProducer"
+      project: "artemis"
+      component: "artemis"
       provider: "fabric8"
-      project: "fabric8mq-producer"
       version: "2.2.94"
-      group: "fabric8mq"
+      group: "artemis"
     template:
       metadata:
         annotations: {}
         labels:
-          queuename: "TEST.FOO"
-          component: "fabric8MQProducer"
+          project: "artemis"
+          component: "artemis"
           provider: "fabric8"
-          project: "fabric8mq-producer"
           version: "2.2.94"
-          group: "fabric8mq"
+          group: "artemis"
       spec:
         containers:
         - args: []
           command: []
           env:
-          - name: "AMQ_QUEUENAME"
-            value: "TEST.FOO"
-          - name: "AMQ_SERVICE_ID"
-            value: "FABRIC8MQ"
           - name: "KUBERNETES_NAMESPACE"
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8mq-producer:2.2.94"
-          name: "fabric8mq-producer"
+          image: "fabric8/artemis:2.2.94"
+          name: "artemis"
           ports:
+          - containerPort: 6194
+            name: "amq"
           - containerPort: 8778
             name: "jolokia"
           securityContext: {}
