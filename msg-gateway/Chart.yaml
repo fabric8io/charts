@@ -1,7 +1,7 @@
 ---
 name: "msg-gateway"
 home: "http://fabric8.io/msg-gateway/"
-version: "2.2.95-SNAPSHOT"
+version: "2.2.96-SNAPSHOT"
 description: "Control/Secure/Scale Enterprise Messaging"
 maintainers:
 - "Fabric8 Development Team"

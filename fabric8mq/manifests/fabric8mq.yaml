@@ -22,7 +22,7 @@ objects:
       project: "fabric8mq"
       component: "fabric8MQ"
       provider: "fabric8"
-      version: "2.2.94"
+      version: "2.2.95"
       group: "fabric8mq"
     name: "fabric8mq"
   spec:
@@ -42,16 +42,16 @@ objects:
   kind: "ReplicationController"
   metadata:
     annotations:
-      fabric8.io/git-branch: "release-v2.2.94"
-      fabric8.io/git-commit: "e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
-      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/e77c669fc153bab2830d821b844d5a3a1ac0a7c5"
-      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/3"
-      fabric8.io/build-id: "3"
+      fabric8.io/git-branch: "release-v2.2.95"
+      fabric8.io/git-commit: "9a124eeb7dafa0350f9b906fa8bceacb3c430763"
+      fabric8.io/git-url: "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/9a124eeb7dafa0350f9b906fa8bceacb3c430763"
+      fabric8.io/build-url: "http://jenkins.release.cd.fabric8.io/job/oss-parent/4"
+      fabric8.io/build-id: "4"
     labels:
       project: "fabric8mq"
       component: "fabric8MQ"
       provider: "fabric8"
-      version: "2.2.94"
+      version: "2.2.95"
       group: "fabric8mq"
     name: "fabric8mq"
   spec:
@@ -60,7 +60,7 @@ objects:
       project: "fabric8mq"
       component: "fabric8MQ"
       provider: "fabric8"
-      version: "2.2.94"
+      version: "2.2.95"
       group: "fabric8mq"
     template:
       metadata:
@@ -69,7 +69,7 @@ objects:
           project: "fabric8mq"
           component: "fabric8MQ"
           provider: "fabric8"
-          version: "2.2.94"
+          version: "2.2.95"
           group: "fabric8mq"
       spec:
         containers:
@@ -82,7 +82,7 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: "metadata.namespace"
-          image: "fabric8/fabric8mq:2.2.94"
+          image: "fabric8/fabric8mq:2.2.95"
           name: "fabric8mq"
           ports:
           - containerPort: 6194

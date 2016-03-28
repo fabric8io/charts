@@ -1,7 +1,7 @@
 ---
 name: "fabric8mq-consumer"
 home: "http://fabric8.io/fabric8mq-consumer/"
-version: "2.2.95-SNAPSHOT"
+version: "2.2.96-SNAPSHOT"
 description: "Fabric8 MQ Example Consumer"
 maintainers:
 - "Fabric8 Development Team"
